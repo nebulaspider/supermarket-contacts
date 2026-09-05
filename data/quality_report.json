@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-09-05T18:34:22.026830+00:00",
+  "total_records": 25,
+  "average_quality": 89.8,
+  "quality_distribution": {
+    "high (>=80)": 25,
+    "medium (60-79)": 0,
+    "low (<60)": 0
+  },
+  "field_coverage": {
+    "company_name": 25,
+    "country": 25,
+    "city": 25,
+    "address": 25,
+    "website": 25,
+    "email": 25,
+    "phone": 25,
+    "whatsapp": 0,
+    "wechat": 8,
+    "linkedin": 23,
+    "facebook": 22,
+    "twitter": 22,
+    "instagram": 22,
+    "youtube": 11
+  },
+  "validation": {
+    "email_valid": 25,
+    "email_invalid": 0,
+    "phone_valid": 25,
+    "phone_invalid": 0
+  }
+}
