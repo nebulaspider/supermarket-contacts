@@ -21,10 +21,18 @@ logger = logging.getLogger(__name__)
 
 # 字段权重（用于质量评分）
 FIELD_WEIGHTS = {
-    'company_name': 15, 'country': 10, 'city': 5, 'address': 5,
-    'website': 10, 'email': 15, 'phone': 15,
-    'whatsapp': 5, 'wechat': 5, 'linkedin': 10,
-    'facebook': 2, 'twitter': 1, 'instagram': 1, 'youtube': 1,
+    # 基本信息
+    'company_name': 10, 'country': 8, 'city': 4, 'address': 4, 'website': 6,
+    # 行业属性
+    'industry': 6, 'company_size': 3, 'founded_year': 2, 'parent_company': 2,
+    'store_count': 3, 'product_categories': 4,
+    # 关键联系人（高价值）
+    'contact_person': 8, 'position': 6, 'department': 4,
+    'contact_email': 8, 'contact_phone': 5, 'contact_linkedin': 4,
+    # 公司联系方式
+    'email': 8, 'phone': 8,
+    'whatsapp': 3, 'wechat': 3, 'linkedin': 6,
+    'facebook': 1, 'twitter': 1, 'instagram': 1, 'youtube': 1,
 }
 
 # 邮箱正则

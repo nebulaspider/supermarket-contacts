@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-09-05T18:34:22.026830+00:00",
+  "generated_at": "2026-09-05T19:11:56.994057+00:00",
   "total_records": 25,
-  "average_quality": 89.8,
+  "average_quality": 86.2,
   "quality_distribution": {
-    "high (>=80)": 25,
-    "medium (60-79)": 0,
+    "high (>=80)": 15,
+    "medium (60-79)": 10,
     "low (<60)": 0
   },
   "field_coverage": {
@@ -13,6 +13,18 @@
     "city": 25,
     "address": 25,
     "website": 25,
+    "industry": 25,
+    "company_size": 25,
+    "founded_year": 25,
+    "parent_company": 25,
+    "store_count": 25,
+    "product_categories": 25,
+    "contact_person": 0,
+    "position": 12,
+    "department": 12,
+    "contact_email": 12,
+    "contact_phone": 0,
+    "contact_linkedin": 0,
     "email": 25,
     "phone": 25,
     "whatsapp": 0,

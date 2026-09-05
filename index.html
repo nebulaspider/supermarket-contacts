@@ -181,9 +181,11 @@
                     </div>
                     <div class="page-actions">
                         <div class="filter-group">
+                            <select id="filterIndustry" class="select-sm"><option value="">全部行业</option></select>
+                            <select id="filterDepartment" class="select-sm"><option value="">全部部门</option></select>
+                            <select id="filterPosition" class="select-sm"><option value="">全部职位</option></select>
                             <select id="filterCountry" class="select-sm"><option value="">全部国家</option></select>
                             <select id="filterQuality" class="select-sm"><option value="">全部质量</option><option value="80">≥80 高质量</option><option value="60">≥60 中等</option></select>
-                            <select id="filterContact" class="select-sm"><option value="">全部联系方式</option><option value="email">有邮箱</option><option value="phone">有电话</option><option value="whatsapp">有 WhatsApp</option><option value="wechat">有微信</option><option value="linkedin">有 LinkedIn</option></select>
                         </div>
                     </div>
                 </div>
@@ -191,11 +193,12 @@
                     <table class="data-table" id="dataTable">
                         <thead><tr>
                             <th data-sort="company_name">企业名称 <span class="sort-icon">↕</span></th>
+                            <th data-sort="industry">行业 <span class="sort-icon">↕</span></th>
                             <th data-sort="country">国家/地区 <span class="sort-icon">↕</span></th>
-                            <th>城市</th>
+                            <th>关键职位</th>
+                            <th>部门</th>
                             <th>邮箱</th>
                             <th>电话</th>
-                            <th>LinkedIn</th>
                             <th data-sort="data_quality">质量 <span class="sort-icon">↕</span></th>
                             <th>操作</th>
                         </tr></thead>

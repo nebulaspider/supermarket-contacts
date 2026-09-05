@@ -62,9 +62,11 @@ function bindEvents() {
     document.getElementById('globalSearch').addEventListener('input', debounce(handleGlobalSearch, 250));
 
     // Filters
+    document.getElementById('filterIndustry').addEventListener('change', applyTableFilters);
+    document.getElementById('filterDepartment').addEventListener('change', applyTableFilters);
+    document.getElementById('filterPosition').addEventListener('change', applyTableFilters);
     document.getElementById('filterCountry').addEventListener('change', applyTableFilters);
     document.getElementById('filterQuality').addEventListener('change', applyTableFilters);
-    document.getElementById('filterContact').addEventListener('change', applyTableFilters);
 
     // Table sorting
     document.querySelectorAll('.data-table th[data-sort]').forEach(th => {
@@ -106,7 +108,7 @@ async function loadData() {
         renderTable();
         renderSpiders();
         renderQuality();
-        populateCountryFilter();
+        populateFilters();
 
         showToast('数据加载完成', 'success');
     } catch (err) {
@@ -200,6 +202,9 @@ function renderCountryChart() {
 
 function renderCoverageChart() {
     const fields = [
+        { name: '行业分类', key: 'industry', color: '#4f46e5' },
+        { name: '职位', key: 'position', color: '#ec4899' },
+        { name: '部门', key: 'department', color: '#14b8a6' },
         { name: '邮箱', key: 'email', color: '#8b5cf6' },
         { name: '电话', key: 'phone', color: '#f97316' },
         { name: 'LinkedIn', key: 'linkedin', color: '#06b6d4' },
@@ -258,11 +263,26 @@ function updatePipelineTimes() {
 }
 
 // ===== Data Table =====
-function populateCountryFilter() {
-    const select = document.getElementById('filterCountry');
+function populateFilters() {
+    // 国家
     const countries = [...new Set(state.data.map(d => d.country).filter(Boolean))].sort();
-    select.innerHTML = '<option value="">全部国家</option>' +
+    document.getElementById('filterCountry').innerHTML = '<option value="">全部国家</option>' +
         countries.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+
+    // 行业
+    const industries = [...new Set(state.data.map(d => d.industry).filter(Boolean))].sort();
+    document.getElementById('filterIndustry').innerHTML = '<option value="">全部行业</option>' +
+        industries.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join('');
+
+    // 部门
+    const departments = [...new Set(state.data.map(d => d.department).filter(Boolean))].sort();
+    document.getElementById('filterDepartment').innerHTML = '<option value="">全部部门</option>' +
+        departments.map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join('');
+
+    // 职位
+    const positions = [...new Set(state.data.map(d => d.position).filter(Boolean))].sort();
+    document.getElementById('filterPosition').innerHTML = '<option value="">全部职位</option>' +
+        positions.map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('');
 }
 
 function handleGlobalSearch(e) {
@@ -273,7 +293,8 @@ function handleGlobalSearch(e) {
         state.filtered = [...state.data];
     } else {
         state.filtered = state.data.filter(d => {
-            return [d.company_name, d.country, d.city, d.email, d.phone, d.address]
+            return [d.company_name, d.country, d.city, d.email, d.phone, d.address,
+                d.industry, d.position, d.department, d.contact_person, d.product_categories]
                 .filter(Boolean).join(' ').toLowerCase().includes(keyword);
         });
     }
@@ -282,16 +303,26 @@ function handleGlobalSearch(e) {
 }
 
 function applyTableFilters() {
+    const industry = document.getElementById('filterIndustry').value;
+    const department = document.getElementById('filterDepartment').value;
+    const position = document.getElementById('filterPosition').value;
     const country = document.getElementById('filterCountry').value;
     const minQuality = parseInt(document.getElementById('filterQuality').value) || 0;
-    const contact = document.getElementById('filterContact').value;
     const keyword = document.getElementById('globalSearch').value.trim().toLowerCase();
 
     state.filtered = state.data.filter(d => {
-        if (keyword && ![d.company_name, d.country, d.city, d.email, d.phone].filter(Boolean).join(' ').toLowerCase().includes(keyword)) return false;
+        // 关键词搜索（扩展到行业、职位、部门、联系人）
+        if (keyword) {
+            const searchable = [d.company_name, d.country, d.city, d.email, d.phone,
+                d.industry, d.position, d.department, d.contact_person, d.product_categories]
+                .filter(Boolean).join(' ').toLowerCase();
+            if (!searchable.includes(keyword)) return false;
+        }
+        if (industry && d.industry !== industry) return false;
+        if (department && d.department !== department) return false;
+        if (position && d.position !== position) return false;
         if (country && d.country !== country) return false;
         if (minQuality && (d.data_quality || 0) < minQuality) return false;
-        if (contact && !d[contact]) return false;
         return true;
     });
     state.currentPage = 1;
@@ -324,18 +355,19 @@ function renderTable() {
 
     const tbody = document.getElementById('tableBody');
     if (pageData.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-tertiary)">未找到匹配的企业</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-tertiary)">未找到匹配的企业</td></tr>`;
     } else {
         tbody.innerHTML = pageData.map(d => {
             const q = d.data_quality || 0;
             const qClass = q >= 80 ? 'quality-high' : q >= 60 ? 'quality-mid' : 'quality-low';
             return `<tr onclick="openDrawer('${esc(d.company_name)}')">
                 <td><span class="table-cell-name">${esc(d.company_name)}</span></td>
+                <td>${d.industry ? `<span style="font-size:12px;color:var(--primary);background:var(--primary-light);padding:2px 8px;border-radius:4px;">${esc(d.industry)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
                 <td>${esc(d.country || '—')}</td>
-                <td>${esc(d.city || '—')}</td>
+                <td>${d.position ? `<span style="font-weight:500;">${esc(d.position)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
+                <td>${d.department ? `<span style="font-size:12px;color:var(--text-secondary)">${esc(d.department)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
                 <td>${d.email ? `<span class="table-cell-email">${esc(d.email)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
                 <td>${d.phone ? `<span class="table-cell-phone">${esc(d.phone)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
-                <td>${d.linkedin ? `<a href="${esc(d.linkedin)}" target="_blank" class="table-cell-link" onclick="event.stopPropagation()">LinkedIn ↗</a>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
                 <td><span class="quality-badge ${qClass}">${q}</span></td>
                 <td><button class="page-btn" onclick="event.stopPropagation();openDrawer('${esc(d.company_name)}')">详情</button></td>
             </tr>`;
@@ -407,12 +439,19 @@ function renderSpiders() {
 function renderQuality() {
     const fields = [
         { name: '企业名称', key: 'company_name', icon: '🏢', color: '#4f46e5' },
+        { name: '行业分类', key: 'industry', icon: '🏭', color: '#6366f1' },
+        { name: '职位', key: 'position', icon: '💼', color: '#ec4899' },
+        { name: '部门', key: 'department', icon: '🏢', color: '#14b8a6' },
+        { name: '联系人直邮', key: 'contact_email', icon: '📧', color: '#f43f5e' },
         { name: '国家/地区', key: 'country', icon: '🌍', color: '#10b981' },
         { name: '城市', key: 'city', icon: '🏙️', color: '#3b82f6' },
         { name: '地址', key: 'address', icon: '📍', color: '#f97316' },
         { name: '官网', key: 'website', icon: '🌐', color: '#8b5cf6' },
-        { name: '邮箱', key: 'email', icon: '📧', color: '#ec4899' },
-        { name: '电话', key: 'phone', icon: '📞', color: '#06b6d4' },
+        { name: '公司邮箱', key: 'email', icon: '📧', color: '#8b5cf6' },
+        { name: '公司电话', key: 'phone', icon: '📞', color: '#06b6d4' },
+        { name: '企业规模', key: 'company_size', icon: '👥', color: '#8b5cf6' },
+        { name: '门店数量', key: 'store_count', icon: '🏪', color: '#f97316' },
+        { name: '主营品类', key: 'product_categories', icon: '📦', color: '#10b981' },
         { name: 'WhatsApp', key: 'whatsapp', icon: '💬', color: '#25d366' },
         { name: '微信', key: 'wechat', icon: '💚', color: '#07c160' },
         { name: 'LinkedIn', key: 'linkedin', icon: '💼', color: '#0077b5' },
@@ -485,7 +524,25 @@ function openDrawer(companyName) {
             <div class="drawer-row"><div class="drawer-row-icon">📍</div><div class="drawer-row-content"><div class="drawer-row-label">地址</div><div class="drawer-row-value">${esc(d.address || '—')}</div></div></div>
         </div>
         <div class="drawer-section">
-            <h4>联系方式</h4>
+            <h4>行业与企业属性</h4>
+            <div class="drawer-row"><div class="drawer-row-icon">🏭</div><div class="drawer-row-content"><div class="drawer-row-label">行业分类</div><div class="drawer-row-value">${d.industry ? `<span style="color:var(--primary);font-weight:600;">${esc(d.industry)}</span>` : '待补充'}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">👥</div><div class="drawer-row-content"><div class="drawer-row-label">企业规模</div><div class="drawer-row-value">${esc(d.company_size || '—')}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">📅</div><div class="drawer-row-content"><div class="drawer-row-label">成立年份</div><div class="drawer-row-value">${esc(d.founded_year || '—')}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">🏛️</div><div class="drawer-row-content"><div class="drawer-row-label">母公司/集团</div><div class="drawer-row-value">${esc(d.parent_company || '—')}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">🏪</div><div class="drawer-row-content"><div class="drawer-row-label">门店数量</div><div class="drawer-row-value">${esc(d.store_count || '—')}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">📦</div><div class="drawer-row-content"><div class="drawer-row-label">主营品类</div><div class="drawer-row-value">${esc(d.product_categories || '—')}</div></div></div>
+        </div>
+        <div class="drawer-section">
+            <h4>关键联系人（采购决策链）</h4>
+            <div class="drawer-row"><div class="drawer-row-icon">👤</div><div class="drawer-row-content"><div class="drawer-row-label">联系人</div><div class="drawer-row-value ${d.contact_person ? '' : 'missing'}">${esc(d.contact_person) || '待补充'}</div></div>${d.contact_person ? `<button class="drawer-copy" onclick="copyText('${esc(d.contact_person)}')">复制</button>` : ''}</div>
+            <div class="drawer-row"><div class="drawer-row-icon">💼</div><div class="drawer-row-content"><div class="drawer-row-label">职位</div><div class="drawer-row-value ${d.position ? '' : 'missing'}">${d.position ? `<span style="color:var(--primary);font-weight:600;">${esc(d.position)}</span>` : '待补充'}</div></div>${d.position ? `<button class="drawer-copy" onclick="copyText('${esc(d.position)}')">复制</button>` : ''}</div>
+            <div class="drawer-row"><div class="drawer-row-icon">🏢</div><div class="drawer-row-content"><div class="drawer-row-label">部门</div><div class="drawer-row-value ${d.department ? '' : 'missing'}">${esc(d.department) || '待补充'}</div></div>${d.department ? `<button class="drawer-copy" onclick="copyText('${esc(d.department)}')">复制</button>` : ''}</div>
+            <div class="drawer-row"><div class="drawer-row-icon">📧</div><div class="drawer-row-content"><div class="drawer-row-label">直邮</div><div class="drawer-row-value ${d.contact_email ? '' : 'missing'}">${d.contact_email ? `<a href="mailto:${esc(d.contact_email)}">${esc(d.contact_email)}</a>` : '待补充'}</div></div>${d.contact_email ? `<button class="drawer-copy" onclick="copyText('${esc(d.contact_email)}')">复制</button>` : ''}</div>
+            <div class="drawer-row"><div class="drawer-row-icon">📞</div><div class="drawer-row-content"><div class="drawer-row-label">直线电话</div><div class="drawer-row-value ${d.contact_phone ? '' : 'missing'}">${d.contact_phone ? `<a href="tel:${esc(d.contact_phone)}">${esc(d.contact_phone)}</a>` : '待补充'}</div></div>${d.contact_phone ? `<button class="drawer-copy" onclick="copyText('${esc(d.contact_phone)}')">复制</button>` : ''}</div>
+            <div class="drawer-row"><div class="drawer-row-icon">🔗</div><div class="drawer-row-content"><div class="drawer-row-label">LinkedIn</div><div class="drawer-row-value ${d.contact_linkedin ? '' : 'missing'}">${d.contact_linkedin ? `<a href="${esc(d.contact_linkedin)}" target="_blank">查看主页 ↗</a>` : '待补充'}</div></div></div>
+        </div>
+        <div class="drawer-section">
+            <h4>公司联系方式</h4>
             ${contactHtml}
         </div>
         <div class="drawer-section">
@@ -523,7 +580,10 @@ function showToast(message, type = '') {
 }
 
 function exportCSV() {
-    const headers = ['company_name', 'country', 'city', 'address', 'website', 'email', 'phone', 'whatsapp', 'wechat', 'linkedin', 'facebook', 'twitter', 'instagram', 'youtube', 'data_quality'];
+    const headers = ['company_name', 'industry', 'country', 'city', 'address', 'website',
+        'company_size', 'founded_year', 'parent_company', 'store_count', 'product_categories',
+        'contact_person', 'position', 'department', 'contact_email', 'contact_phone', 'contact_linkedin',
+        'email', 'phone', 'whatsapp', 'wechat', 'linkedin', 'facebook', 'twitter', 'instagram', 'youtube', 'data_quality'];
     const csv = [headers.join(',')].concat(
         state.data.map(row => headers.map(h => `"${(row[h] || '').toString().replace(/"/g, '""')}"`).join(','))
     ).join('\n');
