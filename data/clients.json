@@ -773,5 +773,775 @@
     "contact_email": "",
     "contact_phone": "",
     "contact_linkedin": ""
+  },
+  {
+    "company_name": "Amazon",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963200Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Apple",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963215Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "ExxonMobil",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963217Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "McKesson",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963219Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Nvidia",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963223Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Cardinal Health",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963225Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Chevron",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963227Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Cigna",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963229Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Cargill",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963231Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Meta Platforms",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963232Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Citigroup",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:42:43.963234Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Dominick's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963238Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Whole Foods Market",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963241Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "A&P",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963242Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Barber's Super Market",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963244Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "BI-LO",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963245Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Byerly's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963246Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Cub",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963248Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Remke Markets",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963249Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Giant Food Stores",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963251Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Grand Union",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963252Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Food City",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963253Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Food Lion",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963255Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "FOODWAY Discount Foods",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963256Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Ingles",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963258Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Jewel",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963259Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Kowalski's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963260Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Piggly Wiggly",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963262Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Safeway",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963263Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Winn-Dixie",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963265Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "IGA",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963266Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Ralphs",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963268Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Smith's Food and Drug",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963269Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Vons",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963271Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Rainbow Foods",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963272Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Fry's Food and Drug",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963274Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Lucky Stores",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963275Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Save-Mart",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963276Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Kmart",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963278Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Carrs-Safeway",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963279Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Genuardi's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963280Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Pavilions",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963282Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Randalls",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963283Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Tom Thumb",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963285Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Farmer Jack",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963286Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Spartan Stores",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963287Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "FoodLand",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963288Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Foodland Hawaii",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963290Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Stater Bros.",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963292Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Bashas'",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963293Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "QFC",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963294Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Raley's Supermarkets",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963296Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Wild Oats Markets",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963297Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Weingarten's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963299Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Wegmans",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963300Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Happy Harry's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963301Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Hannaford",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963303Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Price Chopper",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963305Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Market of Choice",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963306Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Shaw's and Star Market",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963308Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Star Market",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963309Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "CTown Supermarkets",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963311Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "The Food Emporium",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963312Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Key Food",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963314Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "ShopRite (United States)",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963315Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Waldbaum's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963317Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Fairway Market",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963318Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Fareway",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963320Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Trader Joe's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963321Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Giant Markets",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963323Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Giant Open Air",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963324Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Save-A-Lot",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963325Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Bruno's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963327Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Giant Food (Landover)",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963328Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Tops Friendly Markets",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963330Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "99 Ranch Market",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963331Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Hong Kong Supermarket",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:42:43.963332Z",
+    "data_quality": 24
   }
 ]
