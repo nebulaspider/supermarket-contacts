@@ -266,8 +266,10 @@
     "last_shipment": "2026-09-01",
     "source": "ImportYeti Customs Data",
     "found_date": "2026-09-08",
-    "data_quality": 65,
-    "status": "待联系"
+    "data_quality": 70,
+    "status": "待联系",
+    "phone": "855-715-1800",
+    "contact_note": "Signature Hardware 下单热线，可在线聊天"
   },
   {
     "company_name": "Mansfield Plumbing Products",
@@ -280,8 +282,10 @@
     "last_shipment": "2025-10-05",
     "source": "ImportYeti Customs Data",
     "found_date": "2026-09-08",
-    "data_quality": 70,
-    "status": "待联系"
+    "data_quality": 80,
+    "status": "待联系",
+    "phone": "877-850-3060",
+    "contact_note": "公司总部 1430 George Rd, Ashland, OH 44805，另在德州 Henderson 有工厂"
   },
   {
     "company_name": "HQJ Plumbing Supplies",

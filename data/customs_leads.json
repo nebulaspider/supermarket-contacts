@@ -105,13 +105,14 @@
     "address": "428 Tolland Turnpike, Manchester, CT 06042",
     "website": "https://www.mybobs.com",
     "email": "",
-    "phone": "",
+    "phone": "860-812-1111",
     "total_shipments": 62047,
     "last_shipment": "2026-09-02",
     "source": "ImportYeti Customs Data",
     "found_date": "2026-09-08",
     "data_quality": 80,
-    "status": "待联系"
+    "status": "待联系",
+    "contact_note": "销售热线，配送电话 860-474-1000，可在线聊天"
   },
   {
     "company_name": "Bernhardt Furniture",
