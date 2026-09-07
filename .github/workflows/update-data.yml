@@ -138,23 +138,7 @@ jobs:
           MAX_COMPANIES: ${{ github.event.inputs.directory_max || '80' }}
         run: |
           cd scraper
-          echo "行业: $INDUSTRIES"
-          echo "最大数量: $MAX_COMPANIES"
-          python -c "
-import sys; sys.path.insert(0, '.')
-from directory_runner import run_directory_crawl
-industries = '${INDUSTRIES}'.split(',')
-data = run_directory_crawl(
-    industries=industries,
-    country='',
-    max_companies=int('${MAX_COMPANIES}'),
-    extract_contacts=True,
-    output_path='../data/clients.directory.json',
-)
-print(f'目录爬虫完成: {len(data)} 条')
-print(f'有邮箱: {sum(1 for d in data if d.get(\"email\"))}')
-print(f'有电话: {sum(1 for d in data if d.get(\"phone\"))}')
-"
+          python run_directory.py
       - name: Upload directory data
         uses: actions/upload-artifact@v4
         with:
@@ -190,22 +174,7 @@ print(f'有电话: {sum(1 for d in data if d.get(\"phone\"))}')
       - name: Merge directory data
         run: |
           cd scraper
-          python -c "
-import sys, json, os
-sys.path.insert(0, '.')
-from directory_runner import merge_with_existing
-
-# 合并目录爬虫数据
-if os.path.exists('../data/clients.directory.json'):
-    with open('../data/clients.directory.json') as f:
-        dir_data = json.load(f)
-    merged = merge_with_existing(dir_data, '../data/clients.json')
-    with open('../data/clients.json', 'w') as f:
-        json.dump(merged, f, ensure_ascii=False, indent=2)
-    print(f'合并后: {len(merged)} 条（新增目录数据 {len(dir_data)} 条）')
-else:
-    print('无目录数据，跳过合并')
-"
+          python merge_directory.py
       - name: Run data manager
         run: |
           cd scraper
