@@ -84,8 +84,8 @@ body {
     font-family: var(--font);
     background: var(--bg-primary);
     color: var(--text-primary);
-    line-height: 1.5;
-    font-size: 14px;
+    line-height: 1.6;
+    font-size: 15px;
     -webkit-font-smoothing: antialiased;
     transition: background 0.3s, color 0.3s;
 }
@@ -660,3 +660,197 @@ input, select { font-family: inherit; }
     .kpi-grid { grid-template-columns: 1fr; }
     .topbar-stat { display: none; }
 }
+
+/* ============================================
+   v4.0 高端设计升级 — 大字体 + 精致视觉
+   ============================================ */
+
+/* 字体放大 */
+.brand-name { font-size: 17px !important; }
+.brand-tag { font-size: 11px !important; }
+.page-title { font-size: 28px !important; letter-spacing: -0.5px !important; }
+.page-subtitle { font-size: 14px !important; }
+.kpi-value { font-size: 34px !important; letter-spacing: -1px !important; }
+.kpi-label { font-size: 13px !important; }
+.kpi-trend { font-size: 12px !important; }
+.data-table { font-size: 14px !important; }
+.data-table th { font-size: 12px !important; padding: 14px 16px !important; }
+.data-table td { padding: 16px !important; }
+.table-cell-name { font-size: 15px !important; font-weight: 600 !important; }
+.sidebar-nav-item { font-size: 14.5px !important; padding: 11px 16px !important; }
+.nav-label { font-size: 11px !important; }
+.drawer-row-label { font-size: 13px !important; }
+.drawer-row-value { font-size: 15px !important; }
+.chart-header h3 { font-size: 16px !important; }
+.panel-header h3 { font-size: 16px !important; }
+.global-search input { font-size: 14px !important; }
+.select-sm { font-size: 13px !important; height: 38px !important; }
+
+/* 高端视觉：更精致的卡片阴影和圆角 */
+.kpi-card {
+    border-radius: 16px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06) !important;
+    border: 1px solid var(--border-light) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.kpi-card:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1) !important;
+}
+.chart-card, .panel-card, .table-container {
+    border-radius: 16px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06) !important;
+    border: 1px solid var(--border-light) !important;
+}
+.spider-card {
+    border-radius: 14px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+}
+
+/* 手动更新按钮 */
+.btn-update {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 38px;
+    padding: 0 18px;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 2px 8px rgba(79,70,229,0.3);
+    white-space: nowrap;
+}
+.btn-update:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(79,70,229,0.4);
+}
+.btn-update:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.btn-update .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 顶部栏更精致 */
+.topbar {
+    height: 66px !important;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03) !important;
+}
+.brand-logo {
+    width: 40px !important; height: 40px !important;
+    font-size: 15px !important;
+    border-radius: 11px !important;
+}
+
+/* 侧边栏更宽更舒适 */
+.sidebar { width: 256px !important; }
+:root { --sidebar-width: 256px !important; }
+
+/* 表格行高更舒适 */
+.data-table tbody tr { transition: background 0.15s; }
+.data-table tbody tr:hover { background: var(--bg-hover) !important; }
+
+/* 质量徽章更大 */
+.quality-badge {
+    font-size: 13px !important;
+    padding: 4px 10px !important;
+    font-weight: 700 !important;
+}
+
+/* 行业标签 */
+.industry-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+/* 更新模态框 */
+.update-modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.update-modal-overlay.active { display: flex; }
+.update-modal {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.update-modal h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+.update-modal p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+.update-modal .modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+.update-modal .btn-primary {
+    flex: 1;
+    height: 44px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.update-modal .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(79,70,229,0.4); }
+.update-modal .btn-secondary {
+    flex: 1;
+    height: 44px;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.update-modal .info-box {
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+.update-modal .info-box strong { color: var(--text-primary); }

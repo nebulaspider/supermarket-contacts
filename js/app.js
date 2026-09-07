@@ -618,3 +618,105 @@ window.openDrawer = openDrawer;
 window.closeDrawer = closeDrawer;
 window.goPage = goPage;
 window.copyText = copyText;
+
+// ============================================
+// v4.0 手动更新功能
+// ============================================
+
+// 从当前页面 URL 推断仓库信息
+function getRepoInfo() {
+    // GitHub Pages URL: https://{owner}.github.io/{repo}/
+    const host = window.location.hostname;
+    const path = window.location.pathname;
+    if (host.endsWith('.github.io')) {
+        const owner = host.replace('.github.io', '');
+        const repo = path.split('/')[1] || '';
+        return { owner, repo };
+    }
+    // 本地开发时的默认值
+    return { owner: 'nebulaspider', repo: 'supermarket-contacts' };
+}
+
+function openUpdateModal() {
+    document.getElementById('updateModal').classList.add('active');
+}
+
+function closeUpdateModal() {
+    document.getElementById('updateModal').classList.remove('active');
+}
+
+async function triggerUpdate() {
+    const { owner, repo } = getRepoInfo();
+    const btn = document.getElementById('confirmUpdateBtn');
+    const updateBtn = document.getElementById('updateBtn');
+    const updateBtnText = document.getElementById('updateBtnText');
+
+    // 获取 Token（从 localStorage 或提示输入）
+    let token = localStorage.getItem('github_token');
+    if (!token) {
+        token = prompt('请输入你的 GitHub Personal Access Token（需要 repo + workflow 权限）：\n\n创建地址：https://github.com/settings/tokens\n\nToken 仅保存在你的浏览器本地，不会上传到任何服务器。');
+        if (!token) return;
+        localStorage.setItem('github_token', token);
+    }
+
+    btn.disabled = true;
+    btn.textContent = '触发中...';
+    updateBtn.disabled = true;
+    updateBtnText.innerHTML = '<span class="spinner"></span> 更新中';
+
+    try {
+        // 调用 GitHub API 触发 workflow_dispatch
+        const response = await fetch(
+            `https://api.github.com/repos/${owner}/${repo}/actions/workflows/update-data.yml/dispatches`,
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Authorization': `token ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ref: 'main',
+                    inputs: {
+                        industries: 'general,retail,electronics,furniture,cosmetics,food,fashion',
+                        directory_max: '80',
+                    }
+                }),
+            }
+        );
+
+        if (response.status === 204) {
+            closeUpdateModal();
+            showToast('✅ 已触发数据更新！预计 3-8 分钟后完成，完成后网站自动更新。');
+            // 30秒后自动刷新页面检查新数据
+            setTimeout(() => {
+                showToast('💡 数据可能正在更新中，点击刷新按钮查看最新数据');
+            }, 30000);
+        } else if (response.status === 401) {
+            localStorage.removeItem('github_token');
+            alert('Token 无效或已过期，请重新输入。');
+        } else if (response.status === 404) {
+            alert(`找不到工作流文件。请确认仓库 ${owner}/${repo} 中存在 .github/workflows/update-data.yml`);
+        } else {
+            const err = await response.text();
+            alert(`触发失败 (${response.status}): ${err}`);
+        }
+    } catch (err) {
+        alert('网络错误: ' + err.message);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '立即更新';
+        updateBtn.disabled = false;
+        updateBtnText.textContent = '手动更新';
+    }
+}
+
+// 点击模态框外部关闭
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('updateModal');
+    if (e.target === modal) closeUpdateModal();
+});
+
+window.openUpdateModal = openUpdateModal;
+window.closeUpdateModal = closeUpdateModal;
+window.triggerUpdate = triggerUpdate;
