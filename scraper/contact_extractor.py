@@ -28,12 +28,29 @@ SOCIAL_PATTERNS = {
     'youtube': re.compile(r'https?://(?:www\.)?youtube\.com/(?:c|channel|@)/[\w-]+', re.I),
 }
 
-# 常见的联系页面路径
+# 常见的联系页面路径（优先采购相关页面）
 CONTACT_PATHS = [
+    # 采购/供应商相关（优先）
+    '/procurement', '/purchasing', '/sourcing', '/suppliers',
+    '/supplier', '/vendors', '/vendor', '/buyers', '/buyer',
+    '/supply-chain', '/supplychain', '/merchandising',
+    '/trade', '/export', '/import', '/wholesale',
+    '/business-opportunities', '/become-a-supplier',
+    '/work-with-us', '/partnerships',
+    # 通用联系页面
     '/contact', '/contact-us', '/contactus', '/contacts',
     '/about', '/about-us', '/aboutus',
     '/imprint', '/impressum', '/legal',
     '/support', '/help',
+]
+
+# 采购邮箱关键词（用于识别和优先排序）
+PROCUREMENT_KEYWORDS = [
+    'procurement', 'purchasing', 'sourcing', 'buyer', 'buying',
+    'supplier', 'vendors', 'vendor', 'supply', 'chain',
+    'merchandising', 'merchandise', 'trade', 'import', 'export',
+    'wholesale', 'b2b', 'business', 'orders', 'order',
+    '采购', '供应商', '买手', '招商',
 ]
 
 # 需要跳过的邮箱（无效的）
@@ -68,10 +85,10 @@ class ContactExtractor:
     def extract(self, website: str) -> Dict[str, str]:
         """
         从公司官网提取联系方式。
-        返回字典: email, phone, linkedin, facebook, twitter, instagram, youtube
+        返回字典: email, phone, procurement_email, linkedin, facebook, twitter, instagram, youtube
         """
         result = {
-            'email': '', 'phone': '',
+            'email': '', 'phone': '', 'procurement_email': '',
             'linkedin': '', 'facebook': '', 'twitter': '',
             'instagram': '', 'youtube': '',
         }
@@ -84,23 +101,35 @@ class ContactExtractor:
             website = 'https://' + website
         website = website.rstrip('/')
 
+        all_emails = []  # 收集所有邮箱，后面分类
+
         try:
             # 1. 抓取首页
             homepage_html = self._fetch(website)
             if not homepage_html:
                 return result
 
-            self._extract_from_html(homepage_html, website, result)
+            self._extract_from_html(homepage_html, website, result, all_emails)
 
-            # 2. 如果首页没找到邮箱，尝试联系页面
-            if not result['email'] or not result['phone']:
-                for path in CONTACT_PATHS:
-                    contact_url = website + path
-                    contact_html = self._fetch(contact_url)
-                    if contact_html:
-                        self._extract_from_html(contact_html, contact_url, result)
-                        if result['email'] and result['phone']:
-                            break
+            # 2. 优先抓取采购相关页面，再抓通用联系页面
+            for path in CONTACT_PATHS:
+                if result['email'] and result['phone'] and result['procurement_email']:
+                    break
+                contact_url = website + path
+                contact_html = self._fetch(contact_url)
+                if contact_html:
+                    self._extract_from_html(contact_html, contact_url, result, all_emails)
+
+            # 3. 从所有邮箱中识别采购邮箱
+            procurement_emails = [
+                e for e in all_emails
+                if any(kw in e.lower() for kw in PROCUREMENT_KEYWORDS)
+            ]
+            if procurement_emails and not result['procurement_email']:
+                result['procurement_email'] = procurement_emails[0]
+            # 如果没有专门的采购邮箱，用第一个邮箱作为通用邮箱
+            if not result['email'] and all_emails:
+                result['email'] = all_emails[0]
 
         except Exception as e:
             logger.warning(f"提取联系方式失败 {website}: {e}")
@@ -122,16 +151,18 @@ class ContactExtractor:
         except Exception:
             return None
 
-    def _extract_from_html(self, html: str, base_url: str, result: Dict[str, str]):
+    def _extract_from_html(self, html: str, base_url: str, result: Dict[str, str], all_emails: list = None):
         """从 HTML 中提取联系方式"""
         from bs4 import BeautifulSoup
 
         soup = BeautifulSoup(html, 'html.parser')
 
-        # 提取邮箱
-        if not result['email']:
-            emails = self._extract_emails(soup, html)
-            if emails:
+        # 提取邮箱（收集所有邮箱）
+        emails = self._extract_emails(soup, html)
+        if emails:
+            if all_emails is not None:
+                all_emails.extend([e for e in emails if e not in all_emails])
+            if not result['email']:
                 result['email'] = emails[0]
 
         # 提取电话

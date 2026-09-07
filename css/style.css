@@ -856,6 +856,100 @@ input, select { font-family: inherit; }
 .update-modal .info-box strong { color: var(--text-primary); }
 
 /* ============================================
+   v4.2 Cyrus AI — 表格标题放大 + 采购决策链
+   ============================================ */
+
+/* 表格标题放大加粗 */
+.data-table th {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    padding: 16px !important;
+    letter-spacing: 0.3px !important;
+    text-transform: none !important;
+    border-bottom: 3px solid var(--gold, #f5a623) !important;
+}
+.data-table th:nth-child(1) { color: #fff !important; }
+.data-table th:nth-child(2) { color: #c7d2fe !important; }
+.data-table th:nth-child(3) { color: #fcd34d !important; }
+.data-table th:nth-child(4) { color: #fca5a5 !important; }
+.data-table th:nth-child(5) { color: #86efac !important; }
+.data-table th:nth-child(6) { color: #93c5fd !important; }
+.data-table th:nth-child(7) { color: #f9a8d4 !important; }
+.data-table th:nth-child(8) { color: #fde047 !important; }
+.data-table th:nth-child(9) { color: #fff !important; }
+
+/* 表格内容更大 */
+.data-table td {
+    padding: 18px 16px !important;
+    font-size: 14.5px !important;
+}
+
+/* 采购邮箱特殊样式 */
+.procurement-email {
+    color: #d97706 !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #fde68a;
+    font-size: 13px !important;
+}
+
+/* 采购联系人标签 */
+.procurement-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid #fcd34d;
+}
+
+/* 社交找人入口 */
+.social-find-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    padding: 14px;
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+}
+.social-find-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+.social-find-btn:hover { transform: translateY(-1px); text-decoration: none; }
+.social-linkedin { background: #0077b5; color: #fff; }
+.social-facebook { background: #1877f2; color: #fff; }
+.social-instagram { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
+.social-twitter { background: #000; color: #fff; }
+
+/* 海关数据提示 */
+.customs-notice {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border: 1px solid #93c5fd;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #1e40af;
+}
+.customs-notice strong { color: #1e3a8a; }
+
+/* ============================================
    v4.1 客户名录颜色区分 + 主题字号自定义
    ============================================ */
 
@@ -1068,4 +1162,106 @@ body.theme-contrast .kpi-value { color: #ffd700 !important; }
     border-radius: 3px;
     margin-right: 6px;
     vertical-align: middle;
+}
+
+/* ============================================
+   v4.2 Cyrus AI — 大标题色彩分明表头
+   ============================================ */
+
+/* 表格大标题 */
+.data-table thead {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%) !important;
+}
+.data-table th {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    padding: 16px 16px !important;
+    letter-spacing: 0.3px !important;
+    border-bottom: 3px solid var(--gold, #f5a623) !important;
+}
+.data-table th.th-company { color: #60a5fa !important; }
+.data-table th.th-industry { color: #a78bfa !important; }
+.data-table th.th-country { color: #fbbf24 !important; }
+.data-table th.th-position { color: #f472b6 !important; }
+.data-table th.th-dept { color: #34d399 !important; }
+.data-table th.th-email { color: #38bdf8 !important; }
+.data-table th.th-phone { color: #4ade80 !important; }
+.data-table th.th-quality { color: #fb923c !important; }
+.data-table th.th-action { color: #f87171 !important; }
+
+/* 表格内容更大更清晰 */
+.data-table td {
+    padding: 18px 16px !important;
+    font-size: 14.5px !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+.data-table tbody tr {
+    transition: all 0.2s ease !important;
+}
+.data-table tbody tr:hover {
+    background: rgba(96, 165, 250, 0.06) !important;
+    transform: scale(1.001);
+}
+
+/* 页面标题更大 */
+.page-title {
+    font-size: 30px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px !important;
+}
+.page-subtitle {
+    font-size: 15px !important;
+}
+
+/* 品牌名称更大 */
+.brand-name {
+    font-size: 19px !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.brand-logo {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed) !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+}
+
+/* 采购联系区块 */
+.procurement-section {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #fcd34d;
+}
+.procurement-section h4 {
+    color: #92400e;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.procurement-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid #fcd34d;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #92400e;
+    text-decoration: none;
+    margin: 4px;
+    transition: all 0.2s;
+}
+.procurement-link:hover {
+    background: #fef3c7;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(245,166,35,0.2);
 }

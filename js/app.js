@@ -486,7 +486,8 @@ function openDrawer(companyName) {
 
     const rows = [
         { icon: '🌐', label: '官网', value: d.website, href: d.website },
-        { icon: '📧', label: '邮箱', value: d.email, href: d.email ? `mailto:${d.email}` : '' },
+        { icon: '🛒', label: '采购部邮箱', value: d.procurement_email, href: d.procurement_email ? `mailto:${d.procurement_email}` : '', highlight: true },
+        { icon: '📧', label: '公司邮箱', value: d.email, href: d.email ? `mailto:${d.email}` : '' },
         { icon: '📞', label: '电话', value: d.phone, href: d.phone ? `tel:${d.phone}` : '' },
         { icon: '💬', label: 'WhatsApp', value: d.whatsapp, href: d.whatsapp ? `https://wa.me/${String(d.whatsapp).replace(/[^\d]/g, '')}` : '' },
         { icon: '💚', label: '微信', value: d.wechat },
@@ -502,13 +503,28 @@ function openDrawer(companyName) {
             <div class="drawer-row-icon">${r.icon}</div>
             <div class="drawer-row-content">
                 <div class="drawer-row-label">${r.label}</div>
-                <div class="drawer-row-value ${r.value ? '' : 'missing'}">
+                <div class="drawer-row-value ${r.value ? '' : 'missing'} ${r.highlight && r.value ? 'procurement-email' : ''}">
                     ${r.value ? (r.href ? `<a href="${esc(r.href)}" target="_blank">${esc(r.value)}</a>` : esc(r.value)) : '待补充'}
                 </div>
             </div>
             ${r.value ? `<button class="drawer-copy" onclick="copyText('${esc(r.value).replace(/'/g, "\\'")}')">复制</button>` : ''}
         </div>
     `).join('');
+
+    // 社交找人链接（搜索该公司的采购人员）
+    const companySearch = encodeURIComponent(d.company_name);
+    const socialFindHtml = `
+        <div class="social-find-bar">
+            <a class="social-find-btn social-linkedin" href="https://www.linkedin.com/search/results/people/?keywords=${companySearch}%20buyer" target="_blank">🔍 LinkedIn 找 Buyer</a>
+            <a class="social-find-btn social-linkedin" href="https://www.linkedin.com/search/results/people/?keywords=${companySearch}%20procurement" target="_blank">🔍 LinkedIn 找采购</a>
+            <a class="social-find-btn social-facebook" href="https://www.facebook.com/search/top?q=${companySearch}" target="_blank">📘 Facebook</a>
+            <a class="social-find-btn social-instagram" href="https://www.instagram.com/${companySearch.replace(/\s+/g, '')}/" target="_blank">📷 Instagram</a>
+        </div>
+        <div class="customs-notice">
+            <strong>📦 海关订单数据：</strong>真实海关进出口数据为付费数据（ImportYeti 可免费查美国进口商）。
+            <a href="https://importyeti.com/search?q=${companySearch}" target="_blank" style="color:#1d4ed8;font-weight:600;">点此在 ImportYeti 免费查询该公司的美国进口记录 →</a>
+        </div>
+    `;
 
     document.getElementById('drawerBody').innerHTML = `
         <div class="drawer-quality" style="--score:${q}%">
@@ -546,6 +562,11 @@ function openDrawer(companyName) {
         <div class="drawer-section">
             <h4>公司联系方式</h4>
             ${contactHtml}
+        </div>
+        <div class="drawer-section">
+            <h4>🔍 找采购人员 & 海关数据</h4>
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">点击下方链接，在社交平台搜索该公司的 Buyer / 采购经理，或查询美国进口记录：</p>
+            ${socialFindHtml}
         </div>
         <div class="drawer-section">
             <h4>数据元信息</h4>

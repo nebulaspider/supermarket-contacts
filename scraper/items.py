@@ -32,6 +32,7 @@ class SupermarketContactItem(scrapy.Item):
     # ===== 公司联系方式 =====
     email = scrapy.Field()              # 公司总邮箱
     phone = scrapy.Field()              # 公司总机
+    procurement_email = scrapy.Field()  # 采购部专用邮箱
     whatsapp = scrapy.Field()           # WhatsApp 号码
     wechat = scrapy.Field()             # 微信号/公众号
     linkedin = scrapy.Field()           # 公司 LinkedIn 主页

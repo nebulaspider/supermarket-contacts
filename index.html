@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SupermarketIQ — 全球超市客户情报平台</title>
+    <title>Cyrus AI — 全球企业客户情报平台</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,10 +16,10 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
             <div class="brand">
-                <div class="brand-logo">SI</div>
+                <div class="brand-logo">CA</div>
                 <div class="brand-text">
-                    <span class="brand-name">SupermarketIQ</span>
-                    <span class="brand-tag">Global Retail Intelligence</span>
+                    <span class="brand-name">Cyrus AI</span>
+                    <span class="brand-tag">Global Business Intelligence</span>
                 </div>
             </div>
         </div>
@@ -208,15 +208,15 @@
                 <div class="table-container">
                     <table class="data-table" id="dataTable">
                         <thead><tr>
-                            <th data-sort="company_name">企业名称 <span class="sort-icon">↕</span></th>
-                            <th data-sort="industry">行业 <span class="sort-icon">↕</span></th>
-                            <th data-sort="country">国家/地区 <span class="sort-icon">↕</span></th>
-                            <th>关键职位</th>
-                            <th>部门</th>
-                            <th>邮箱</th>
-                            <th>电话</th>
-                            <th data-sort="data_quality">质量 <span class="sort-icon">↕</span></th>
-                            <th>操作</th>
+                            <th data-sort="company_name" class="th-company">企业名称 <span class="sort-icon">↕</span></th>
+                            <th data-sort="industry" class="th-industry">行业 <span class="sort-icon">↕</span></th>
+                            <th data-sort="country" class="th-country">国家/地区 <span class="sort-icon">↕</span></th>
+                            <th class="th-position">关键职位</th>
+                            <th class="th-dept">部门</th>
+                            <th class="th-email">邮箱</th>
+                            <th class="th-phone">电话</th>
+                            <th data-sort="data_quality" class="th-quality">质量 <span class="sort-icon">↕</span></th>
+                            <th class="th-action">操作</th>
                         </tr></thead>
                         <tbody id="tableBody"></tbody>
                     </table>

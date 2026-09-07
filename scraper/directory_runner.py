@@ -18,6 +18,43 @@ from scraper.directory_sources.europages import EuroPagesDirectorySource
 from scraper.contact_extractor import ContactExtractor
 from scraper.directory_sources.base import CompanyLead
 
+
+def extract_website_from_wikipedia(wikipedia_url: str) -> str:
+    """从维基百科公司页面的信息框中提取官方网站链接"""
+    try:
+        import requests
+        from bs4 import BeautifulSoup
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+        }
+        resp = requests.get(wikipedia_url, headers=headers, timeout=10)
+        if resp.status_code != 200:
+            return ''
+
+        soup = BeautifulSoup(resp.text, 'html.parser')
+
+        # 方法1：从 infobox 中找 "Website" 行
+        infobox = soup.find('table', class_='infobox')
+        if infobox:
+            for row in infobox.find_all('tr'):
+                header = row.find('th')
+                if header and 'website' in header.get_text().lower():
+                    link = row.find('a', class_='external')
+                    if link and link.get('href'):
+                        return link['href'].split('?')[0].rstrip('/')
+
+        # 方法2：找页面中第一个外部链接（通常是官网）
+        for link in soup.find_all('a', class_='external'):
+            href = link.get('href', '')
+            if href and 'wikipedia.org' not in href and 'wikimedia' not in href:
+                return href.split('?')[0].rstrip('/')
+
+        return ''
+    except Exception as e:
+        logger.warning(f"从维基百科提取官网失败 {wikipedia_url}: {e}")
+        return ''
+
 logger = logging.getLogger(__name__)
 
 # 支持的行业列表（全行业）
@@ -111,12 +148,21 @@ def run_directory_crawl(
             record['scraped_at'] = datetime.utcnow().isoformat() + 'Z'
             record['data_quality'] = 0
 
-            # 如果 website 是维基百科链接，不提取（需要先找真实官网）
+            # 如果 website 是维基百科链接，先从维基页面提取真实官网
+            if lead.website and 'wikipedia.org' in lead.website:
+                real_website = extract_website_from_wikipedia(lead.website)
+                if real_website:
+                    record['website'] = real_website
+                    lead.website = real_website
+                else:
+                    record['website'] = ''
+
+            # 提取联系方式
             if lead.website and 'wikipedia.org' not in lead.website:
                 contacts = extractor.extract(lead.website)
                 record.update(contacts)
-            else:
-                record['website'] = ''  # 维基百科链接不作为官网
+            elif not record.get('website'):
+                record['website'] = ''
 
             results.append(record)
     else:
