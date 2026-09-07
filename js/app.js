@@ -34,25 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function bindEvents() {
-    // Navigation
-    document.querySelectorAll('.nav-item').forEach(item => {
+    // Navigation (sidebar + bottom nav)
+    document.querySelectorAll('.nav-item, .bottom-nav-item').forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
             switchView(item.dataset.view);
         });
     });
-    document.querySelectorAll('[data-view]').forEach(el => {
-        if (!el.classList.contains('nav-item')) {
-            el.addEventListener('click', (e) => {
-                e.preventDefault();
-                switchView(el.dataset.view);
-            });
-        }
-    });
 
-    // Sidebar toggle
+    // Sidebar toggle (mobile drawer)
     document.getElementById('sidebarToggle').addEventListener('click', () => {
-        document.getElementById('sidebar').classList.toggle('collapsed');
+        document.getElementById('sidebar').classList.toggle('mobile-open');
+        document.getElementById('sidebarOverlay').classList.toggle('active');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+        document.getElementById('sidebar').classList.remove('mobile-open');
+        document.getElementById('sidebarOverlay').classList.remove('active');
     });
 
     // Theme toggle
@@ -61,7 +58,7 @@ function bindEvents() {
     // Global search
     document.getElementById('globalSearch').addEventListener('input', debounce(handleGlobalSearch, 250));
 
-    // Filters
+    // Filters (客户名录)
     document.getElementById('filterIndustry').addEventListener('change', applyTableFilters);
     document.getElementById('filterDepartment').addEventListener('change', applyTableFilters);
     document.getElementById('filterPosition').addEventListener('change', applyTableFilters);
@@ -83,8 +80,8 @@ function bindEvents() {
 
     // Keyboard
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeDrawer();
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        if (e.key === 'Escape') { closeDrawer(); closeUpdateModal(); }
+        if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
             e.preventDefault();
             document.getElementById('globalSearch').focus();
         }
@@ -120,7 +117,7 @@ async function loadData() {
 // ===== View Switching =====
 function switchView(view) {
     state.currentView = view;
-    document.querySelectorAll('.nav-item').forEach(item => {
+    document.querySelectorAll('.nav-item, .bottom-nav-item').forEach(item => {
         item.classList.toggle('active', item.dataset.view === view);
     });
     document.querySelectorAll('.view').forEach(v => {
@@ -128,6 +125,9 @@ function switchView(view) {
     });
     // Close mobile sidebar
     document.getElementById('sidebar').classList.remove('mobile-open');
+    document.getElementById('sidebarOverlay').classList.remove('active');
+    // Render discovery view if switching to it
+    if (view === 'discovery') renderDiscovery();
 }
 
 // ===== Theme =====
@@ -770,7 +770,7 @@ function setTheme(theme) {
         }
     }
     // 更新选择器状态
-    document.querySelectorAll('.theme-option').forEach(el => {
+    document.querySelectorAll('.option-btn[data-theme]').forEach(el => {
         el.classList.toggle('active', el.dataset.theme === theme);
     });
     localStorage.setItem('siq_theme', theme);
@@ -781,7 +781,7 @@ function setFontSize(size) {
     const body = document.body;
     body.classList.remove('font-sm', 'font-md', 'font-lg', 'font-xl');
     body.classList.add('font-' + size);
-    document.querySelectorAll('.font-option').forEach(el => {
+    document.querySelectorAll('.option-btn[data-size]').forEach(el => {
         el.classList.toggle('active', el.dataset.size === size);
     });
     localStorage.setItem('siq_fontsize', size);
@@ -845,12 +845,12 @@ function initPreferences() {
     setFontSize(savedFont);
 
     // 绑定主题选择器
-    document.querySelectorAll('.theme-option').forEach(el => {
+    document.querySelectorAll('.option-btn[data-theme]').forEach(el => {
         el.addEventListener('click', () => setTheme(el.dataset.theme));
     });
 
     // 绑定字号选择器
-    document.querySelectorAll('.font-option').forEach(el => {
+    document.querySelectorAll('.option-btn[data-size]').forEach(el => {
         el.addEventListener('click', () => setFontSize(el.dataset.size));
     });
 }
@@ -998,8 +998,8 @@ function renderDiscovery() {
 
 function applyDiscoveryFilters(data) {
     const keyword = document.getElementById('filterKeyword')?.value?.toLowerCase() || '';
-    const industry = document.getElementById('filterIndustry')?.value || '';
-    const country = document.getElementById('filterCountry')?.value || '';
+    const industry = document.getElementById('filterIndustryDiscovery')?.value || '';
+    const country = document.getElementById('filterCountryDiscovery')?.value || '';
     const hasEmail = document.getElementById('filterHasEmail')?.checked;
     const hasPhone = document.getElementById('filterHasPhone')?.checked;
     const hasProcurement = document.getElementById('filterHasProcurement')?.checked;
@@ -1020,17 +1020,18 @@ function applyDiscoveryFilters(data) {
 // 潜客挖掘页面事件绑定
 function initDiscovery() {
     // Tab 切换
-    document.querySelectorAll('.discovery-tab').forEach(tab => {
+    // Tab 切换
+    document.querySelectorAll('.tab-btn').forEach(tab => {
         tab.addEventListener('click', () => {
-            document.querySelectorAll('.discovery-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.discovery-tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(c => c.classList.remove('active'));
             tab.classList.add('active');
             document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
         });
     });
 
     // 筛选事件
-    const filterIds = ['filterKeyword', 'filterIndustry', 'filterCountry', 'filterHasEmail', 'filterHasPhone', 'filterHasProcurement', 'filterHasLinkedIn'];
+    const filterIds = ['filterKeyword', 'filterIndustryDiscovery', 'filterCountryDiscovery', 'filterHasEmail', 'filterHasPhone', 'filterHasProcurement', 'filterHasLinkedIn'];
     filterIds.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -1042,9 +1043,9 @@ function initDiscovery() {
     // 重置筛选
     document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
         document.getElementById('filterKeyword').value = '';
-        document.getElementById('filterIndustry').value = '';
-        document.getElementById('filterCountry').value = '';
-        document.querySelectorAll('.filter-checkbox input').forEach(cb => cb.checked = false);
+        document.getElementById('filterIndustryDiscovery').value = '';
+        document.getElementById('filterCountryDiscovery').value = '';
+        document.querySelectorAll('.checkbox-list input').forEach(cb => cb.checked = false);
         renderDiscovery();
     });
 

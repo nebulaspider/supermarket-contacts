@@ -2,490 +2,431 @@
 <html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyrus AI — 全球企业客户情报平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Cyrus AI - 全球B2B客户情报与潜客挖掘平台">
+    <title>Cyrus AI — 全球客户情报系统</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234f46e5'/><text y='.9em' font-size='60' x='20'>🏪</text></svg>">
 </head>
-<body>
-    <header class="topbar">
-        <div class="topbar-left">
-            <button class="sidebar-toggle" id="sidebarToggle" aria-label="切换侧边栏">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-            </button>
-            <div class="brand">
-                <div class="brand-logo">CA</div>
-                <div class="brand-text">
-                    <span class="brand-name">Cyrus AI</span>
-                    <span class="brand-tag">Global Business Intelligence</span>
-                </div>
-            </div>
-        </div>
-        <div class="topbar-center">
-            <div class="global-search">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" id="globalSearch" placeholder="搜索公司、国家、邮箱、电话..." autocomplete="off">
-                <kbd>⌘K</kbd>
-            </div>
-        </div>
-        <div class="topbar-right">
-            <button class="btn-update" id="updateBtn" onclick="openUpdateModal()">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
-                <span id="updateBtnText">手动更新</span>
-            </button>
-            <div class="topbar-stat">
-                <span class="stat-dot stat-dot--active"></span>
-                <span id="autoStatus">自动化运行中</span>
-            </div>
-            <button class="icon-btn" id="themeToggle" title="切换主题">
-                <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            </button>
-            <div class="avatar">BOSS</div>
-        </div>
-    </header>
+<body class="font-md">
 
-    <div class="app-layout">
-        <aside class="sidebar" id="sidebar">
-            <nav class="sidebar-nav">
-                <div class="nav-section">
-                    <span class="nav-label">概览</span>
-                    <a href="#" class="nav-item active" data-view="dashboard">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                        <span>仪表盘</span>
-                    </a>
-                    <a href="#" class="nav-item" data-view="contacts">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        <span>客户名录</span>
-                        <span class="nav-badge" id="navCount">0</span>
-                    </a>
-                    <a href="#" class="nav-item" data-view="discovery">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="M11 8v6M8 11h6"/></svg>
-                        <span>潜客挖掘</span>
-                        <span class="nav-badge" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">NEW</span>
-                    </a>
-                </div>
-                <div class="nav-section">
-                    <span class="nav-label">自动化</span>
-                    <a href="#" class="nav-item" data-view="automation">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                        <span>爬虫状态</span>
-                        <span class="nav-dot nav-dot--green"></span>
-                    </a>
-                    <a href="#" class="nav-item" data-view="quality">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                        <span>数据质量</span>
-                    </a>
-                </div>
-                <div class="nav-section">
-                    <span class="nav-label">系统</span>
-                    <a href="#" class="nav-item" data-view="settings">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                        <span>设置</span>
-                    </a>
-                </div>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="automation-mini">
-                    <div class="automation-mini-header">
-                        <span class="pulse-dot"></span>
-                        <span>Auto Pipeline</span>
-                    </div>
-                    <p>全链路自动化已启用</p>
-                    <p class="automation-mini-time" id="lastRunTime">—</p>
-                </div>
-            </div>
-        </aside>
-
-        <main class="main-content">
-            <section class="view view-dashboard active" id="view-dashboard">
-                <div class="page-header">
-                    <div>
-                        <h1 class="page-title">仪表盘</h1>
-                        <p class="page-subtitle">全球超市客户情报总览 · 数据实时同步</p>
-                    </div>
-                    <div class="page-actions">
-                        <button class="btn btn--secondary" id="exportBtn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            导出 CSV
-                        </button>
-                        <button class="btn btn--primary" id="refreshBtn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-                            刷新数据
-                        </button>
-                    </div>
-                </div>
-
-                <div class="last-update-bar" id="lastUpdateBar">
-                    <div class="update-icon">🕐</div>
-                    <div class="update-info">
-                        <div class="update-label">数据最后更新</div>
-                        <div class="update-time" id="lastUpdateTime">加载中...</div>
-                    </div>
-                    <div class="update-status success" id="updateStatus">
-                        <span class="status-dot"></span>
-                        <span id="updateStatusText">已同步</span>
-                    </div>
-                </div>
-
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--blue"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">企业总数</span><span class="kpi-value" id="kpiTotal">0</span><span class="kpi-trend kpi-trend--up">↑ 自动发现中</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">覆盖国家</span><span class="kpi-value" id="kpiCountries">0</span><span class="kpi-trend">全球分布</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--purple"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">邮箱覆盖率</span><span class="kpi-value" id="kpiEmail">0%</span><span class="kpi-trend kpi-trend--up" id="kpiEmailCount">0 个邮箱</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--orange"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">电话覆盖率</span><span class="kpi-value" id="kpiPhone">0%</span><span class="kpi-trend kpi-trend--up" id="kpiPhoneCount">0 个电话</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--cyan"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">LinkedIn 覆盖</span><span class="kpi-value" id="kpiLinkedin">0%</span><span class="kpi-trend" id="kpiLinkedinCount">0 个主页</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--pink"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">平均数据质量</span><span class="kpi-value" id="kpiQuality">0</span><span class="kpi-trend kpi-trend--up">满分 100</span></div>
-                    </div>
-                </div>
-
-                <div class="charts-row">
-                    <div class="chart-card">
-                        <div class="chart-header"><h3>国家/地区分布</h3><span class="chart-sub">Top 10</span></div>
-                        <div class="chart-body" id="countryChart"></div>
-                    </div>
-                    <div class="chart-card">
-                        <div class="chart-header"><h3>联系方式覆盖率</h3><span class="chart-sub">各字段完整度</span></div>
-                        <div class="chart-body" id="coverageChart"></div>
-                    </div>
-                </div>
-
-                <div class="dashboard-bottom">
-                    <div class="panel">
-                        <div class="panel-header">
-                            <h3>最近更新的企业</h3>
-                            <a href="#" class="panel-link" data-view="contacts">查看全部 →</a>
-                        </div>
-                        <div class="panel-body" id="recentList"></div>
-                    </div>
-                    <div class="panel">
-                        <div class="panel-header">
-                            <h3>自动化管线状态</h3>
-                            <span class="status-pill status-pill--running"><span class="pulse-dot"></span>运行中</span>
-                        </div>
-                        <div class="panel-body">
-                            <div class="pipeline">
-                                <div class="pipeline-step complete"><div class="pipeline-icon">✓</div><div class="pipeline-info"><span class="pipeline-title">自动发现</span><span class="pipeline-desc">从维基百科/商业目录发现新品牌</span></div><span class="pipeline-time" id="pipeDiscoverTime">—</span></div>
-                                <div class="pipeline-step complete"><div class="pipeline-icon">✓</div><div class="pipeline-info"><span class="pipeline-title">数据抓取</span><span class="pipeline-desc">Scrapy 多品牌并行抓取</span></div><span class="pipeline-time" id="pipeScrapeTime">—</span></div>
-                                <div class="pipeline-step complete"><div class="pipeline-icon">✓</div><div class="pipeline-info"><span class="pipeline-title">清洗去重</span><span class="pipeline-desc">格式标准化 + 智能去重</span></div><span class="pipeline-time" id="pipeCleanTime">—</span></div>
-                                <div class="pipeline-step complete"><div class="pipeline-icon">✓</div><div class="pipeline-info"><span class="pipeline-title">质量验证</span><span class="pipeline-desc">邮箱格式/号码有效性检查</span></div><span class="pipeline-time" id="pipeValidateTime">—</span></div>
-                                <div class="pipeline-step running"><div class="pipeline-icon pipeline-icon--spin">⟳</div><div class="pipeline-info"><span class="pipeline-title">自动部署</span><span class="pipeline-desc">GitHub Pages 实时更新</span></div><span class="pipeline-time">实时</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="view view-contacts" id="view-contacts">
-                <div class="page-header">
-                    <div>
-                        <h1 class="page-title">客户名录</h1>
-                        <p class="page-subtitle" id="contactsSubtitle">共 0 家企业</p>
-                    </div>
-                    <div class="page-actions">
-                        <div class="filter-group">
-                            <select id="filterIndustry" class="select-sm"><option value="">全部行业</option></select>
-                            <select id="filterDepartment" class="select-sm"><option value="">全部部门</option></select>
-                            <select id="filterPosition" class="select-sm"><option value="">全部职位</option></select>
-                            <select id="filterCountry" class="select-sm"><option value="">全部国家</option></select>
-                            <select id="filterQuality" class="select-sm"><option value="">全部质量</option><option value="80">≥80 高质量</option><option value="60">≥60 中等</option></select>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-container">
-                    <table class="data-table" id="dataTable">
-                        <thead><tr>
-                            <th data-sort="company_name" class="th-company">企业名称 <span class="sort-icon">↕</span></th>
-                            <th data-sort="industry" class="th-industry">行业 <span class="sort-icon">↕</span></th>
-                            <th data-sort="country" class="th-country">国家/地区 <span class="sort-icon">↕</span></th>
-                            <th class="th-position">关键职位</th>
-                            <th class="th-dept">部门</th>
-                            <th class="th-email">邮箱</th>
-                            <th class="th-phone">电话</th>
-                            <th data-sort="data_quality" class="th-quality">质量 <span class="sort-icon">↕</span></th>
-                            <th class="th-action">操作</th>
-                        </tr></thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                    <div class="table-footer">
-                        <span id="tableInfo">显示 0-0 / 0 条</span>
-                        <div class="pagination" id="pagination"></div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="view view-discovery" id="view-discovery">
-                <div class="page-header">
-                    <div>
-                        <h1 class="page-title">潜客挖掘</h1>
-                        <p class="page-subtitle">Apollo.io 级 B2B 潜客搜索 · 多维度筛选 · 智能邮箱生成</p>
-                    </div>
-                    <div class="page-actions">
-                        <button class="btn btn--secondary" id="discoveryExportBtn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            导出 CSV
-                        </button>
-                        <button class="btn btn--primary" id="discoverySaveBtn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                            保存筛选
-                        </button>
-                    </div>
-                </div>
-
-                <div class="discovery-layout">
-                    <!-- 左侧筛选面板 -->
-                    <div class="discovery-filters">
-                        <div class="filter-group">
-                            <div class="filter-header">
-                                <span>🔍 关键词搜索</span>
-                            </div>
-                            <input type="text" class="filter-input" id="filterKeyword" placeholder="公司名、行业、产品...">
-                        </div>
-
-                        <div class="filter-group">
-                            <div class="filter-header"><span>🏭 行业</span></div>
-                            <select class="filter-select" id="filterIndustry">
-                                <option value="">全部行业</option>
-                                <option value="零售">零售</option>
-                                <option value="综合零售 / 大卖场">大卖场</option>
-                                <option value="折扣超市">折扣超市</option>
-                                <option value="便利店">便利店</option>
-                                <option value="会员制仓储">会员制仓储</option>
-                                <option value="批发 / 现购自运">批发</option>
-                                <option value="电子">电子产品</option>
-                                <option value="服装">服装时尚</option>
-                                <option value="食品">食品饮料</option>
-                                <option value="家居">家居用品</option>
-                                <option value="化妆品">化妆品</option>
-                                <option value="汽车">汽车</option>
-                            </select>
-                        </div>
-
-                        <div class="filter-group">
-                            <div class="filter-header"><span>🌍 国家/地区</span></div>
-                            <select class="filter-select" id="filterCountry">
-                                <option value="">全部国家</option>
-                                <option value="美国">美国</option>
-                                <option value="英国">英国</option>
-                                <option value="德国">德国</option>
-                                <option value="法国">法国</option>
-                                <option value="日本">日本</option>
-                                <option value="中国">中国</option>
-                                <option value="澳大利亚">澳大利亚</option>
-                                <option value="加拿大">加拿大</option>
-                                <option value="荷兰">荷兰</option>
-                                <option value="韩国">韩国</option>
-                            </select>
-                        </div>
-
-                        <div class="filter-group">
-                            <div class="filter-header"><span>👥 企业规模</span></div>
-                            <div class="filter-checkboxes">
-                                <label class="filter-checkbox"><input type="checkbox" value="1-50" class="size-filter"> 1-50 人</label>
-                                <label class="filter-checkbox"><input type="checkbox" value="51-200" class="size-filter"> 51-200 人</label>
-                                <label class="filter-checkbox"><input type="checkbox" value="201-1000" class="size-filter"> 201-1000 人</label>
-                                <label class="filter-checkbox"><input type="checkbox" value="1001-5000" class="size-filter"> 1001-5000 人</label>
-                                <label class="filter-checkbox"><input type="checkbox" value="5000+" class="size-filter"> 5000+ 人</label>
-                            </div>
-                        </div>
-
-                        <div class="filter-group">
-                            <div class="filter-header"><span>💼 目标职位</span></div>
-                            <div class="filter-checkboxes">
-                                <label class="filter-checkbox"><input type="checkbox" value="CEO" class="title-filter"> CEO / 创始人</label>
-                                <label class="filter-checkbox"><input type="checkbox" value="Director" class="title-filter"> Director / 总监</label>
-                                <label class="filter-checkbox"><input type="checkbox" value="Manager" class="title-filter"> 采购经理</label>
-                                <label class="filter-checkbox"><input type="checkbox" value="Buyer" class="title-filter"> Buyer / 买手</label>
-                                <label class="filter-checkbox"><input type="checkbox" value="Sourcing" class="title-filter"> Sourcing /  sourcing</label>
-                            </div>
-                        </div>
-
-                        <div class="filter-group">
-                            <div class="filter-header"><span>📧 数据完整度</span></div>
-                            <div class="filter-checkboxes">
-                                <label class="filter-checkbox"><input type="checkbox" id="filterHasEmail"> 有邮箱</label>
-                                <label class="filter-checkbox"><input type="checkbox" id="filterHasPhone"> 有电话</label>
-                                <label class="filter-checkbox"><input type="checkbox" id="filterHasProcurement"> 有采购邮箱</label>
-                                <label class="filter-checkbox"><input type="checkbox" id="filterHasLinkedIn"> 有 LinkedIn</label>
-                            </div>
-                        </div>
-
-                        <button class="btn btn--outline btn--block" id="resetFiltersBtn">重置筛选</button>
-                    </div>
-
-                    <!-- 右侧结果区 -->
-                    <div class="discovery-results">
-                        <!-- 结果统计 + 视图切换 -->
-                        <div class="discovery-toolbar">
-                            <div class="discovery-stats">
-                                <span id="discoveryCount">0</span> 家公司 ·
-                                <span id="discoveryContacts">0</span> 个潜在联系人
-                            </div>
-                            <div class="discovery-tabs">
-                                <button class="discovery-tab active" data-tab="companies">🏢 公司</button>
-                                <button class="discovery-tab" data-tab="contacts">👤 联系人</button>
-                            </div>
-                        </div>
-
-                        <!-- 公司视图 -->
-                        <div class="discovery-tab-content active" id="tab-companies">
-                            <div class="table-container">
-                                <table class="data-table">
-                                    <thead>
-                                        <tr>
-                                            <th>公司名称</th>
-                                            <th>行业</th>
-                                            <th>国家</th>
-                                            <th>规模</th>
-                                            <th>采购邮箱</th>
-                                            <th>电话</th>
-                                            <th>潜客评分</th>
-                                            <th>操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="discoveryCompanyBody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- 联系人视图 -->
-                        <div class="discovery-tab-content" id="tab-contacts">
-                            <div class="table-container">
-                                <table class="data-table">
-                                    <thead>
-                                        <tr>
-                                            <th>姓名</th>
-                                            <th>职位</th>
-                                            <th>公司</th>
-                                            <th>国家</th>
-                                            <th>邮箱（智能生成）</th>
-                                            <th>置信度</th>
-                                            <th>LinkedIn</th>
-                                            <th>操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="discoveryContactBody"></tbody>
-                                </table>
-                            </div>
-                            <div class="contact-generator-note">
-                                💡 <strong>智能邮箱生成：</strong>根据公司域名和常见命名规则（first.last@、first@、flast@）生成潜在采购联系人邮箱。点击「验证」可检查邮箱是否有效。LinkedIn 链接可直接搜索对应人员。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="view view-automation" id="view-automation">
-                <div class="page-header">
-                    <div><h1 class="page-title">爬虫状态</h1><p class="page-subtitle">全自动化抓取管线实时监控</p></div>
-                </div>
-                <div class="spider-grid" id="spiderGrid"></div>
-            </section>
-
-            <section class="view view-quality" id="view-quality">
-                <div class="page-header">
-                    <div><h1 class="page-title">数据质量</h1><p class="page-subtitle">各字段完整度与质量分析</p></div>
-                </div>
-                <div class="quality-grid" id="qualityGrid"></div>
-            </section>
-
-            <section class="view view-settings" id="view-settings">
-                <div class="page-header">
-                    <div><h1 class="page-title">设置</h1><p class="page-subtitle">系统配置与自动化参数</p></div>
-                </div>
-                <div class="settings-panel">
-                    <div class="settings-group">
-                        <h3>外观设置</h3>
-                        <div class="setting-row">
-                            <div><span class="setting-label">主题模式</span><span class="setting-desc">选择界面配色主题</span></div>
-                            <div class="theme-selector" id="themeSelector">
-                                <div class="theme-option active" data-theme="light"><span class="theme-preview" style="background:#f8fafc;border:1px solid #e2e8f0;"></span>浅色</div>
-                                <div class="theme-option" data-theme="dark"><span class="theme-preview" style="background:#1a1a2e;"></span>深色</div>
-                                <div class="theme-option" data-theme="deepblue"><span class="theme-preview" style="background:#0f172a;"></span>深蓝</div>
-                                <div class="theme-option" data-theme="contrast"><span class="theme-preview" style="background:#000;border:1px solid #ffd700;"></span>高对比</div>
-                            </div>
-                        </div>
-                        <div class="setting-row">
-                            <div><span class="setting-label">字体大小</span><span class="setting-desc">调整全局字体大小</span></div>
-                            <div class="font-selector" id="fontSelector">
-                                <div class="font-option" data-size="sm">小</div>
-                                <div class="font-option active" data-size="md">中</div>
-                                <div class="font-option" data-size="lg">大</div>
-                                <div class="font-option" data-size="xl">超大</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="settings-group">
-                        <h3>自动化配置</h3>
-                        <div class="setting-row"><div><span class="setting-label">定时抓取</span><span class="setting-desc">每周一 UTC 02:00 自动运行全量抓取</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-                        <div class="setting-row"><div><span class="setting-label">自动发现新品牌</span><span class="setting-desc">从维基百科、商业目录自动发现新超市品牌</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-                        <div class="setting-row"><div><span class="setting-label">数据质量验证</span><span class="setting-desc">自动验证邮箱格式、电话号码有效性</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-                        <div class="setting-row"><div><span class="setting-label">异常数据回滚</span><span class="setting-desc">数据量骤降50%以上时自动恢复备份</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-                    </div>
-                    <div class="settings-group">
-                        <h3>抓取参数</h3>
-                        <div class="setting-row"><div><span class="setting-label">请求延迟</span><span class="setting-desc">对同一域名的请求间隔（秒）</span></div><span class="setting-value">3.0s</span></div>
-                        <div class="setting-row"><div><span class="setting-label">并发请求</span><span class="setting-desc">最大并发请求数</span></div><span class="setting-value">8</span></div>
-                        <div class="setting-row"><div><span class="setting-label">遵守 robots.txt</span><span class="setting-desc">合规抓取，不抓取禁止页面</span></div><span class="status-pill status-pill--success">已启用</span></div>
-                        <div class="setting-row"><div><span class="setting-label">代理池</span><span class="setting-desc">通过 GitHub Secrets 配置 PROXY_API_URL</span></div><span class="status-pill status-pill--muted">可选</span></div>
-                    </div>
-                    <div class="settings-group">
-                        <h3>部署信息</h3>
-                        <div class="setting-row"><div><span class="setting-label">部署平台</span></div><span class="setting-value mono">GitHub Pages</span></div>
-                        <div class="setting-row"><div><span class="setting-label">数据文件</span></div><span class="setting-value mono">data/clients.json</span></div>
-                        <div class="setting-row"><div><span class="setting-label">工作流文件</span></div><span class="setting-value mono">.github/workflows/update-data.yml</span></div>
-                        <div class="setting-row"><div><span class="setting-label">最后更新</span></div><span class="setting-value mono" id="settingsLastUpdate">—</span></div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <div class="drawer-overlay" id="drawerOverlay"></div>
-    <aside class="drawer" id="detailDrawer">
-        <div class="drawer-header"><h2 id="drawerTitle">企业详情</h2><button class="drawer-close" id="drawerClose">&times;</button></div>
-        <div class="drawer-body" id="drawerBody"></div>
-    </aside>
-
-    <div class="toast-container" id="toastContainer"></div>
-
-    <!-- 手动更新模态框 -->
-    <div class="update-modal-overlay" id="updateModal">
-        <div class="update-modal">
-            <h3>🔄 手动更新客户数据</h3>
-            <p>触发 GitHub Actions 自动化管线，在云端运行目录爬虫和品牌爬虫，抓取最新客户数据后自动更新网站。</p>
-            <div class="info-box">
-                <strong>运行内容：</strong><br>
-                • 商业目录爬虫（维基百科 + EuroPages，全行业）<br>
-                • 14 个品牌官网爬虫<br>
-                • 数据清洗去重 + 质量评分<br>
-                • 自动提交并重新部署网站<br>
-                <strong style="margin-top:8px;display:inline-block;">预计耗时：3-8 分钟</strong>
-            </div>
-            <div class="modal-actions">
-                <button class="btn-secondary" onclick="closeUpdateModal()">取消</button>
-                <button class="btn-primary" id="confirmUpdateBtn" onclick="triggerUpdate()">立即更新</button>
+<!-- ===== 顶部导航栏 ===== -->
+<header class="topbar">
+    <div class="topbar-left">
+        <button class="icon-btn" id="sidebarToggle" aria-label="菜单">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="brand">
+            <div class="brand-logo">C</div>
+            <div class="brand-text">
+                <span class="brand-name">Cyrus AI</span>
+                <span class="brand-tag">Global Intelligence</span>
             </div>
         </div>
     </div>
-    <script src="js/app.js"></script>
+    <div class="topbar-center">
+        <div class="search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="globalSearch" placeholder="搜索公司、行业、国家... (按 / 聚焦)">
+        </div>
+    </div>
+    <div class="topbar-right">
+        <button class="icon-btn" id="themeToggle" aria-label="切换主题">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn btn--gold" id="updateBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            <span id="updateBtnText">手动更新</span>
+        </button>
+    </div>
+</header>
+
+<!-- ===== 侧边栏（桌面） ===== -->
+<aside class="sidebar" id="sidebar">
+    <nav class="sidebar-nav">
+        <div class="nav-group">
+            <span class="nav-group-title">概览</span>
+            <a href="#" class="nav-item active" data-view="dashboard">
+                <span class="nav-icon">📊</span><span class="nav-text">仪表盘</span>
+            </a>
+            <a href="#" class="nav-item" data-view="contacts">
+                <span class="nav-icon">🏢</span><span class="nav-text">客户名录</span>
+                <span class="nav-badge" id="navCount">0</span>
+            </a>
+            <a href="#" class="nav-item" data-view="discovery">
+                <span class="nav-icon">🔍</span><span class="nav-text">潜客挖掘</span>
+                <span class="nav-badge nav-badge--new">NEW</span>
+            </a>
+        </div>
+        <div class="nav-group">
+            <span class="nav-group-title">系统</span>
+            <a href="#" class="nav-item" data-view="automation">
+                <span class="nav-icon">⚡</span><span class="nav-text">爬虫状态</span>
+            </a>
+            <a href="#" class="nav-item" data-view="quality">
+                <span class="nav-icon">✅</span><span class="nav-text">数据质量</span>
+            </a>
+            <a href="#" class="nav-item" data-view="settings">
+                <span class="nav-icon">⚙️</span><span class="nav-text">设置</span>
+            </a>
+        </div>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="footer-card">
+            <div class="footer-title">自动化运行中</div>
+            <div class="footer-time" id="lastRunTime">—</div>
+        </div>
+    </div>
+</aside>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ===== 底部导航（手机） ===== -->
+<nav class="bottom-nav">
+    <a href="#" class="bottom-nav-item active" data-view="dashboard">
+        <span class="bottom-nav-icon">📊</span><span>仪表盘</span>
+    </a>
+    <a href="#" class="bottom-nav-item" data-view="contacts">
+        <span class="bottom-nav-icon">🏢</span><span>客户</span>
+    </a>
+    <a href="#" class="bottom-nav-item" data-view="discovery">
+        <span class="bottom-nav-icon">🔍</span><span>挖掘</span>
+    </a>
+    <a href="#" class="bottom-nav-item" data-view="settings">
+        <span class="bottom-nav-icon">⚙️</span><span>设置</span>
+    </a>
+</nav>
+
+<!-- ===== 主内容区 ===== -->
+<main class="main-content">
+
+    <!-- ===== 仪表盘 ===== -->
+    <section class="view active" id="view-dashboard">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">仪表盘</h1>
+                <p class="page-subtitle">全球客户情报总览</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn btn--outline" id="exportBtn">导出 CSV</button>
+                <button class="btn btn--primary" id="refreshBtn">刷新数据</button>
+            </div>
+        </div>
+
+        <div class="update-bar" id="lastUpdateBar">
+            <span class="update-bar-icon">🕐</span>
+            <div class="update-bar-info">
+                <span class="update-bar-label">数据最后更新</span>
+                <span class="update-bar-time" id="lastUpdateTime">加载中...</span>
+            </div>
+            <span class="update-bar-status" id="updateStatus">
+                <span class="status-dot"></span>
+                <span id="updateStatusText">已同步</span>
+            </span>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-icon kpi-icon--blue">🏢</div>
+                <div class="kpi-info">
+                    <span class="kpi-label">企业总数</span>
+                    <span class="kpi-value" id="kpiTotal">0</span>
+                    <span class="kpi-sub">自动发现中</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon kpi-icon--green">📧</div>
+                <div class="kpi-info">
+                    <span class="kpi-label">邮箱覆盖率</span>
+                    <span class="kpi-value" id="kpiEmail">0%</span>
+                    <span class="kpi-sub" id="kpiEmailCount">0 个邮箱</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon kpi-icon--orange">📞</div>
+                <div class="kpi-info">
+                    <span class="kpi-label">电话覆盖率</span>
+                    <span class="kpi-value" id="kpiPhone">0%</span>
+                    <span class="kpi-sub" id="kpiPhoneCount">0 个电话</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon kpi-icon--purple">💼</div>
+                <div class="kpi-info">
+                    <span class="kpi-label">LinkedIn 覆盖</span>
+                    <span class="kpi-value" id="kpiLinkedin">0%</span>
+                    <span class="kpi-sub" id="kpiLinkedinCount">0 个主页</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-header"><h3>🌍 国家分布</h3></div>
+                <div class="card-body" id="countryChart"></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>📈 联系方式覆盖率</h3></div>
+                <div class="card-body" id="coverageChart"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><h3>🕐 最近更新的企业</h3></div>
+            <div class="card-body" id="recentList"></div>
+        </div>
+    </section>
+
+    <!-- ===== 客户名录 ===== -->
+    <section class="view" id="view-contacts">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">客户名录</h1>
+                <p class="page-subtitle" id="contactsSubtitle">共 0 家企业</p>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <select id="filterIndustry"><option value="">全部行业</option></select>
+            <select id="filterCountry"><option value="">全部国家</option></select>
+            <select id="filterDepartment"><option value="">全部部门</option></select>
+            <select id="filterPosition"><option value="">全部职位</option></select>
+            <select id="filterQuality">
+                <option value="0">全部质量</option>
+                <option value="80">高质量 (80+)</option>
+                <option value="60">中等 (60+)</option>
+            </select>
+        </div>
+
+        <div class="card table-card">
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th data-sort="company_name">公司名称</th>
+                            <th>行业</th>
+                            <th data-sort="country">国家</th>
+                            <th>职位</th>
+                            <th>部门</th>
+                            <th>邮箱</th>
+                            <th>电话</th>
+                            <th data-sort="data_quality">质量</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+            <div class="table-footer">
+                <span id="tableInfo">显示 0 条</span>
+                <div class="pagination" id="pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 潜客挖掘 ===== -->
+    <section class="view" id="view-discovery">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">潜客挖掘</h1>
+                <p class="page-subtitle">多维度筛选 · 智能邮箱生成 · 采购决策链</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn btn--outline" id="discoveryExportBtn">导出 CSV</button>
+            </div>
+        </div>
+
+        <div class="discovery-layout">
+            <div class="discovery-filters">
+                <div class="filter-block">
+                    <label class="filter-label">🔍 关键词</label>
+                    <input type="text" class="input" id="filterKeyword" placeholder="公司名、行业、产品...">
+                </div>
+                <div class="filter-block">
+                    <label class="filter-label">🏭 行业</label>
+                    <select class="input" id="filterIndustryDiscovery">
+                        <option value="">全部行业</option>
+                        <option value="零售">零售</option>
+                        <option value="综合零售 / 大卖场">大卖场</option>
+                        <option value="折扣超市">折扣超市</option>
+                        <option value="便利店">便利店</option>
+                        <option value="电子">电子产品</option>
+                        <option value="服装">服装时尚</option>
+                        <option value="食品">食品饮料</option>
+                        <option value="家居">家居用品</option>
+                        <option value="化妆品">化妆品</option>
+                    </select>
+                </div>
+                <div class="filter-block">
+                    <label class="filter-label">🌍 国家</label>
+                    <select class="input" id="filterCountryDiscovery">
+                        <option value="">全部国家</option>
+                        <option value="美国">美国</option>
+                        <option value="英国">英国</option>
+                        <option value="德国">德国</option>
+                        <option value="法国">法国</option>
+                        <option value="日本">日本</option>
+                        <option value="中国">中国</option>
+                        <option value="澳大利亚">澳大利亚</option>
+                        <option value="加拿大">加拿大</option>
+                    </select>
+                </div>
+                <div class="filter-block">
+                    <label class="filter-label">📧 数据完整度</label>
+                    <div class="checkbox-list">
+                        <label><input type="checkbox" id="filterHasEmail"> 有邮箱</label>
+                        <label><input type="checkbox" id="filterHasPhone"> 有电话</label>
+                        <label><input type="checkbox" id="filterHasProcurement"> 有采购邮箱</label>
+                        <label><input type="checkbox" id="filterHasLinkedIn"> 有 LinkedIn</label>
+                    </div>
+                </div>
+                <button class="btn btn--outline btn--block" id="resetFiltersBtn">重置筛选</button>
+            </div>
+
+            <div class="discovery-results">
+                <div class="results-toolbar">
+                    <span class="results-count"><strong id="discoveryCount">0</strong> 家公司 · <strong id="discoveryContacts">0</strong> 个潜在联系人</span>
+                    <div class="tab-switch">
+                        <button class="tab-btn active" data-tab="companies">🏢 公司</button>
+                        <button class="tab-btn" data-tab="contacts">👤 联系人</button>
+                    </div>
+                </div>
+
+                <div class="tab-panel active" id="tab-companies">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>公司</th><th>行业</th><th>国家</th><th>采购邮箱</th><th>电话</th><th>评分</th><th></th></tr>
+                            </thead>
+                            <tbody id="discoveryCompanyBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-panel" id="tab-contacts">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>姓名</th><th>职位</th><th>公司</th><th>邮箱（智能生成）</th><th>置信度</th><th>LinkedIn</th><th></th></tr>
+                            </thead>
+                            <tbody id="discoveryContactBody"></tbody>
+                        </table>
+                    </div>
+                    <div class="info-note">
+                        💡 <strong>智能邮箱生成：</strong>根据公司域名和常见命名规则生成采购联系人邮箱。点击 LinkedIn 搜索链接可直接查找对应人员。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 爬虫状态 ===== -->
+    <section class="view" id="view-automation">
+        <div class="page-header">
+            <div><h1 class="page-title">爬虫状态</h1><p class="page-subtitle">全自动化抓取管线实时监控</p></div>
+        </div>
+        <div class="spider-grid" id="spiderGrid"></div>
+    </section>
+
+    <!-- ===== 数据质量 ===== -->
+    <section class="view" id="view-quality">
+        <div class="page-header">
+            <div><h1 class="page-title">数据质量</h1><p class="page-subtitle">各字段完整度与质量分析</p></div>
+        </div>
+        <div class="quality-grid" id="qualityGrid"></div>
+    </section>
+
+    <!-- ===== 设置 ===== -->
+    <section class="view" id="view-settings">
+        <div class="page-header">
+            <div><h1 class="page-title">设置</h1><p class="page-subtitle">外观、自动化与系统配置</p></div>
+        </div>
+
+        <div class="settings-grid">
+            <div class="card">
+                <div class="card-header"><h3>🎨 外观设置</h3></div>
+                <div class="card-body">
+                    <div class="setting-row">
+                        <div><strong>主题模式</strong><p>选择界面配色</p></div>
+                        <div class="option-group" id="themeSelector">
+                            <button class="option-btn active" data-theme="light">☀️ 浅色</button>
+                            <button class="option-btn" data-theme="dark">🌙 深色</button>
+                            <button class="option-btn" data-theme="deepblue">🌊 深蓝</button>
+                            <button class="option-btn" data-theme="contrast">⚡ 高对比</button>
+                        </div>
+                    </div>
+                    <div class="setting-row">
+                        <div><strong>字体大小</strong><p>调整全局字号</p></div>
+                        <div class="option-group" id="fontSelector">
+                            <button class="option-btn" data-size="sm">小</button>
+                            <button class="option-btn active" data-size="md">中</button>
+                            <button class="option-btn" data-size="lg">大</button>
+                            <button class="option-btn" data-size="xl">超大</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h3>⚡ 自动化配置</h3></div>
+                <div class="card-body">
+                    <div class="setting-row"><div><strong>定时抓取</strong><p>每周自动运行全量抓取</p></div><span class="tag tag--success">已启用</span></div>
+                    <div class="setting-row"><div><strong>自动发现新品牌</strong><p>从维基百科、商业目录发现</p></div><span class="tag tag--success">已启用</span></div>
+                    <div class="setting-row"><div><strong>数据质量验证</strong><p>自动验证邮箱格式、电话有效性</p></div><span class="tag tag--success">已启用</span></div>
+                    <div class="setting-row"><div><strong>异常数据回滚</strong><p>数据骤降50%自动恢复备份</p></div><span class="tag tag--success">已启用</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h3>📋 部署信息</h3></div>
+                <div class="card-body">
+                    <div class="setting-row"><div><strong>部署平台</strong></div><span class="mono">GitHub Pages</span></div>
+                    <div class="setting-row"><div><strong>数据文件</strong></div><span class="mono">data/clients.json</span></div>
+                    <div class="setting-row"><div><strong>最后更新</strong></div><span class="mono" id="settingsLastUpdate">—</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== 详情抽屉 ===== -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="detailDrawer">
+    <div class="drawer-header">
+        <h2 id="drawerTitle">公司详情</h2>
+        <button class="icon-btn" id="drawerClose">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+</aside>
+
+<!-- ===== 手动更新模态框 ===== -->
+<div class="modal-overlay" id="updateModal">
+    <div class="modal">
+        <div class="modal-header"><h3>手动触发数据更新</h3><button class="icon-btn" onclick="closeUpdateModal()">✕</button></div>
+        <div class="modal-body">
+            <p>将立即运行完整的数据抓取管线，包括：</p>
+            <ul>
+                <li>🔍 自动发现新品牌和企业</li>
+                <li>🕷️ 品牌官网联系方式抓取</li>
+                <li>📚 商业目录数据抓取（维基百科、EuroPages）</li>
+                <li>🧹 数据清洗、去重、质量评分</li>
+                <li>🚀 自动部署到网站</li>
+            </ul>
+            <p class="modal-note">预计耗时 3-8 分钟，完成后网站数据自动更新。</p>
+            <div class="modal-input-group">
+                <label>GitHub Token（用于触发工作流）</label>
+                <input type="password" id="githubTokenInput" placeholder="ghp_xxxxxxxxxxxx">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn--outline" onclick="closeUpdateModal()">取消</button>
+            <button class="btn btn--primary" id="confirmUpdateBtn">立即更新</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Toast ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/app.js"></script>
 </body>
 </html>
