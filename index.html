@@ -113,6 +113,18 @@
                     </div>
                 </div>
 
+                <div class="last-update-bar" id="lastUpdateBar">
+                    <div class="update-icon">🕐</div>
+                    <div class="update-info">
+                        <div class="update-label">数据最后更新</div>
+                        <div class="update-time" id="lastUpdateTime">加载中...</div>
+                    </div>
+                    <div class="update-status success" id="updateStatus">
+                        <span class="status-dot"></span>
+                        <span id="updateStatusText">已同步</span>
+                    </div>
+                </div>
+
                 <div class="kpi-grid">
                     <div class="kpi-card">
                         <div class="kpi-icon kpi-icon--blue"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
@@ -235,6 +247,27 @@
                 </div>
                 <div class="settings-panel">
                     <div class="settings-group">
+                        <h3>外观设置</h3>
+                        <div class="setting-row">
+                            <div><span class="setting-label">主题模式</span><span class="setting-desc">选择界面配色主题</span></div>
+                            <div class="theme-selector" id="themeSelector">
+                                <div class="theme-option active" data-theme="light"><span class="theme-preview" style="background:#f8fafc;border:1px solid #e2e8f0;"></span>浅色</div>
+                                <div class="theme-option" data-theme="dark"><span class="theme-preview" style="background:#1a1a2e;"></span>深色</div>
+                                <div class="theme-option" data-theme="deepblue"><span class="theme-preview" style="background:#0f172a;"></span>深蓝</div>
+                                <div class="theme-option" data-theme="contrast"><span class="theme-preview" style="background:#000;border:1px solid #ffd700;"></span>高对比</div>
+                            </div>
+                        </div>
+                        <div class="setting-row">
+                            <div><span class="setting-label">字体大小</span><span class="setting-desc">调整全局字体大小</span></div>
+                            <div class="font-selector" id="fontSelector">
+                                <div class="font-option" data-size="sm">小</div>
+                                <div class="font-option active" data-size="md">中</div>
+                                <div class="font-option" data-size="lg">大</div>
+                                <div class="font-option" data-size="xl">超大</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-group">
                         <h3>自动化配置</h3>
                         <div class="setting-row"><div><span class="setting-label">定时抓取</span><span class="setting-desc">每周一 UTC 02:00 自动运行全量抓取</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
                         <div class="setting-row"><div><span class="setting-label">自动发现新品牌</span><span class="setting-desc">从维基百科、商业目录自动发现新超市品牌</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
@@ -253,6 +286,7 @@
                         <div class="setting-row"><div><span class="setting-label">部署平台</span></div><span class="setting-value mono">GitHub Pages</span></div>
                         <div class="setting-row"><div><span class="setting-label">数据文件</span></div><span class="setting-value mono">data/clients.json</span></div>
                         <div class="setting-row"><div><span class="setting-label">工作流文件</span></div><span class="setting-value mono">.github/workflows/update-data.yml</span></div>
+                        <div class="setting-row"><div><span class="setting-label">最后更新</span></div><span class="setting-value mono" id="settingsLastUpdate">—</span></div>
                     </div>
                 </div>
             </section>

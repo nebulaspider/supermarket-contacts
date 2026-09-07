@@ -360,12 +360,14 @@ function renderTable() {
         tbody.innerHTML = pageData.map(d => {
             const q = d.data_quality || 0;
             const qClass = q >= 80 ? 'quality-high' : q >= 60 ? 'quality-mid' : 'quality-low';
+            const isHighValue = isHighValuePosition(d.position);
+            const posClass = isHighValue ? 'high-value' : 'normal-value';
             return `<tr onclick="openDrawer('${esc(d.company_name)}')">
                 <td><span class="table-cell-name">${esc(d.company_name)}</span></td>
-                <td>${d.industry ? `<span style="font-size:12px;color:var(--primary);background:var(--primary-light);padding:2px 8px;border-radius:4px;">${esc(d.industry)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
-                <td>${esc(d.country || '—')}</td>
-                <td>${d.position ? `<span style="font-weight:500;">${esc(d.position)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
-                <td>${d.department ? `<span style="font-size:12px;color:var(--text-secondary)">${esc(d.department)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
+                <td>${d.industry ? `<span class="industry-badge">${esc(d.industry)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
+                <td><span class="table-cell-country">${esc(d.country || '—')}</span></td>
+                <td>${d.position ? `<span class="table-cell-position ${posClass}">${esc(d.position)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
+                <td>${d.department ? `<span class="table-cell-dept">${esc(d.department)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
                 <td>${d.email ? `<span class="table-cell-email">${esc(d.email)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
                 <td>${d.phone ? `<span class="table-cell-phone">${esc(d.phone)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
                 <td><span class="quality-badge ${qClass}">${q}</span></td>
@@ -720,3 +722,126 @@ document.addEventListener('click', (e) => {
 window.openUpdateModal = openUpdateModal;
 window.closeUpdateModal = closeUpdateModal;
 window.triggerUpdate = triggerUpdate;
+
+// ============================================
+// v4.1 主题/字号自定义 + 更新时间显示
+// ============================================
+
+// 高价值职位判断
+function isHighValuePosition(position) {
+    if (!position) return false;
+    const lower = position.toLowerCase();
+    const keywords = ['ceo', 'director', '总监', '经理', 'manager', 'head', 'chief', 'vp', 'president', '采购', 'sourcing', 'buyer', 'merchandis', 'senior', 'lead'];
+    return keywords.some(kw => lower.includes(kw));
+}
+
+// 主题切换
+function setTheme(theme) {
+    const body = document.body;
+    // 移除所有主题类
+    body.classList.remove('theme-dark', 'theme-deepblue', 'theme-contrast');
+    if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        if (theme !== 'light') {
+            body.classList.add('theme-' + theme);
+        }
+    }
+    // 更新选择器状态
+    document.querySelectorAll('.theme-option').forEach(el => {
+        el.classList.toggle('active', el.dataset.theme === theme);
+    });
+    localStorage.setItem('siq_theme', theme);
+}
+
+// 字号切换
+function setFontSize(size) {
+    const body = document.body;
+    body.classList.remove('font-sm', 'font-md', 'font-lg', 'font-xl');
+    body.classList.add('font-' + size);
+    document.querySelectorAll('.font-option').forEach(el => {
+        el.classList.toggle('active', el.dataset.size === size);
+    });
+    localStorage.setItem('siq_fontsize', size);
+}
+
+// 显示最后更新时间
+function showLastUpdateTime() {
+    const data = state.data || [];
+    if (data.length === 0) {
+        document.getElementById('lastUpdateTime').textContent = '暂无数据';
+        document.getElementById('settingsLastUpdate').textContent = '—';
+        return;
+    }
+
+    // 找最新的 scraped_at
+    const times = data.map(d => d.scraped_at).filter(Boolean).sort();
+    const latest = times[times.length - 1];
+
+    if (latest) {
+        const date = new Date(latest);
+        const formatted = date.toLocaleString('zh-CN', {
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit'
+        });
+        // 计算多久前
+        const diff = Date.now() - date.getTime();
+        const hours = Math.floor(diff / 3600000);
+        const days = Math.floor(hours / 24);
+        let ago = '';
+        if (days > 0) ago = `（${days}天前）`;
+        else if (hours > 0) ago = `（${hours}小时前）`;
+        else ago = '（刚刚）';
+
+        document.getElementById('lastUpdateTime').textContent = formatted + ' ' + ago;
+        document.getElementById('settingsLastUpdate').textContent = formatted;
+
+        // 更新状态
+        const statusEl = document.getElementById('updateStatus');
+        const statusText = document.getElementById('updateStatusText');
+        if (hours < 24) {
+            statusEl.className = 'update-status success';
+            statusText.textContent = '已同步';
+        } else {
+            statusEl.className = 'update-status running';
+            statusText.textContent = '需更新';
+        }
+    } else {
+        document.getElementById('lastUpdateTime').textContent = '未知';
+        document.getElementById('settingsLastUpdate').textContent = '—';
+    }
+}
+
+// 初始化偏好设置
+function initPreferences() {
+    // 主题
+    const savedTheme = localStorage.getItem('siq_theme') || 'light';
+    setTheme(savedTheme);
+
+    // 字号
+    const savedFont = localStorage.getItem('siq_fontsize') || 'md';
+    setFontSize(savedFont);
+
+    // 绑定主题选择器
+    document.querySelectorAll('.theme-option').forEach(el => {
+        el.addEventListener('click', () => setTheme(el.dataset.theme));
+    });
+
+    // 绑定字号选择器
+    document.querySelectorAll('.font-option').forEach(el => {
+        el.addEventListener('click', () => setFontSize(el.dataset.size));
+    });
+}
+
+// 在数据加载后显示更新时间
+const originalLoadData = loadData;
+loadData = async function() {
+    await originalLoadData();
+    showLastUpdateTime();
+};
+
+// 页面加载时初始化偏好
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initPreferences, 100);
+});
