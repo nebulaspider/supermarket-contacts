@@ -1,69 +1,74 @@
-/**
- * SupermarketIQ — Global Retail Intelligence Platform
- * Professional SaaS Dashboard Frontend Logic
- */
+/* ============================================
+   Cyrus AI — Application Logic
+   Professional CRM platform
+   ============================================ */
 
 // ===== State =====
 const state = {
     data: [],
     filtered: [],
-    currentView: 'dashboard',
-    sortField: null,
-    sortDir: 'asc',
     currentPage: 1,
     pageSize: 15,
-    theme: localStorage.getItem('theme') || 'light',
+    sortField: '',
+    sortDir: 'asc',
+    currentView: 'dashboard',
+    theme: 'light',
+    charts: {},
 };
 
-// ===== Spider definitions (for automation status page) =====
-const SPIDERS = [
-    { name: 'walmart', label: 'Walmart', country: 'United States', status: 'success', lastRun: '2026-09-01 02:15', records: 1, duration: '12s' },
-    { name: 'costco', label: 'Costco', country: 'United States', status: 'success', lastRun: '2026-09-01 02:16', records: 1, duration: '8s' },
-    { name: 'carrefour', label: 'Carrefour', country: 'France', status: 'success', lastRun: '2026-09-01 02:17', records: 2, duration: '15s' },
-    { name: 'tesco', label: 'Tesco', country: 'United Kingdom', status: 'success', lastRun: '2026-09-01 02:18', records: 2, duration: '11s' },
-    { name: 'aldi', label: 'Aldi', country: 'Germany', status: 'success', lastRun: '2026-09-01 02:19', records: 1, duration: '9s' },
-    { name: 'auto_discover', label: 'Auto Discover', country: 'Global', status: 'running', lastRun: '进行中', records: '—', duration: '—' },
-    { name: 'data_manager', label: 'Data Manager', country: '—', status: 'idle', lastRun: '2026-09-01 02:20', records: 25, duration: '3s' },
-];
+const VIEW_NAMES = {
+    dashboard: '仪表盘',
+    contacts: '客户名录',
+    discovery: '潜客挖掘',
+    automation: '爬虫监控',
+    quality: '数据质量',
+    settings: '设置',
+};
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
-    applyTheme();
     bindEvents();
+    initPreferences();
+    initDiscovery();
     loadData();
 });
 
+// ===== Events =====
 function bindEvents() {
-    // Navigation (sidebar + bottom nav)
-    document.querySelectorAll('.nav-item, .bottom-nav-item').forEach(item => {
+    // Navigation
+    document.querySelectorAll('.nav-link').forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
             switchView(item.dataset.view);
         });
     });
 
-    // Sidebar toggle (mobile drawer)
-    document.getElementById('sidebarToggle').addEventListener('click', () => {
-        document.getElementById('sidebar').classList.toggle('mobile-open');
-        document.getElementById('sidebarOverlay').classList.toggle('active');
+    // Sidebar collapse (desktop)
+    document.getElementById('sidebarCollapse')?.addEventListener('click', () => {
+        document.getElementById('sidebar').classList.toggle('collapsed');
+        setTimeout(() => { Object.values(state.charts).forEach(c => c?.resize()); }, 250);
     });
-    document.getElementById('sidebarOverlay').addEventListener('click', () => {
-        document.getElementById('sidebar').classList.remove('mobile-open');
-        document.getElementById('sidebarOverlay').classList.remove('active');
+
+    // Mobile menu
+    document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
+        document.getElementById('sidebar').classList.add('mobile-open');
+        document.getElementById('sidebarMask').classList.add('active');
     });
+    document.getElementById('sidebarMask')?.addEventListener('click', closeMobileSidebar);
 
     // Theme toggle
-    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    document.getElementById('themeToggle')?.addEventListener('click', () => {
+        const next = state.theme === 'light' ? 'dark' : 'light';
+        setTheme(next);
+    });
 
     // Global search
-    document.getElementById('globalSearch').addEventListener('input', debounce(handleGlobalSearch, 250));
+    document.getElementById('globalSearch')?.addEventListener('input', debounce(handleGlobalSearch, 250));
 
-    // Filters (客户名录)
-    document.getElementById('filterIndustry').addEventListener('change', applyTableFilters);
-    document.getElementById('filterDepartment').addEventListener('change', applyTableFilters);
-    document.getElementById('filterPosition').addEventListener('change', applyTableFilters);
-    document.getElementById('filterCountry').addEventListener('change', applyTableFilters);
-    document.getElementById('filterQuality').addEventListener('change', applyTableFilters);
+    // Table filters
+    ['filterIndustry', 'filterCountry', 'filterDepartment', 'filterPosition', 'filterQuality'].forEach(id => {
+        document.getElementById(id)?.addEventListener('change', applyTableFilters);
+    });
 
     // Table sorting
     document.querySelectorAll('.data-table th[data-sort]').forEach(th => {
@@ -71,21 +76,56 @@ function bindEvents() {
     });
 
     // Buttons
-    document.getElementById('refreshBtn').addEventListener('click', loadData);
-    document.getElementById('exportBtn').addEventListener('click', exportCSV);
+    document.getElementById('refreshBtn')?.addEventListener('click', loadData);
+    document.getElementById('exportBtn')?.addEventListener('click', exportCSV);
+    document.getElementById('updateBtn')?.addEventListener('click', openUpdateModal);
+    document.getElementById('confirmUpdateBtn')?.addEventListener('click', triggerUpdate);
 
     // Drawer
-    document.getElementById('drawerClose').addEventListener('click', closeDrawer);
-    document.getElementById('drawerOverlay').addEventListener('click', closeDrawer);
+    document.getElementById('drawerClose')?.addEventListener('click', closeDrawer);
+    document.getElementById('drawerOverlay')?.addEventListener('click', closeDrawer);
 
     // Keyboard
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') { closeDrawer(); closeUpdateModal(); }
+        if (e.key === 'Escape') { closeDrawer(); closeUpdateModal(); closeMobileSidebar(); }
         if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
             e.preventDefault();
-            document.getElementById('globalSearch').focus();
+            document.getElementById('globalSearch')?.focus();
         }
     });
+
+    // Chart link navigation
+    document.querySelectorAll('.chart-link[data-view]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchView(link.dataset.view);
+        });
+    });
+
+    // Window resize for charts
+    window.addEventListener('resize', debounce(() => {
+        Object.values(state.charts).forEach(c => c?.resize());
+    }, 200));
+}
+
+function closeMobileSidebar() {
+    document.getElementById('sidebar')?.classList.remove('mobile-open');
+    document.getElementById('sidebarMask')?.classList.remove('active');
+}
+
+// ===== View Switching =====
+function switchView(view) {
+    state.currentView = view;
+    document.querySelectorAll('.nav-link').forEach(item => {
+        item.classList.toggle('active', item.dataset.view === view);
+    });
+    document.querySelectorAll('.page').forEach(p => {
+        p.classList.toggle('active', p.id === `page-${view}`);
+    });
+    document.getElementById('breadcrumbCurrent').textContent = VIEW_NAMES[view] || view;
+    closeMobileSidebar();
+    if (view === 'discovery') renderDiscovery();
+    if (view === 'dashboard') setTimeout(() => Object.values(state.charts).forEach(c => c?.resize()), 100);
 }
 
 // ===== Data Loading =====
@@ -97,232 +137,297 @@ async function loadData() {
         state.filtered = [...state.data];
 
         document.getElementById('navCount').textContent = state.data.length;
-        document.getElementById('lastRunTime').textContent = state.data[0]?.scraped_at
-            ? new Date(state.data[0].scraped_at).toLocaleDateString('zh-CN')
-            : '—';
+        document.getElementById('contactsSubtitle').textContent = `共 ${state.data.length} 家企业`;
 
+        populateFilters();
         renderDashboard();
         renderTable();
         renderSpiders();
         renderQuality();
-        populateFilters();
+        showLastUpdateTime();
+        renderDiscovery();
 
-        showToast('数据加载完成', 'success');
-    } catch (err) {
-        console.error('加载失败:', err);
-        showToast('数据加载失败: ' + err.message, 'error');
+    } catch (e) {
+        showToast('⚠️ 数据加载失败: ' + e.message);
     }
 }
 
-// ===== View Switching =====
-function switchView(view) {
-    state.currentView = view;
-    document.querySelectorAll('.nav-item, .bottom-nav-item').forEach(item => {
-        item.classList.toggle('active', item.dataset.view === view);
-    });
-    document.querySelectorAll('.view').forEach(v => {
-        v.classList.toggle('active', v.id === `view-${view}`);
-    });
-    // Close mobile sidebar
-    document.getElementById('sidebar').classList.remove('mobile-open');
-    document.getElementById('sidebarOverlay').classList.remove('active');
-    // Render discovery view if switching to it
-    if (view === 'discovery') renderDiscovery();
-}
-
-// ===== Theme =====
-function applyTheme() {
-    document.documentElement.setAttribute('data-theme', state.theme);
-}
-function toggleTheme() {
-    state.theme = state.theme === 'light' ? 'dark' : 'light';
-    localStorage.setItem('theme', state.theme);
-    applyTheme();
-    showToast(`已切换到${state.theme === 'dark' ? '深色' : '浅色'}模式`);
-}
-
-// ===== Dashboard Rendering =====
+// ===== Dashboard =====
 function renderDashboard() {
     const data = state.data;
-    const total = data.length;
-    const countries = new Set(data.map(d => d.country).filter(Boolean)).size;
-    const emailCount = data.filter(d => d.email).length;
+    const total = data.length || 1;
+    const emailCount = data.filter(d => d.email || d.procurement_email).length;
     const phoneCount = data.filter(d => d.phone).length;
     const linkedinCount = data.filter(d => d.linkedin).length;
-    const avgQuality = Math.round(data.reduce((s, d) => s + (d.data_quality || 0), 0) / total);
 
-    animateNumber('kpiTotal', total);
-    animateNumber('kpiCountries', countries);
+    animateNumber('kpiTotal', data.length);
     document.getElementById('kpiEmail').textContent = Math.round(emailCount / total * 100) + '%';
     document.getElementById('kpiEmailCount').textContent = emailCount + ' 个邮箱';
     document.getElementById('kpiPhone').textContent = Math.round(phoneCount / total * 100) + '%';
     document.getElementById('kpiPhoneCount').textContent = phoneCount + ' 个电话';
     document.getElementById('kpiLinkedin').textContent = Math.round(linkedinCount / total * 100) + '%';
     document.getElementById('kpiLinkedinCount').textContent = linkedinCount + ' 个主页';
-    animateNumber('kpiQuality', avgQuality);
 
     renderCountryChart();
-    renderCoverageChart();
+    renderCoverageChart(emailCount, phoneCount, linkedinCount, total);
+    renderIndustryChart();
     renderRecentList();
-    updatePipelineTimes();
 }
 
 function animateNumber(id, target) {
     const el = document.getElementById(id);
     if (!el) return;
-    const duration = 500;
+    const start = parseInt(el.textContent) || 0;
+    const duration = 600;
     const startTime = performance.now();
     function update(now) {
         const progress = Math.min((now - startTime) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.round(target * eased);
+        el.textContent = Math.round(start + (target - start) * eased);
         if (progress < 1) requestAnimationFrame(update);
     }
     requestAnimationFrame(update);
 }
 
+// ===== ECharts: Country Distribution =====
 function renderCountryChart() {
-    const counts = {};
-    state.data.forEach(d => { counts[d.country || 'Unknown'] = (counts[d.country || 'Unknown'] || 0) + 1; });
-    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
-    const max = sorted[0]?.[1] || 1;
+    const el = document.getElementById('countryChart');
+    if (!el || typeof echarts === 'undefined') return;
 
-    const html = '<div class="bar-chart">' + sorted.map(([country, count]) => `
-        <div class="bar-row">
-            <span class="bar-label" title="${esc(country)}">${esc(country)}</span>
-            <div class="bar-track">
-                <div class="bar-fill" style="width:${count / max * 100}%">
-                    <span class="bar-value">${count}</span>
-                </div>
-            </div>
-        </div>
-    `).join('') + '</div>';
-    document.getElementById('countryChart').innerHTML = html;
-}
-
-function renderCoverageChart() {
-    const fields = [
-        { name: '行业分类', key: 'industry', color: '#4f46e5' },
-        { name: '职位', key: 'position', color: '#ec4899' },
-        { name: '部门', key: 'department', color: '#14b8a6' },
-        { name: '邮箱', key: 'email', color: '#8b5cf6' },
-        { name: '电话', key: 'phone', color: '#f97316' },
-        { name: 'LinkedIn', key: 'linkedin', color: '#06b6d4' },
-        { name: '官网', key: 'website', color: '#3b82f6' },
-        { name: '地址', key: 'address', color: '#10b981' },
-        { name: 'WhatsApp', key: 'whatsapp', color: '#25d366' },
-        { name: '微信', key: 'wechat', color: '#07c160' },
-    ];
-    const total = state.data.length;
-    const html = '<div class="coverage-list">' + fields.map(f => {
-        const count = state.data.filter(d => d[f.key]).length;
-        const pct = Math.round(count / total * 100);
-        return `<div class="coverage-item">
-            <div class="coverage-header">
-                <span class="coverage-name">${f.name}</span>
-                <span class="coverage-pct">${pct}%</span>
-            </div>
-            <div class="coverage-track">
-                <div class="coverage-fill" style="width:${pct}%;background:${f.color}"></div>
-            </div>
-        </div>`;
-    }).join('') + '</div>';
-    document.getElementById('coverageChart').innerHTML = html;
-}
-
-function renderRecentList() {
-    const recent = [...state.data].sort((a, b) =>
-        new Date(b.scraped_at || 0) - new Date(a.scraped_at || 0)
-    ).slice(0, 6);
-
-    const html = recent.map(d => {
-        const q = d.data_quality || 0;
-        const qClass = q >= 80 ? 'quality-high' : q >= 60 ? 'quality-mid' : 'quality-low';
-        const initials = (d.company_name || '?').substring(0, 2).toUpperCase();
-        return `<div class="recent-item" onclick="openDrawer('${esc(d.company_name)}')">
-            <div class="recent-avatar">${esc(initials)}</div>
-            <div class="recent-info">
-                <div class="recent-name">${esc(d.company_name)}</div>
-                <div class="recent-meta">${esc(d.country || '')} · ${esc(d.city || '')}</div>
-            </div>
-            <span class="recent-quality ${qClass}">${q}</span>
-        </div>`;
-    }).join('');
-    document.getElementById('recentList').innerHTML = html;
-}
-
-function updatePipelineTimes() {
-    const t = state.data[0]?.scraped_at;
-    if (t) {
-        const d = new Date(t);
-        const timeStr = d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
-        ['pipeDiscoverTime', 'pipeScrapeTime', 'pipeCleanTime', 'pipeValidateTime'].forEach(id => {
-            document.getElementById(id).textContent = timeStr;
-        });
+    if (!state.charts.country) {
+        state.charts.country = echarts.init(el);
     }
+    const chart = state.charts.country;
+
+    const counts = {};
+    state.data.forEach(d => {
+        const c = d.country || '未知';
+        counts[c] = (counts[c] || 0) + 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+    const colors = ['#3b82f6', '#60a5fa', '#8b5cf6', '#a78bfa', '#10b981', '#34d399', '#f59e0b', '#fbbf24', '#ef4444', '#f87171'];
+
+    chart.setOption({
+        grid: { left: 70, right: 30, top: 10, bottom: 20 },
+        xAxis: {
+            type: 'value',
+            axisLine: { show: false },
+            axisTick: { show: false },
+            splitLine: { lineStyle: { color: '#f1f5f9', type: 'dashed' } },
+            axisLabel: { color: '#94a3b8', fontSize: 11 },
+        },
+        yAxis: {
+            type: 'category',
+            data: sorted.map(s => s[0]).reverse(),
+            axisLine: { show: false },
+            axisTick: { show: false },
+            axisLabel: { color: '#475569', fontSize: 12, fontWeight: 500 },
+        },
+        series: [{
+            type: 'bar',
+            data: sorted.map((s, i) => ({
+                value: s[1],
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                        { offset: 0, color: colors[i % colors.length] + '99' },
+                        { offset: 1, color: colors[i % colors.length] },
+                    ]),
+                    borderRadius: [0, 4, 4, 0],
+                },
+            })).reverse(),
+            barWidth: 18,
+            label: {
+                show: true,
+                position: 'right',
+                color: '#475569',
+                fontSize: 12,
+                fontWeight: 600,
+            },
+        }],
+        tooltip: {
+            trigger: 'axis',
+            backgroundColor: '#0f172a',
+            borderColor: '#1e293b',
+            textStyle: { color: '#fff', fontSize: 12 },
+            formatter: (params) => `${params[0].name}: <strong>${params[0].value}</strong> 家`,
+        },
+    });
 }
 
-// ===== Data Table =====
+// ===== ECharts: Coverage =====
+function renderCoverageChart(email, phone, linkedin, total) {
+    const el = document.getElementById('coverageChart');
+    if (!el || typeof echarts === 'undefined') return;
+
+    if (!state.charts.coverage) {
+        state.charts.coverage = echarts.init(el);
+    }
+    const chart = state.charts.coverage;
+
+    chart.setOption({
+        series: [{
+            type: 'gauge',
+            startAngle: 200,
+            endAngle: -20,
+            min: 0,
+            max: 100,
+            splitNumber: 10,
+            radius: '90%',
+            center: ['50%', '58%'],
+            axisLine: {
+                lineStyle: {
+                    width: 14,
+                    color: [[0.3, '#ef4444'], [0.6, '#f59e0b'], [1, '#10b981']],
+                },
+            },
+            pointer: { show: false },
+            axisTick: { show: false },
+            splitLine: { show: false },
+            axisLabel: { show: false },
+            detail: {
+                valueAnimation: true,
+                fontSize: 28,
+                fontWeight: 800,
+                color: '#0f172a',
+                offsetCenter: [0, '5%'],
+                formatter: '{value}%',
+            },
+            data: [{ value: Math.round((email + phone + linkedin) / 3 / total * 100) }],
+        }],
+        graphic: [
+            {
+                type: 'text',
+                left: 'center',
+                top: '72%',
+                style: {
+                    text: '综合覆盖率',
+                    fill: '#94a3b8',
+                    fontSize: 12,
+                    fontWeight: 600,
+                },
+            },
+        ],
+    });
+}
+
+// ===== ECharts: Industry =====
+function renderIndustryChart() {
+    const el = document.getElementById('industryChart');
+    if (!el || typeof echarts === 'undefined') return;
+
+    if (!state.charts.industry) {
+        state.charts.industry = echarts.init(el);
+    }
+    const chart = state.charts.industry;
+
+    const counts = {};
+    state.data.forEach(d => {
+        const ind = d.industry || '未分类';
+        counts[ind] = (counts[ind] || 0) + 1;
+    });
+    const data = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+
+    chart.setOption({
+        tooltip: {
+            trigger: 'item',
+            backgroundColor: '#0f172a',
+            borderColor: '#1e293b',
+            textStyle: { color: '#fff', fontSize: 12 },
+            formatter: '{b}: {c} 家 ({d}%)',
+        },
+        legend: {
+            orient: 'vertical',
+            right: 5,
+            top: 'center',
+            textStyle: { color: '#475569', fontSize: 11 },
+            itemWidth: 10,
+            itemHeight: 10,
+        },
+        series: [{
+            type: 'pie',
+            radius: ['45%', '70%'],
+            center: ['35%', '50%'],
+            avoidLabelOverlap: true,
+            itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
+            label: { show: false },
+            data: data.map((d, i) => ({
+                name: d[0],
+                value: d[1],
+                itemStyle: { color: ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#06b6d4', '#ec4899', '#84cc16'][i % 8] },
+            })),
+        }],
+    });
+}
+
+// ===== Recent List =====
+function renderRecentList() {
+    const el = document.getElementById('recentList');
+    if (!el) return;
+    const sorted = [...state.data]
+        .filter(d => d.scraped_at)
+        .sort((a, b) => new Date(b.scraped_at) - new Date(a.scraped_at))
+        .slice(0, 8);
+
+    el.innerHTML = sorted.map(d => `
+        <div class="recent-item" onclick="openDrawer('${esc(d.company_name)}')">
+            <div>
+                <div class="recent-name">${esc(d.company_name)}</div>
+                <div class="recent-meta">${esc(d.country || '—')} · ${esc(d.industry || '—')}</div>
+            </div>
+            <span class="recent-badge">${d.data_quality || 0}分</span>
+        </div>
+    `).join('') || '<p style="color:var(--text-tertiary);font-size:13px;">暂无数据</p>';
+}
+
+// ===== Filters =====
 function populateFilters() {
-    // 国家
     const countries = [...new Set(state.data.map(d => d.country).filter(Boolean))].sort();
-    document.getElementById('filterCountry').innerHTML = '<option value="">全部国家</option>' +
-        countries.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
-
-    // 行业
     const industries = [...new Set(state.data.map(d => d.industry).filter(Boolean))].sort();
-    document.getElementById('filterIndustry').innerHTML = '<option value="">全部行业</option>' +
-        industries.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join('');
-
-    // 部门
     const departments = [...new Set(state.data.map(d => d.department).filter(Boolean))].sort();
-    document.getElementById('filterDepartment').innerHTML = '<option value="">全部部门</option>' +
-        departments.map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join('');
-
-    // 职位
     const positions = [...new Set(state.data.map(d => d.position).filter(Boolean))].sort();
-    document.getElementById('filterPosition').innerHTML = '<option value="">全部职位</option>' +
-        positions.map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('');
+
+    const setOpts = (id, list) => {
+        const sel = document.getElementById(id);
+        if (!sel) return;
+        const first = sel.options[0];
+        sel.innerHTML = '';
+        sel.appendChild(first);
+        list.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v; opt.textContent = v;
+            sel.appendChild(opt);
+        });
+    };
+    setOpts('filterCountry', countries);
+    setOpts('filterIndustry', industries);
+    setOpts('filterDepartment', departments);
+    setOpts('filterPosition', positions);
 }
 
 function handleGlobalSearch(e) {
-    const keyword = e.target.value.trim().toLowerCase();
-    if (state.currentView !== 'contacts') switchView('contacts');
-
-    if (!keyword) {
-        state.filtered = [...state.data];
-    } else {
-        state.filtered = state.data.filter(d => {
-            return [d.company_name, d.country, d.city, d.email, d.phone, d.address,
-                d.industry, d.position, d.department, d.contact_person, d.product_categories]
-                .filter(Boolean).join(' ').toLowerCase().includes(keyword);
-        });
-    }
     state.currentPage = 1;
-    renderTable();
+    applyTableFilters();
 }
 
 function applyTableFilters() {
-    const industry = document.getElementById('filterIndustry').value;
-    const department = document.getElementById('filterDepartment').value;
-    const position = document.getElementById('filterPosition').value;
-    const country = document.getElementById('filterCountry').value;
-    const minQuality = parseInt(document.getElementById('filterQuality').value) || 0;
-    const keyword = document.getElementById('globalSearch').value.trim().toLowerCase();
+    const industry = document.getElementById('filterIndustry')?.value || '';
+    const country = document.getElementById('filterCountry')?.value || '';
+    const dept = document.getElementById('filterDepartment')?.value || '';
+    const pos = document.getElementById('filterPosition')?.value || '';
+    const minQ = parseInt(document.getElementById('filterQuality')?.value) || 0;
+    const kw = document.getElementById('globalSearch')?.value?.trim().toLowerCase() || '';
 
     state.filtered = state.data.filter(d => {
-        // 关键词搜索（扩展到行业、职位、部门、联系人）
-        if (keyword) {
-            const searchable = [d.company_name, d.country, d.city, d.email, d.phone,
-                d.industry, d.position, d.department, d.contact_person, d.product_categories]
-                .filter(Boolean).join(' ').toLowerCase();
-            if (!searchable.includes(keyword)) return false;
-        }
         if (industry && d.industry !== industry) return false;
-        if (department && d.department !== department) return false;
-        if (position && d.position !== position) return false;
         if (country && d.country !== country) return false;
-        if (minQuality && (d.data_quality || 0) < minQuality) return false;
+        if (dept && d.department !== dept) return false;
+        if (pos && d.position !== pos) return false;
+        if ((d.data_quality || 0) < minQ) return false;
+        if (kw) {
+            const hay = `${d.company_name} ${d.industry} ${d.country} ${d.city} ${d.product_categories || ''}`.toLowerCase();
+            if (!hay.includes(kw)) return false;
+        }
         return true;
     });
     state.currentPage = 1;
@@ -344,166 +449,125 @@ function handleSort(field) {
     renderTable();
 }
 
+// ===== Table =====
 function renderTable() {
-    const data = state.filtered;
-    const total = data.length;
+    const tbody = document.getElementById('tableBody');
+    if (!tbody) return;
+    const total = state.filtered.length;
     const totalPages = Math.ceil(total / state.pageSize);
     const start = (state.currentPage - 1) * state.pageSize;
-    const pageData = data.slice(start, start + state.pageSize);
+    const pageData = state.filtered.slice(start, start + state.pageSize);
 
-    document.getElementById('contactsSubtitle').textContent = `共 ${total} 家企业`;
+    document.getElementById('tableInfo').textContent = `显示 ${total === 0 ? 0 : start + 1}-${Math.min(start + state.pageSize, total)} / ${total} 条`;
 
-    const tbody = document.getElementById('tableBody');
-    if (pageData.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-tertiary)">未找到匹配的企业</td></tr>`;
-    } else {
-        tbody.innerHTML = pageData.map(d => {
-            const q = d.data_quality || 0;
-            const qClass = q >= 80 ? 'quality-high' : q >= 60 ? 'quality-mid' : 'quality-low';
-            const isHighValue = isHighValuePosition(d.position);
-            const posClass = isHighValue ? 'high-value' : 'normal-value';
-            return `<tr onclick="openDrawer('${esc(d.company_name)}')">
-                <td><span class="table-cell-name">${esc(d.company_name)}</span></td>
-                <td>${d.industry ? `<span class="industry-badge">${esc(d.industry)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
-                <td><span class="table-cell-country">${esc(d.country || '—')}</span></td>
-                <td>${d.position ? `<span class="table-cell-position ${posClass}">${esc(d.position)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
-                <td>${d.department ? `<span class="table-cell-dept">${esc(d.department)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
-                <td>${d.email ? `<span class="table-cell-email">${esc(d.email)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
-                <td>${d.phone ? `<span class="table-cell-phone">${esc(d.phone)}</span>` : '<span style="color:var(--text-tertiary)">—</span>'}</td>
-                <td><span class="quality-badge ${qClass}">${q}</span></td>
-                <td><button class="page-btn" onclick="event.stopPropagation();openDrawer('${esc(d.company_name)}')">详情</button></td>
-            </tr>`;
-        }).join('');
-    }
-
-    document.getElementById('tableInfo').textContent =
-        total === 0 ? '显示 0 条' : `显示 ${start + 1}-${Math.min(start + state.pageSize, total)} / ${total} 条`;
+    tbody.innerHTML = pageData.map(d => {
+        const q = d.data_quality || 0;
+        const qClass = q >= 80 ? 'quality-high' : q >= 60 ? 'quality-mid' : 'quality-low';
+        const isHigh = isHighValuePosition(d.position);
+        return `<tr onclick="openDrawer('${esc(d.company_name)}')">
+            <td><span class="cell-name">${esc(d.company_name)}</span></td>
+            <td>${d.industry ? `<span class="industry-tag">${esc(d.industry)}</span>` : '—'}</td>
+            <td><span class="cell-country">${esc(d.country || '—')}</span></td>
+            <td>${d.contact_person ? esc(d.contact_person) : '—'}</td>
+            <td>${d.position ? `<span class="cell-position ${isHigh ? 'high' : ''}">${esc(d.position)}</span>` : '—'}</td>
+            <td>${d.procurement_email ? `<span class="proc-email">${esc(d.procurement_email)}</span>` : (d.email ? `<span class="cell-email">${esc(d.email)}</span>` : '—')}</td>
+            <td>${d.phone ? `<span class="cell-phone">${esc(d.phone)}</span>` : '—'}</td>
+            <td><span class="quality-tag ${qClass}">${q}</span></td>
+            <td><button class="action-btn" onclick="event.stopPropagation();openDrawer('${esc(d.company_name)}')">详情</button></td>
+        </tr>`;
+    }).join('') || `<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无匹配数据</td></tr>`;
 
     renderPagination(totalPages);
 }
 
 function renderPagination(totalPages) {
     const container = document.getElementById('pagination');
-    if (totalPages <= 1) { container.innerHTML = ''; return; }
-
-    let html = `<button class="page-btn" ${state.currentPage === 1 ? 'disabled' : ''} onclick="goPage(${state.currentPage - 1})">‹</button>`;
-    for (let i = 1; i <= totalPages; i++) {
-        if (i === 1 || i === totalPages || Math.abs(i - state.currentPage) <= 1) {
-            html += `<button class="page-btn ${i === state.currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
-        } else if (Math.abs(i - state.currentPage) === 2) {
-            html += `<span style="padding:0 4px;color:var(--text-tertiary)">…</span>`;
-        }
+    if (!container || totalPages <= 1) { container.innerHTML = ''; return; }
+    let html = `<button class="page-link" onclick="goPage(${state.currentPage - 1})" ${state.currentPage === 1 ? 'disabled' : ''}>‹</button>`;
+    for (let i = 1; i <= Math.min(totalPages, 7); i++) {
+        html += `<button class="page-link ${i === state.currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
     }
-    html += `<button class="page-btn" ${state.currentPage === totalPages ? 'disabled' : ''} onclick="goPage(${state.currentPage + 1})">›</button>`;
+    html += `<button class="page-link" onclick="goPage(${state.currentPage + 1})" ${state.currentPage === totalPages ? 'disabled' : ''}>›</button>`;
     container.innerHTML = html;
 }
 
 function goPage(page) {
+    const total = Math.ceil(state.filtered.length / state.pageSize);
+    if (page < 1 || page > total) return;
     state.currentPage = page;
     renderTable();
 }
 
-// ===== Spider Status Page =====
+// ===== Spiders =====
 function renderSpiders() {
-    const html = SPIDERS.map(s => `
+    const el = document.getElementById('spiderGrid');
+    if (!el) return;
+    const spiders = [
+        { name: '品牌官网爬虫', status: 'success', desc: '14个品牌官网联系方式抓取', time: '运行中' },
+        { name: '维基百科目录', status: 'success', desc: '11个行业分类，发达国家优先', time: '运行中' },
+        { name: 'EuroPages 目录', status: 'running', desc: '欧洲企业目录数据', time: '运行中' },
+        { name: '联系方式提取', status: 'success', desc: '邮箱、电话、社交链接提取', time: '运行中' },
+        { name: '数据清洗去重', status: 'success', desc: '标准化、去重、质量评分', time: '运行中' },
+        { name: '自动部署', status: 'success', desc: 'GitHub Pages 自动发布', time: '运行中' },
+    ];
+    el.innerHTML = spiders.map(s => `
         <div class="spider-card">
-            <div class="spider-header">
-                <div>
-                    <div class="spider-name">${esc(s.label)}</div>
-                    <div class="spider-country">${esc(s.country)}</div>
-                </div>
-                <span class="spider-status ${s.status}">${s.status === 'success' ? '成功' : s.status === 'running' ? '运行中' : '待命'}</span>
-            </div>
-            <div class="spider-meta">
-                <div class="spider-meta-item">
-                    <span class="spider-meta-label">最近运行</span>
-                    <span class="spider-meta-value">${esc(s.lastRun)}</span>
-                </div>
-                <div class="spider-meta-item">
-                    <span class="spider-meta-label">抓取记录</span>
-                    <span class="spider-meta-value">${s.records}</span>
-                </div>
-                <div class="spider-meta-item">
-                    <span class="spider-meta-label">耗时</span>
-                    <span class="spider-meta-value">${esc(s.duration)}</span>
-                </div>
-                <div class="spider-meta-item">
-                    <span class="spider-meta-label">爬虫 ID</span>
-                    <span class="spider-meta-value">${esc(s.name)}</span>
-                </div>
-            </div>
+            <div class="spider-name">${s.name}</div>
+            <span class="spider-status ${s.status}">${s.status === 'success' ? '● 正常' : s.status === 'running' ? '● 运行中' : '● 失败'}</span>
+            <div class="spider-meta">${s.desc}</div>
         </div>
     `).join('');
-    document.getElementById('spiderGrid').innerHTML = html;
 }
 
-// ===== Quality Page =====
+// ===== Quality =====
 function renderQuality() {
+    const el = document.getElementById('qualityGrid');
+    if (!el) return;
     const fields = [
-        { name: '企业名称', key: 'company_name', icon: '🏢', color: '#4f46e5' },
-        { name: '行业分类', key: 'industry', icon: '🏭', color: '#6366f1' },
-        { name: '职位', key: 'position', icon: '💼', color: '#ec4899' },
-        { name: '部门', key: 'department', icon: '🏢', color: '#14b8a6' },
-        { name: '联系人直邮', key: 'contact_email', icon: '📧', color: '#f43f5e' },
-        { name: '国家/地区', key: 'country', icon: '🌍', color: '#10b981' },
-        { name: '城市', key: 'city', icon: '🏙️', color: '#3b82f6' },
-        { name: '地址', key: 'address', icon: '📍', color: '#f97316' },
-        { name: '官网', key: 'website', icon: '🌐', color: '#8b5cf6' },
-        { name: '公司邮箱', key: 'email', icon: '📧', color: '#8b5cf6' },
-        { name: '公司电话', key: 'phone', icon: '📞', color: '#06b6d4' },
-        { name: '企业规模', key: 'company_size', icon: '👥', color: '#8b5cf6' },
-        { name: '门店数量', key: 'store_count', icon: '🏪', color: '#f97316' },
-        { name: '主营品类', key: 'product_categories', icon: '📦', color: '#10b981' },
-        { name: 'WhatsApp', key: 'whatsapp', icon: '💬', color: '#25d366' },
-        { name: '微信', key: 'wechat', icon: '💚', color: '#07c160' },
-        { name: 'LinkedIn', key: 'linkedin', icon: '💼', color: '#0077b5' },
+        { name: '公司名称', key: 'company_name', color: '#3b82f6' },
+        { name: '国家/地区', key: 'country', color: '#8b5cf6' },
+        { name: '邮箱地址', key: 'email', color: '#10b981' },
+        { name: '采购邮箱', key: 'procurement_email', color: '#f59e0b' },
+        { name: '联系电话', key: 'phone', color: '#ef4444' },
+        { name: 'LinkedIn', key: 'linkedin', color: '#06b6d4' },
+        { name: '行业分类', key: 'industry', color: '#ec4899' },
+        { name: '职位信息', key: 'position', color: '#84cc16' },
     ];
-    const total = state.data.length;
-    const html = fields.map(f => {
+    const total = state.data.length || 1;
+    el.innerHTML = fields.map(f => {
         const count = state.data.filter(d => d[f.key]).length;
         const pct = Math.round(count / total * 100);
         return `<div class="quality-card">
-            <div class="quality-card-header">
-                <span class="quality-card-title">${f.icon} ${f.name}</span>
-                <span class="quality-card-pct">${pct}%</span>
-            </div>
-            <div class="quality-bar">
-                <div class="quality-bar-fill" style="width:${pct}%;background:${f.color}"></div>
-            </div>
-            <div class="quality-detail">${count} / ${total} 条记录已填充</div>
+            <div class="quality-field">${f.name}</div>
+            <div class="quality-bar"><div class="quality-fill" style="width:${pct}%;background:${f.color}"></div></div>
+            <div class="quality-percent">${pct}% (${count}/${total})</div>
         </div>`;
     }).join('');
-    document.getElementById('qualityGrid').innerHTML = html;
 }
 
-// ===== Detail Drawer =====
+// ===== Drawer =====
 function openDrawer(companyName) {
     const d = state.data.find(x => x.company_name === companyName);
     if (!d) return;
-
     document.getElementById('drawerTitle').textContent = d.company_name;
     const q = d.data_quality || 0;
 
-    const rows = [
+    const contactRows = [
         { icon: '🌐', label: '官网', value: d.website, href: d.website },
         { icon: '🛒', label: '采购部邮箱', value: d.procurement_email, href: d.procurement_email ? `mailto:${d.procurement_email}` : '', highlight: true },
         { icon: '📧', label: '公司邮箱', value: d.email, href: d.email ? `mailto:${d.email}` : '' },
         { icon: '📞', label: '电话', value: d.phone, href: d.phone ? `tel:${d.phone}` : '' },
-        { icon: '💬', label: 'WhatsApp', value: d.whatsapp, href: d.whatsapp ? `https://wa.me/${String(d.whatsapp).replace(/[^\d]/g, '')}` : '' },
-        { icon: '💚', label: '微信', value: d.wechat },
         { icon: '💼', label: 'LinkedIn', value: d.linkedin, href: d.linkedin },
         { icon: '📘', label: 'Facebook', value: d.facebook, href: d.facebook },
-        { icon: '🐦', label: 'Twitter/X', value: d.twitter, href: d.twitter },
         { icon: '📷', label: 'Instagram', value: d.instagram, href: d.instagram },
-        { icon: '▶️', label: 'YouTube', value: d.youtube, href: d.youtube },
     ];
 
-    const contactHtml = rows.map(r => `
+    const contactHtml = contactRows.map(r => `
         <div class="drawer-row">
             <div class="drawer-row-icon">${r.icon}</div>
-            <div class="drawer-row-content">
+            <div class="drawer-row-info">
                 <div class="drawer-row-label">${r.label}</div>
-                <div class="drawer-row-value ${r.value ? '' : 'missing'} ${r.highlight && r.value ? 'procurement-email' : ''}">
+                <div class="drawer-row-value ${r.value ? '' : 'missing'} ${r.highlight && r.value ? 'proc-email' : ''}">
                     ${r.value ? (r.href ? `<a href="${esc(r.href)}" target="_blank">${esc(r.value)}</a>` : esc(r.value)) : '待补充'}
                 </div>
             </div>
@@ -511,67 +575,48 @@ function openDrawer(companyName) {
         </div>
     `).join('');
 
-    // 社交找人链接（搜索该公司的采购人员）
     const companySearch = encodeURIComponent(d.company_name);
-    const socialFindHtml = `
-        <div class="social-find-bar">
-            <a class="social-find-btn social-linkedin" href="https://www.linkedin.com/search/results/people/?keywords=${companySearch}%20buyer" target="_blank">🔍 LinkedIn 找 Buyer</a>
-            <a class="social-find-btn social-linkedin" href="https://www.linkedin.com/search/results/people/?keywords=${companySearch}%20procurement" target="_blank">🔍 LinkedIn 找采购</a>
-            <a class="social-find-btn social-facebook" href="https://www.facebook.com/search/top?q=${companySearch}" target="_blank">📘 Facebook</a>
-            <a class="social-find-btn social-instagram" href="https://www.instagram.com/${companySearch.replace(/\s+/g, '')}/" target="_blank">📷 Instagram</a>
-        </div>
-        <div class="customs-notice">
-            <strong>📦 海关订单数据：</strong>真实海关进出口数据为付费数据（ImportYeti 可免费查美国进口商）。
-            <a href="https://importyeti.com/search?q=${companySearch}" target="_blank" style="color:#1d4ed8;font-weight:600;">点此在 ImportYeti 免费查询该公司的美国进口记录 →</a>
-        </div>
-    `;
 
     document.getElementById('drawerBody').innerHTML = `
-        <div class="drawer-quality" style="--score:${q}%">
-            <div class="drawer-quality-score"><span>${q}</span></div>
-            <div class="drawer-quality-info">
-                <h4>数据质量评分</h4>
-                <p>${q >= 80 ? '高质量数据，联系方式完整' : q >= 60 ? '中等质量，部分字段待补充' : '基础数据，建议手动完善'}</p>
+        <div class="drawer-score">
+            <div class="drawer-score-ring" style="--score:${q}%"><div class="drawer-score-inner">${q}</div></div>
+            <div>
+                <div style="font-size:14px;font-weight:700;">数据质量评分</div>
+                <div style="font-size:12px;color:var(--text-tertiary);margin-top:2px;">${q >= 80 ? '高质量，联系方式完整' : q >= 60 ? '中等质量，部分待补充' : '基础数据，建议完善'}</div>
             </div>
         </div>
+
         <div class="drawer-section">
             <h4>企业信息</h4>
-            <div class="drawer-row"><div class="drawer-row-icon">🏢</div><div class="drawer-row-content"><div class="drawer-row-label">公司名称</div><div class="drawer-row-value">${esc(d.company_name)}</div></div></div>
-            <div class="drawer-row"><div class="drawer-row-icon">🌍</div><div class="drawer-row-content"><div class="drawer-row-label">国家/地区</div><div class="drawer-row-value">${esc(d.country || '—')}</div></div></div>
-            <div class="drawer-row"><div class="drawer-row-icon">🏙️</div><div class="drawer-row-content"><div class="drawer-row-label">城市</div><div class="drawer-row-value">${esc(d.city || '—')}</div></div></div>
-            <div class="drawer-row"><div class="drawer-row-icon">📍</div><div class="drawer-row-content"><div class="drawer-row-label">地址</div><div class="drawer-row-value">${esc(d.address || '—')}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">🏢</div><div class="drawer-row-info"><div class="drawer-row-label">公司名称</div><div class="drawer-row-value">${esc(d.company_name)}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">🌍</div><div class="drawer-row-info"><div class="drawer-row-label">国家/地区</div><div class="drawer-row-value">${esc(d.country || '—')}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">🏭</div><div class="drawer-row-info"><div class="drawer-row-label">行业</div><div class="drawer-row-value">${d.industry ? `<span class="industry-tag">${esc(d.industry)}</span>` : '—'}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">👥</div><div class="drawer-row-info"><div class="drawer-row-label">企业规模</div><div class="drawer-row-value">${esc(d.company_size || '—')}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">🏪</div><div class="drawer-row-info"><div class="drawer-row-label">门店数量</div><div class="drawer-row-value">${esc(d.store_count || '—')}</div></div></div>
         </div>
+
         <div class="drawer-section">
-            <h4>行业与企业属性</h4>
-            <div class="drawer-row"><div class="drawer-row-icon">🏭</div><div class="drawer-row-content"><div class="drawer-row-label">行业分类</div><div class="drawer-row-value">${d.industry ? `<span style="color:var(--primary);font-weight:600;">${esc(d.industry)}</span>` : '待补充'}</div></div></div>
-            <div class="drawer-row"><div class="drawer-row-icon">👥</div><div class="drawer-row-content"><div class="drawer-row-label">企业规模</div><div class="drawer-row-value">${esc(d.company_size || '—')}</div></div></div>
-            <div class="drawer-row"><div class="drawer-row-icon">📅</div><div class="drawer-row-content"><div class="drawer-row-label">成立年份</div><div class="drawer-row-value">${esc(d.founded_year || '—')}</div></div></div>
-            <div class="drawer-row"><div class="drawer-row-icon">🏛️</div><div class="drawer-row-content"><div class="drawer-row-label">母公司/集团</div><div class="drawer-row-value">${esc(d.parent_company || '—')}</div></div></div>
-            <div class="drawer-row"><div class="drawer-row-icon">🏪</div><div class="drawer-row-content"><div class="drawer-row-label">门店数量</div><div class="drawer-row-value">${esc(d.store_count || '—')}</div></div></div>
-            <div class="drawer-row"><div class="drawer-row-icon">📦</div><div class="drawer-row-content"><div class="drawer-row-label">主营品类</div><div class="drawer-row-value">${esc(d.product_categories || '—')}</div></div></div>
+            <h4>采购决策链</h4>
+            <div class="drawer-row"><div class="drawer-row-icon">👤</div><div class="drawer-row-info"><div class="drawer-row-label">联系人</div><div class="drawer-row-value ${d.contact_person ? '' : 'missing'}">${esc(d.contact_person) || '待补充'}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">💼</div><div class="drawer-row-info"><div class="drawer-row-label">职位</div><div class="drawer-row-value ${d.position ? '' : 'missing'}">${d.position ? `<span class="cell-position high">${esc(d.position)}</span>` : '待补充'}</div></div></div>
+            <div class="drawer-row"><div class="drawer-row-icon">🏢</div><div class="drawer-row-info"><div class="drawer-row-label">部门</div><div class="drawer-row-value ${d.department ? '' : 'missing'}">${esc(d.department) || '待补充'}</div></div></div>
         </div>
+
         <div class="drawer-section">
-            <h4>关键联系人（采购决策链）</h4>
-            <div class="drawer-row"><div class="drawer-row-icon">👤</div><div class="drawer-row-content"><div class="drawer-row-label">联系人</div><div class="drawer-row-value ${d.contact_person ? '' : 'missing'}">${esc(d.contact_person) || '待补充'}</div></div>${d.contact_person ? `<button class="drawer-copy" onclick="copyText('${esc(d.contact_person)}')">复制</button>` : ''}</div>
-            <div class="drawer-row"><div class="drawer-row-icon">💼</div><div class="drawer-row-content"><div class="drawer-row-label">职位</div><div class="drawer-row-value ${d.position ? '' : 'missing'}">${d.position ? `<span style="color:var(--primary);font-weight:600;">${esc(d.position)}</span>` : '待补充'}</div></div>${d.position ? `<button class="drawer-copy" onclick="copyText('${esc(d.position)}')">复制</button>` : ''}</div>
-            <div class="drawer-row"><div class="drawer-row-icon">🏢</div><div class="drawer-row-content"><div class="drawer-row-label">部门</div><div class="drawer-row-value ${d.department ? '' : 'missing'}">${esc(d.department) || '待补充'}</div></div>${d.department ? `<button class="drawer-copy" onclick="copyText('${esc(d.department)}')">复制</button>` : ''}</div>
-            <div class="drawer-row"><div class="drawer-row-icon">📧</div><div class="drawer-row-content"><div class="drawer-row-label">直邮</div><div class="drawer-row-value ${d.contact_email ? '' : 'missing'}">${d.contact_email ? `<a href="mailto:${esc(d.contact_email)}">${esc(d.contact_email)}</a>` : '待补充'}</div></div>${d.contact_email ? `<button class="drawer-copy" onclick="copyText('${esc(d.contact_email)}')">复制</button>` : ''}</div>
-            <div class="drawer-row"><div class="drawer-row-icon">📞</div><div class="drawer-row-content"><div class="drawer-row-label">直线电话</div><div class="drawer-row-value ${d.contact_phone ? '' : 'missing'}">${d.contact_phone ? `<a href="tel:${esc(d.contact_phone)}">${esc(d.contact_phone)}</a>` : '待补充'}</div></div>${d.contact_phone ? `<button class="drawer-copy" onclick="copyText('${esc(d.contact_phone)}')">复制</button>` : ''}</div>
-            <div class="drawer-row"><div class="drawer-row-icon">🔗</div><div class="drawer-row-content"><div class="drawer-row-label">LinkedIn</div><div class="drawer-row-value ${d.contact_linkedin ? '' : 'missing'}">${d.contact_linkedin ? `<a href="${esc(d.contact_linkedin)}" target="_blank">查看主页 ↗</a>` : '待补充'}</div></div></div>
-        </div>
-        <div class="drawer-section">
-            <h4>公司联系方式</h4>
+            <h4>联系方式</h4>
             ${contactHtml}
         </div>
+
         <div class="drawer-section">
             <h4>🔍 找采购人员 & 海关数据</h4>
-            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">点击下方链接，在社交平台搜索该公司的 Buyer / 采购经理，或查询美国进口记录：</p>
-            ${socialFindHtml}
-        </div>
-        <div class="drawer-section">
-            <h4>数据元信息</h4>
-            <div class="drawer-row"><div class="drawer-row-icon">🔗</div><div class="drawer-row-content"><div class="drawer-row-label">来源页面</div><div class="drawer-row-value">${d.source_url ? `<a href="${esc(d.source_url)}" target="_blank">${esc(d.source_url)}</a>` : '—'}</div></div></div>
-            <div class="drawer-row"><div class="drawer-row-icon">🕐</div><div class="drawer-row-content"><div class="drawer-row-label">抓取时间</div><div class="drawer-row-value">${d.scraped_at ? new Date(d.scraped_at).toLocaleString('zh-CN') : '—'}</div></div></div>
+            <div class="social-bar">
+                <a class="social-btn linkedin" href="https://www.linkedin.com/search/results/people/?keywords=${companySearch}%20buyer" target="_blank">LinkedIn 找 Buyer</a>
+                <a class="social-btn linkedin" href="https://www.linkedin.com/search/results/people/?keywords=${companySearch}%20procurement" target="_blank">LinkedIn 找采购</a>
+                <a class="social-btn facebook" href="https://www.facebook.com/search/top?q=${companySearch}" target="_blank">Facebook</a>
+            </div>
+            <div class="customs-box">
+                📦 <strong>海关数据：</strong><a href="https://importyeti.com/search?q=${companySearch}" target="_blank" style="color:inherit;font-weight:600;text-decoration:underline;">点此在 ImportYeti 免费查询美国进口记录 →</a>
+            </div>
         </div>
     `;
 
@@ -581,44 +626,291 @@ function openDrawer(companyName) {
 }
 
 function closeDrawer() {
-    document.getElementById('detailDrawer').classList.remove('active');
-    document.getElementById('drawerOverlay').classList.remove('active');
+    document.getElementById('detailDrawer')?.classList.remove('active');
+    document.getElementById('drawerOverlay')?.classList.remove('active');
     document.body.style.overflow = '';
 }
 
-// ===== Utilities =====
-function copyText(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        showToast('已复制到剪贴板', 'success');
-    }).catch(() => showToast('复制失败', 'error'));
+// ===== Discovery (Lead Generation) =====
+function generateEmails(company) {
+    const domain = extractDomain(company.website || company.email || '');
+    if (!domain) return [];
+    const roles = [
+        { name: 'Procurement Manager', first: 'procurement', last: 'manager' },
+        { name: 'Purchasing Manager', first: 'purchasing', last: 'manager' },
+        { name: 'Buyer', first: 'buyer', last: '' },
+        { name: 'Sourcing Manager', first: 'sourcing', last: 'manager' },
+    ];
+    const contacts = [];
+    for (const role of roles.slice(0, 3)) {
+        const patterns = [
+            { email: `${role.first}.${role.last || role.first}@${domain}`, conf: 'high' },
+            { email: `${role.first}@${domain}`, conf: 'medium' },
+        ];
+        for (const p of patterns) {
+            contacts.push({
+                name: role.name,
+                title: role.name,
+                email: p.email,
+                confidence: p.conf,
+                company: company.company_name,
+                country: company.country || '',
+                linkedin: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(company.company_name + ' ' + role.name)}`,
+            });
+        }
+    }
+    return contacts;
 }
 
-function showToast(message, type = '') {
+function extractDomain(url) {
+    if (!url) return '';
+    try {
+        if (url.includes('@')) return url.split('@')[1];
+        const u = new URL(url.startsWith('http') ? url : 'https://' + url);
+        return u.hostname.replace('www.', '');
+    } catch { return ''; }
+}
+
+function calculateLeadScore(company) {
+    let score = 0;
+    if (company.email) score += 20;
+    if (company.procurement_email) score += 25;
+    if (company.phone) score += 15;
+    if (company.linkedin) score += 15;
+    if (company.website) score += 10;
+    if (company.position) score += 10;
+    return Math.min(score, 100);
+}
+
+function renderDiscovery() {
+    const filtered = applyDiscoveryFilters(state.data);
+    document.getElementById('discoveryCount').textContent = filtered.length;
+    let totalContacts = 0;
+    filtered.forEach(c => { totalContacts += generateEmails(c).length; });
+    document.getElementById('discoveryContacts').textContent = totalContacts;
+
+    // Company table
+    const cBody = document.getElementById('discoveryCompanyBody');
+    if (cBody) {
+        cBody.innerHTML = filtered.slice(0, 50).map(d => {
+            const score = calculateLeadScore(d);
+            const color = score >= 70 ? '#10b981' : score >= 40 ? '#f59e0b' : '#ef4444';
+            return `<tr onclick="openDrawer('${esc(d.company_name)}')">
+                <td><span class="cell-name">${esc(d.company_name)}</span></td>
+                <td>${d.industry ? `<span class="industry-tag">${esc(d.industry)}</span>` : '—'}</td>
+                <td><span class="cell-country">${esc(d.country || '—')}</span></td>
+                <td>${d.procurement_email ? `<span class="proc-email">${esc(d.procurement_email)}</span>` : (d.email ? `<span class="cell-email">${esc(d.email)}</span>` : '—')}</td>
+                <td>${d.phone ? `<span class="cell-phone">${esc(d.phone)}</span>` : '—'}</td>
+                <td><div class="lead-score"><div class="lead-score-bar"><div class="lead-score-fill" style="width:${score}%;background:${color}"></div></div><span class="lead-score-num" style="color:${color}">${score}</span></div></td>
+                <td><button class="action-btn" onclick="event.stopPropagation();openDrawer('${esc(d.company_name)}')">详情</button></td>
+            </tr>`;
+        }).join('') || `<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无匹配数据</td></tr>`;
+    }
+
+    // Contact table
+    const pBody = document.getElementById('discoveryContactBody');
+    if (pBody) {
+        let all = [];
+        filtered.forEach(c => { all = all.concat(generateEmails(c)); });
+        all = all.slice(0, 100);
+        pBody.innerHTML = all.map(c => {
+            const confClass = c.confidence === 'high' ? 'confidence-high' : c.confidence === 'medium' ? 'confidence-medium' : 'confidence-low';
+            return `<tr>
+                <td style="font-weight:600;">${esc(c.name)}</td>
+                <td><span class="cell-position high">${esc(c.title)}</span></td>
+                <td>${esc(c.company)}</td>
+                <td><span class="cell-email">${esc(c.email)}</span></td>
+                <td><span class="confidence-tag ${confClass}">${c.confidence === 'high' ? '高' : c.confidence === 'medium' ? '中' : '低'}</span></td>
+                <td><a href="${esc(c.linkedin)}" target="_blank" class="linkedin-link">搜索 ↗</a></td>
+                <td><button class="action-btn" onclick="copyText('${esc(c.email)}')">复制</button></td>
+            </tr>`;
+        }).join('') || `<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无联系人数据</td></tr>`;
+    }
+}
+
+function applyDiscoveryFilters(data) {
+    const kw = document.getElementById('filterKeyword')?.value?.toLowerCase() || '';
+    const industry = document.getElementById('filterIndustryDisc')?.value || '';
+    const country = document.getElementById('filterCountryDisc')?.value || '';
+    const hasEmail = document.getElementById('filterHasEmail')?.checked;
+    const hasPhone = document.getElementById('filterHasPhone')?.checked;
+    const hasProc = document.getElementById('filterHasProcurement')?.checked;
+    const hasLi = document.getElementById('filterHasLinkedIn')?.checked;
+
+    return data.filter(d => {
+        if (kw && !(d.company_name?.toLowerCase().includes(kw) || d.industry?.toLowerCase().includes(kw) || d.product_categories?.toLowerCase().includes(kw))) return false;
+        if (industry && d.industry !== industry) return false;
+        if (country && d.country !== country) return false;
+        if (hasEmail && !d.email && !d.procurement_email) return false;
+        if (hasPhone && !d.phone) return false;
+        if (hasProc && !d.procurement_email) return false;
+        if (hasLi && !d.linkedin) return false;
+        return true;
+    });
+}
+
+function initDiscovery() {
+    // Tabs
+    document.querySelectorAll('.results-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.results-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.results-panel').forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Filters
+    ['filterKeyword', 'filterIndustryDisc', 'filterCountryDisc', 'filterHasEmail', 'filterHasPhone', 'filterHasProcurement', 'filterHasLinkedIn'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.addEventListener('input', renderDiscovery); el.addEventListener('change', renderDiscovery); }
+    });
+
+    // Reset
+    document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
+        document.getElementById('filterKeyword').value = '';
+        document.getElementById('filterIndustryDisc').value = '';
+        document.getElementById('filterCountryDisc').value = '';
+        document.querySelectorAll('.checkbox-group input').forEach(cb => cb.checked = false);
+        renderDiscovery();
+    });
+
+    // Export
+    document.getElementById('discoveryExportBtn')?.addEventListener('click', () => {
+        exportCSV(applyDiscoveryFilters(state.data));
+    });
+}
+
+// ===== Theme & Font =====
+function setTheme(theme) {
+    state.theme = theme;
+    document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+    document.body.className = document.body.className.replace(/theme-\w+/g, '').trim();
+    if (theme !== 'light' && theme !== 'dark') {
+        document.body.classList.add('theme-' + theme);
+    }
+    document.querySelectorAll('.seg-btn[data-theme]').forEach(el => {
+        el.classList.toggle('active', el.dataset.theme === theme);
+    });
+    localStorage.setItem('siq_theme', theme);
+    setTimeout(() => Object.values(state.charts).forEach(c => c?.resize()), 100);
+}
+
+function setFontSize(size) {
+    document.body.className = document.body.className.replace(/font-\w+/g, '').trim();
+    document.body.classList.add('font-' + size);
+    document.querySelectorAll('.seg-btn[data-size]').forEach(el => {
+        el.classList.toggle('active', el.dataset.size === size);
+    });
+    localStorage.setItem('siq_fontsize', size);
+}
+
+function initPreferences() {
+    const theme = localStorage.getItem('siq_theme') || 'light';
+    setTheme(theme);
+    const font = localStorage.getItem('siq_fontsize') || 'md';
+    setFontSize(font);
+
+    document.querySelectorAll('.seg-btn[data-theme]').forEach(el => {
+        el.addEventListener('click', () => setTheme(el.dataset.theme));
+    });
+    document.querySelectorAll('.seg-btn[data-size]').forEach(el => {
+        el.addEventListener('click', () => setFontSize(el.dataset.size));
+    });
+}
+
+// ===== Last Update =====
+function showLastUpdateTime() {
+    const data = state.data;
+    if (!data.length) return;
+    const times = data.map(d => d.scraped_at).filter(Boolean).sort();
+    const latest = times[times.length - 1];
+    if (latest) {
+        const date = new Date(latest);
+        const formatted = date.toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+        document.getElementById('settingsLastUpdate').textContent = formatted;
+        document.getElementById('lastRunTime').textContent = formatted;
+    }
+}
+
+// ===== Update Modal =====
+function openUpdateModal() {
+    const token = localStorage.getItem('github_token');
+    if (token) document.getElementById('githubTokenInput').value = token;
+    document.getElementById('updateModal').classList.add('active');
+}
+function closeUpdateModal() {
+    document.getElementById('updateModal').classList.remove('active');
+}
+async function triggerUpdate() {
+    const token = document.getElementById('githubTokenInput').value.trim();
+    if (!token) { alert('请输入 GitHub Token'); return; }
+    localStorage.setItem('github_token', token);
+
+    const btn = document.getElementById('confirmUpdateBtn');
+    btn.disabled = true; btn.textContent = '触发中...';
+
+    try {
+        const resp = await fetch('https://api.github.com/repos/nebulaspider/supermarket-contacts/actions/workflows/update-data.yml/dispatches', {
+            method: 'POST',
+            headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ref: 'main', inputs: { industries: 'general,retail,electronics,furniture,cosmetics,food,fashion', directory_max: '150' } }),
+        });
+        if (resp.status === 204) {
+            closeUpdateModal();
+            showToast('✅ 已触发数据更新！预计 3-8 分钟后完成。');
+        } else if (resp.status === 401) {
+            localStorage.removeItem('github_token');
+            alert('Token 无效或已过期，请重新输入。');
+        } else {
+            alert('触发失败: HTTP ' + resp.status);
+        }
+    } catch (e) {
+        alert('网络错误: ' + e.message);
+    }
+    btn.disabled = false; btn.textContent = '立即更新';
+}
+
+// ===== Utilities =====
+function isHighValuePosition(pos) {
+    if (!pos) return false;
+    const lower = pos.toLowerCase();
+    return ['ceo', 'director', '总监', '经理', 'manager', 'head', 'chief', 'vp', '采购', 'sourcing', 'buyer', 'senior'].some(kw => lower.includes(kw));
+}
+
+function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => showToast('📋 已复制: ' + text)).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+        showToast('📋 已复制');
+    });
+}
+
+function showToast(message) {
     const container = document.getElementById('toastContainer');
     const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
+    toast.className = 'toast';
     toast.textContent = message;
     container.appendChild(toast);
-    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; setTimeout(() => toast.remove(), 300); }, 2500);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(16px)'; setTimeout(() => toast.remove(), 300); }, 3500);
 }
 
-function exportCSV() {
-    const headers = ['company_name', 'industry', 'country', 'city', 'address', 'website',
-        'company_size', 'founded_year', 'parent_company', 'store_count', 'product_categories',
-        'contact_person', 'position', 'department', 'contact_email', 'contact_phone', 'contact_linkedin',
-        'email', 'phone', 'whatsapp', 'wechat', 'linkedin', 'facebook', 'twitter', 'instagram', 'youtube', 'data_quality'];
-    const csv = [headers.join(',')].concat(
-        state.data.map(row => headers.map(h => `"${(row[h] || '').toString().replace(/"/g, '""')}"`).join(','))
-    ).join('\n');
-
-    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `supermarket-contacts-${new Date().toISOString().slice(0, 10)}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast('CSV 导出成功', 'success');
+function exportCSV(data) {
+    const rows = data || state.filtered;
+    if (!rows.length) { showToast('⚠️ 没有可导出的数据'); return; }
+    const headers = ['公司名称', '国家', '城市', '行业', '职位', '部门', '邮箱', '采购邮箱', '电话', 'LinkedIn', '官网'];
+    const keys = ['company_name', 'country', 'city', 'industry', 'position', 'department', 'email', 'procurement_email', 'phone', 'linkedin', 'website'];
+    let csv = '\uFEFF' + headers.join(',') + '\n';
+    rows.forEach(d => {
+        csv += keys.map(k => `"${(d[k] || '').toString().replace(/"/g, '""')}"`).join(',') + '\n';
+    });
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'cyrus-ai-clients.csv';
+    link.click();
+    showToast('✅ 已导出 ' + rows.length + ' 条数据');
 }
 
 function esc(str) {
@@ -636,435 +928,11 @@ function debounce(fn, delay) {
     };
 }
 
-// Expose to global
+// Global exports
 window.openDrawer = openDrawer;
 window.closeDrawer = closeDrawer;
-window.goPage = goPage;
 window.copyText = copyText;
-
-// ============================================
-// v4.0 手动更新功能
-// ============================================
-
-// 从当前页面 URL 推断仓库信息
-function getRepoInfo() {
-    // GitHub Pages URL: https://{owner}.github.io/{repo}/
-    const host = window.location.hostname;
-    const path = window.location.pathname;
-    if (host.endsWith('.github.io')) {
-        const owner = host.replace('.github.io', '');
-        const repo = path.split('/')[1] || '';
-        return { owner, repo };
-    }
-    // 本地开发时的默认值
-    return { owner: 'nebulaspider', repo: 'supermarket-contacts' };
-}
-
-function openUpdateModal() {
-    document.getElementById('updateModal').classList.add('active');
-}
-
-function closeUpdateModal() {
-    document.getElementById('updateModal').classList.remove('active');
-}
-
-async function triggerUpdate() {
-    const { owner, repo } = getRepoInfo();
-    const btn = document.getElementById('confirmUpdateBtn');
-    const updateBtn = document.getElementById('updateBtn');
-    const updateBtnText = document.getElementById('updateBtnText');
-
-    // 获取 Token（从 localStorage 或提示输入）
-    let token = localStorage.getItem('github_token');
-    if (!token) {
-        token = prompt('请输入你的 GitHub Personal Access Token（需要 repo + workflow 权限）：\n\n创建地址：https://github.com/settings/tokens\n\nToken 仅保存在你的浏览器本地，不会上传到任何服务器。');
-        if (!token) return;
-        localStorage.setItem('github_token', token);
-    }
-
-    btn.disabled = true;
-    btn.textContent = '触发中...';
-    updateBtn.disabled = true;
-    updateBtnText.innerHTML = '<span class="spinner"></span> 更新中';
-
-    try {
-        // 调用 GitHub API 触发 workflow_dispatch
-        const response = await fetch(
-            `https://api.github.com/repos/${owner}/${repo}/actions/workflows/update-data.yml/dispatches`,
-            {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Authorization': `token ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    ref: 'main',
-                    inputs: {
-                        industries: 'general,retail,electronics,furniture,cosmetics,food,fashion',
-                        directory_max: '80',
-                    }
-                }),
-            }
-        );
-
-        if (response.status === 204) {
-            closeUpdateModal();
-            showToast('✅ 已触发数据更新！预计 3-8 分钟后完成，完成后网站自动更新。');
-            // 30秒后自动刷新页面检查新数据
-            setTimeout(() => {
-                showToast('💡 数据可能正在更新中，点击刷新按钮查看最新数据');
-            }, 30000);
-        } else if (response.status === 401) {
-            localStorage.removeItem('github_token');
-            alert('Token 无效或已过期，请重新输入。');
-        } else if (response.status === 404) {
-            alert(`找不到工作流文件。请确认仓库 ${owner}/${repo} 中存在 .github/workflows/update-data.yml`);
-        } else {
-            const err = await response.text();
-            alert(`触发失败 (${response.status}): ${err}`);
-        }
-    } catch (err) {
-        alert('网络错误: ' + err.message);
-    } finally {
-        btn.disabled = false;
-        btn.textContent = '立即更新';
-        updateBtn.disabled = false;
-        updateBtnText.textContent = '手动更新';
-    }
-}
-
-// 点击模态框外部关闭
-document.addEventListener('click', (e) => {
-    const modal = document.getElementById('updateModal');
-    if (e.target === modal) closeUpdateModal();
-});
-
+window.goPage = goPage;
+window.exportCSV = exportCSV;
 window.openUpdateModal = openUpdateModal;
 window.closeUpdateModal = closeUpdateModal;
-window.triggerUpdate = triggerUpdate;
-
-// ============================================
-// v4.1 主题/字号自定义 + 更新时间显示
-// ============================================
-
-// 高价值职位判断
-function isHighValuePosition(position) {
-    if (!position) return false;
-    const lower = position.toLowerCase();
-    const keywords = ['ceo', 'director', '总监', '经理', 'manager', 'head', 'chief', 'vp', 'president', '采购', 'sourcing', 'buyer', 'merchandis', 'senior', 'lead'];
-    return keywords.some(kw => lower.includes(kw));
-}
-
-// 主题切换
-function setTheme(theme) {
-    const body = document.body;
-    // 移除所有主题类
-    body.classList.remove('theme-dark', 'theme-deepblue', 'theme-contrast');
-    if (theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        if (theme !== 'light') {
-            body.classList.add('theme-' + theme);
-        }
-    }
-    // 更新选择器状态
-    document.querySelectorAll('.option-btn[data-theme]').forEach(el => {
-        el.classList.toggle('active', el.dataset.theme === theme);
-    });
-    localStorage.setItem('siq_theme', theme);
-}
-
-// 字号切换
-function setFontSize(size) {
-    const body = document.body;
-    body.classList.remove('font-sm', 'font-md', 'font-lg', 'font-xl');
-    body.classList.add('font-' + size);
-    document.querySelectorAll('.option-btn[data-size]').forEach(el => {
-        el.classList.toggle('active', el.dataset.size === size);
-    });
-    localStorage.setItem('siq_fontsize', size);
-}
-
-// 显示最后更新时间
-function showLastUpdateTime() {
-    const data = state.data || [];
-    if (data.length === 0) {
-        document.getElementById('lastUpdateTime').textContent = '暂无数据';
-        document.getElementById('settingsLastUpdate').textContent = '—';
-        return;
-    }
-
-    // 找最新的 scraped_at
-    const times = data.map(d => d.scraped_at).filter(Boolean).sort();
-    const latest = times[times.length - 1];
-
-    if (latest) {
-        const date = new Date(latest);
-        const formatted = date.toLocaleString('zh-CN', {
-            year: 'numeric', month: '2-digit', day: '2-digit',
-            hour: '2-digit', minute: '2-digit'
-        });
-        // 计算多久前
-        const diff = Date.now() - date.getTime();
-        const hours = Math.floor(diff / 3600000);
-        const days = Math.floor(hours / 24);
-        let ago = '';
-        if (days > 0) ago = `（${days}天前）`;
-        else if (hours > 0) ago = `（${hours}小时前）`;
-        else ago = '（刚刚）';
-
-        document.getElementById('lastUpdateTime').textContent = formatted + ' ' + ago;
-        document.getElementById('settingsLastUpdate').textContent = formatted;
-
-        // 更新状态
-        const statusEl = document.getElementById('updateStatus');
-        const statusText = document.getElementById('updateStatusText');
-        if (hours < 24) {
-            statusEl.className = 'update-status success';
-            statusText.textContent = '已同步';
-        } else {
-            statusEl.className = 'update-status running';
-            statusText.textContent = '需更新';
-        }
-    } else {
-        document.getElementById('lastUpdateTime').textContent = '未知';
-        document.getElementById('settingsLastUpdate').textContent = '—';
-    }
-}
-
-// 初始化偏好设置
-function initPreferences() {
-    // 主题
-    const savedTheme = localStorage.getItem('siq_theme') || 'light';
-    setTheme(savedTheme);
-
-    // 字号
-    const savedFont = localStorage.getItem('siq_fontsize') || 'md';
-    setFontSize(savedFont);
-
-    // 绑定主题选择器
-    document.querySelectorAll('.option-btn[data-theme]').forEach(el => {
-        el.addEventListener('click', () => setTheme(el.dataset.theme));
-    });
-
-    // 绑定字号选择器
-    document.querySelectorAll('.option-btn[data-size]').forEach(el => {
-        el.addEventListener('click', () => setFontSize(el.dataset.size));
-    });
-}
-
-// 在数据加载后显示更新时间
-const originalLoadData = loadData;
-loadData = async function() {
-    await originalLoadData();
-    showLastUpdateTime();
-};
-
-// 页面加载时初始化偏好
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(initPreferences, 100);
-});
-
-// ============================================
-// v5.0 潜客挖掘 — Apollo.io 风格
-// ============================================
-
-// 智能邮箱生成器
-function generateEmails(company) {
-    const domain = extractDomain(company.website || company.email || '');
-    if (!domain) return [];
-
-    // 常见采购职位名称
-    const procurementRoles = [
-        { first: 'Procurement', last: 'Manager', title: 'Procurement Manager' },
-        { first: 'Purchasing', last: 'Manager', title: 'Purchasing Manager' },
-        { first: 'Buyer', last: '', title: 'Buyer' },
-        { first: 'Sourcing', last: 'Manager', title: 'Sourcing Manager' },
-        { first: 'Supply', last: 'Chain', title: 'Supply Chain Manager' },
-        { first: 'Merchandising', last: 'Manager', title: 'Merchandising Manager' },
-    ];
-
-    // 邮箱命名模式
-    const patterns = [
-        { pattern: (f, l) => `${f.toLowerCase()}.${l.toLowerCase()}@${domain}`, conf: 'high' },
-        { pattern: (f, l) => `${f.toLowerCase()}@${domain}`, conf: 'medium' },
-        { pattern: (f, l) => `${f[0].toLowerCase()}${l.toLowerCase()}@${domain}`, conf: 'medium' },
-        { pattern: (f, l) => `${f.toLowerCase()}${l[0].toLowerCase()}@${domain}`, conf: 'low' },
-    ];
-
-    const contacts = [];
-    for (const role of procurementRoles.slice(0, 3)) {
-        for (const p of patterns.slice(0, 2)) {
-            const email = p.pattern(role.first, role.last || role.first);
-            contacts.push({
-                name: `${role.first} ${role.last}`.trim(),
-                title: role.title,
-                email: email,
-                confidence: p.conf,
-                company: company.company_name,
-                country: company.country || '',
-                linkedin: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(company.company_name + ' ' + role.title)}`,
-            });
-        }
-    }
-    return contacts;
-}
-
-function extractDomain(url) {
-    if (!url) return '';
-    try {
-        if (url.includes('@')) {
-            return url.split('@')[1];
-        }
-        const u = new URL(url.startsWith('http') ? url : 'https://' + url);
-        return u.hostname.replace('www.', '');
-    } catch {
-        return '';
-    }
-}
-
-// 潜客评分
-function calculateLeadScore(company) {
-    let score = 0;
-    if (company.email) score += 20;
-    if (company.procurement_email) score += 25;
-    if (company.phone) score += 15;
-    if (company.linkedin) score += 15;
-    if (company.website) score += 10;
-    if (company.position) score += 10;
-    if (company.store_count && parseInt(company.store_count) > 100) score += 5;
-    return Math.min(score, 100);
-}
-
-// 渲染潜客挖掘页面
-function renderDiscovery() {
-    const data = state.data || [];
-
-    // 应用筛选
-    let filtered = applyDiscoveryFilters(data);
-
-    // 更新统计
-    document.getElementById('discoveryCount').textContent = filtered.length;
-    let totalContacts = 0;
-    filtered.forEach(c => { totalContacts += generateEmails(c).length; });
-    document.getElementById('discoveryContacts').textContent = totalContacts;
-
-    // 渲染公司表格
-    const companyBody = document.getElementById('discoveryCompanyBody');
-    companyBody.innerHTML = filtered.slice(0, 50).map(d => {
-        const score = calculateLeadScore(d);
-        const scoreColor = score >= 70 ? '#10b981' : score >= 40 ? '#f59e0b' : '#ef4444';
-        return `<tr onclick="openDrawer('${esc(d.company_name)}')">
-            <td><span class="table-cell-name">${esc(d.company_name)}</span></td>
-            <td>${d.industry ? `<span class="industry-badge">${esc(d.industry)}</span>` : '—'}</td>
-            <td><span class="table-cell-country">${esc(d.country || '—')}</span></td>
-            <td>${d.company_size ? `<span class="company-size-badge">${esc(d.company_size)}</span>` : '—'}</td>
-            <td>${d.procurement_email ? `<span class="procurement-email">${esc(d.procurement_email)}</span>` : (d.email ? `<span class="table-cell-email">${esc(d.email)}</span>` : '—')}</td>
-            <td>${d.phone ? `<span class="table-cell-phone">${esc(d.phone)}</span>` : '—'}</td>
-            <td>
-                <div class="lead-score">
-                    <div class="lead-score-bar"><div class="lead-score-fill" style="width:${score}%;background:${scoreColor}"></div></div>
-                    <span class="lead-score-num" style="color:${scoreColor}">${score}</span>
-                </div>
-            </td>
-            <td><button class="page-btn" onclick="event.stopPropagation();openDrawer('${esc(d.company_name)}')">详情</button></td>
-        </tr>`;
-    }).join('');
-
-    // 渲染联系人表格
-    const contactBody = document.getElementById('discoveryContactBody');
-    let allContacts = [];
-    filtered.forEach(c => {
-        allContacts = allContacts.concat(generateEmails(c));
-    });
-    allContacts = allContacts.slice(0, 100);
-    contactBody.innerHTML = allContacts.map(c => {
-        const confClass = c.confidence === 'high' ? 'confidence-high' : c.confidence === 'medium' ? 'confidence-medium' : 'confidence-low';
-        const confText = c.confidence === 'high' ? '高' : c.confidence === 'medium' ? '中' : '低';
-        return `<tr>
-            <td><span style="font-weight:600;">${esc(c.name)}</span></td>
-            <td><span class="table-cell-position high-value">${esc(c.title)}</span></td>
-            <td>${esc(c.company)}</td>
-            <td>${esc(c.country || '—')}</td>
-            <td><span class="table-cell-email">${esc(c.email)}</span></td>
-            <td><span class="confidence-badge ${confClass}">${confText}</span></td>
-            <td><a href="${esc(c.linkedin)}" target="_blank" style="color:#0077b5;font-weight:600;font-size:13px;">搜索 ↗</a></td>
-            <td><button class="page-btn" onclick="copyText('${esc(c.email)}')">复制邮箱</button></td>
-        </tr>`;
-    }).join('');
-}
-
-function applyDiscoveryFilters(data) {
-    const keyword = document.getElementById('filterKeyword')?.value?.toLowerCase() || '';
-    const industry = document.getElementById('filterIndustryDiscovery')?.value || '';
-    const country = document.getElementById('filterCountryDiscovery')?.value || '';
-    const hasEmail = document.getElementById('filterHasEmail')?.checked;
-    const hasPhone = document.getElementById('filterHasPhone')?.checked;
-    const hasProcurement = document.getElementById('filterHasProcurement')?.checked;
-    const hasLinkedIn = document.getElementById('filterHasLinkedIn')?.checked;
-
-    return data.filter(d => {
-        if (keyword && !(d.company_name?.toLowerCase().includes(keyword) || d.industry?.toLowerCase().includes(keyword) || d.product_categories?.toLowerCase().includes(keyword))) return false;
-        if (industry && d.industry !== industry) return false;
-        if (country && d.country !== country) return false;
-        if (hasEmail && !d.email && !d.procurement_email) return false;
-        if (hasPhone && !d.phone) return false;
-        if (hasProcurement && !d.procurement_email) return false;
-        if (hasLinkedIn && !d.linkedin) return false;
-        return true;
-    });
-}
-
-// 潜客挖掘页面事件绑定
-function initDiscovery() {
-    // Tab 切换
-    // Tab 切换
-    document.querySelectorAll('.tab-btn').forEach(tab => {
-        tab.addEventListener('click', () => {
-            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-panel').forEach(c => c.classList.remove('active'));
-            tab.classList.add('active');
-            document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
-        });
-    });
-
-    // 筛选事件
-    const filterIds = ['filterKeyword', 'filterIndustryDiscovery', 'filterCountryDiscovery', 'filterHasEmail', 'filterHasPhone', 'filterHasProcurement', 'filterHasLinkedIn'];
-    filterIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', renderDiscovery);
-            el.addEventListener('change', renderDiscovery);
-        }
-    });
-
-    // 重置筛选
-    document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
-        document.getElementById('filterKeyword').value = '';
-        document.getElementById('filterIndustryDiscovery').value = '';
-        document.getElementById('filterCountryDiscovery').value = '';
-        document.querySelectorAll('.checkbox-list input').forEach(cb => cb.checked = false);
-        renderDiscovery();
-    });
-
-    // 导出 CSV
-    document.getElementById('discoveryExportBtn')?.addEventListener('click', () => {
-        const filtered = applyDiscoveryFilters(state.data || []);
-        exportToCSV(filtered, 'cyrus-ai-leads.csv');
-    });
-}
-
-// 数据加载后渲染潜客挖掘
-const origLoadData2 = loadData;
-loadData = async function() {
-    await origLoadData2();
-    showLastUpdateTime();
-    renderDiscovery();
-};
-
-// 初始化
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(initDiscovery, 200);
-});
