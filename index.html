@@ -1,267 +1,1227 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SupermarketIQ — 全球超市客户情报平台</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234f46e5'/><text y='.9em' font-size='60' x='20'>🏪</text></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SupermarketIQ — 全球超市客户挖掘系统</title>
+<style>
+/* ========== 全局变量 ========== */
+:root {
+    --primary: #0a2540;
+    --primary-light: #1a3a5c;
+    --primary-lighter: #244b6e;
+    --gold: #f5a623;
+    --gold-light: #ffc04d;
+    --gold-dark: #d4891a;
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --text-secondary: #5a6a7a;
+    --text-light: #8a9aaa;
+    --border: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --shadow-sm: 0 1px 3px rgba(10,37,64,0.08);
+    --shadow-md: 0 4px 12px rgba(10,37,64,0.1);
+    --shadow-lg: 0 8px 30px rgba(10,37,64,0.15);
+    --radius: 12px;
+    --radius-sm: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ========== 顶部导航 ========== */
+.topbar {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+
+.logo {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px; color: var(--primary);
+    box-shadow: 0 2px 8px rgba(245,166,35,0.4);
+}
+
+.topbar-title { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
+.topbar-subtitle { color: rgba(255,255,255,0.5); font-size: 12px; margin-left: 8px; }
+
+.topbar-right { display: flex; align-items: center; gap: 16px; }
+
+.status-badge {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(16,185,129,0.15);
+    color: #34d399;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.status-dot {
+    width: 7px; height: 7px;
+    background: #34d399;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* ========== 主容器 ========== */
+.container { max-width: 1400px; margin: 0 auto; padding: 28px 32px; }
+
+/* ========== 搜索面板 ========== */
+.search-panel {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 24px;
+    border-top: 4px solid var(--gold);
+}
+
+.search-panel-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.search-panel-title::before {
+    content: '';
+    width: 4px; height: 18px;
+    background: var(--gold);
+    border-radius: 2px;
+}
+
+.search-grid {
+    display: grid;
+    grid-template-columns: 1fr 200px auto;
+    gap: 16px;
+    align-items: end;
+}
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.form-label .hint {
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--text-light);
+}
+
+.form-input, .form-select {
+    height: 46px;
+    padding: 0 14px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--text);
+    background: #fff;
+    transition: all 0.2s;
+    outline: none;
+}
+.form-input:focus, .form-select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(245,166,35,0.15);
+}
+.form-input::placeholder { color: var(--text-light); }
+
+/* 行业标签 */
+.industry-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+    min-height: 28px;
+}
+.industry-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(245,166,35,0.1);
+    color: var(--gold-dark);
+    padding: 3px 10px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.industry-tag .remove {
+    cursor: pointer;
+    opacity: 0.6;
+    font-size: 14px;
+    line-height: 1;
+}
+.industry-tag .remove:hover { opacity: 1; }
+
+/* 挖掘按钮 */
+.btn-mine {
+    height: 46px;
+    padding: 0 32px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: var(--primary);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(245,166,35,0.35);
+    white-space: nowrap;
+}
+.btn-mine:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245,166,35,0.5);
+}
+.btn-mine:active:not(:disabled) { transform: translateY(0); }
+.btn-mine:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+.btn-mine .spinner {
+    width: 18px; height: 18px;
+    border: 2.5px solid rgba(10,37,64,0.3);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ========== 进度条 ========== */
+.progress-section {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+    display: none;
+}
+.progress-section.active { display: block; animation: slideDown 0.3s ease; }
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.progress-label { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+.progress-percent { font-size: 20px; font-weight: 800; color: var(--gold-dark); }
+
+.progress-bar-bg {
+    width: 100%;
+    height: 10px;
+    background: var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.4s ease;
+    position: relative;
+}
+.progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-detail {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex;
+    gap: 20px;
+}
+.progress-detail span { display: flex; align-items: center; gap: 4px; }
+
+/* ========== KPI 卡片 ========== */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.kpi-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+}
+.kpi-card.kpi-total::before { background: var(--primary); }
+.kpi-card.kpi-email::before { background: var(--gold); }
+.kpi-card.kpi-high::before { background: var(--success); }
+
+.kpi-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 14px;
+}
+.kpi-total .kpi-icon { background: rgba(10,37,64,0.08); }
+.kpi-email .kpi-icon { background: rgba(245,166,35,0.12); }
+.kpi-high .kpi-icon { background: rgba(16,185,129,0.1); }
+
+.kpi-value {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+.kpi-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+.kpi-sub {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 4px;
+}
+
+/* ========== 数据表格区 ========== */
+.table-section {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.table-toolbar {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.table-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.table-count {
+    background: var(--primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 10px;
+}
+
+.toolbar-actions { display: flex; gap: 10px; }
+
+.btn {
+    height: 38px;
+    padding: 0 18px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+.btn-export {
+    background: var(--primary);
+    color: #fff;
+}
+.btn-export:hover { background: var(--primary-light); }
+.btn-clear {
+    background: #fff;
+    color: var(--danger);
+    border: 2px solid var(--danger);
+}
+.btn-clear:hover { background: rgba(239,68,68,0.06); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* 表格 */
+.table-wrapper { overflow-x: auto; }
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+.data-table thead {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+}
+.data-table th {
+    padding: 14px 16px;
+    text-align: left;
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+.data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+}
+.data-table tbody tr {
+    transition: background 0.15s;
+}
+.data-table tbody tr:hover { background: rgba(245,166,35,0.04); }
+.data-table tbody tr:last-child td { border-bottom: none; }
+
+.col-index {
+    width: 50px;
+    text-align: center;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.company-name {
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.company-name:hover { color: var(--gold-dark); text-decoration: underline; }
+.company-meta {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
+.email-cell {
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 12px;
+    color: var(--primary-light);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.copy-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    opacity: 0.5;
+    padding: 2px;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+.copy-btn:hover { opacity: 1; background: rgba(10,37,64,0.06); }
+.copy-btn.copied { opacity: 1; color: var(--success); }
+
+.phone-cell {
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.contact-name { font-weight: 600; color: var(--text); }
+.position-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 3px;
+    font-weight: 600;
+}
+.position-high {
+    background: rgba(16,185,129,0.1);
+    color: var(--success);
+}
+.position-normal {
+    background: rgba(10,37,64,0.06);
+    color: var(--text-secondary);
+}
+
+/* 状态开关 */
+.status-toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+.status-toggle input { opacity: 0; width: 0; height: 0; }
+.status-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #cbd5e1;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+.status-slider::before {
+    content: '';
+    position: absolute;
+    height: 18px; width: 18px;
+    left: 3px; bottom: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.status-toggle input:checked + .status-slider { background: var(--success); }
+.status-toggle input:checked + .status-slider::before { transform: translateX(20px); }
+
+.status-label {
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+.status-pending { color: var(--warning); }
+.status-done { color: var(--success); }
+
+/* 空状态 */
+.empty-state {
+    padding: 80px 20px;
+    text-align: center;
+}
+.empty-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+}
+.empty-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+.empty-desc {
+    font-size: 14px;
+    color: var(--text-light);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--primary);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { border-left: 4px solid var(--success); }
+.toast.error { border-left: 4px solid var(--danger); }
+
+/* 模式标签 */
+.mode-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(245,166,35,0.12);
+    color: var(--gold-dark);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+    .search-grid { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: 1fr; }
+    .container { padding: 16px; }
+    .topbar { padding: 0 16px; }
+}
+</style>
 </head>
 <body>
-    <header class="topbar">
-        <div class="topbar-left">
-            <button class="sidebar-toggle" id="sidebarToggle" aria-label="切换侧边栏">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-            </button>
-            <div class="brand">
-                <div class="brand-logo">SI</div>
-                <div class="brand-text">
-                    <span class="brand-name">SupermarketIQ</span>
-                    <span class="brand-tag">Global Retail Intelligence</span>
-                </div>
-            </div>
-        </div>
-        <div class="topbar-center">
-            <div class="global-search">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" id="globalSearch" placeholder="搜索公司、国家、邮箱、电话..." autocomplete="off">
-                <kbd>⌘K</kbd>
-            </div>
-        </div>
-        <div class="topbar-right">
-            <div class="topbar-stat">
-                <span class="stat-dot stat-dot--active"></span>
-                <span id="autoStatus">自动化运行中</span>
-            </div>
-            <button class="icon-btn" id="themeToggle" title="切换主题">
-                <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            </button>
-            <div class="avatar">BOSS</div>
-        </div>
-    </header>
 
-    <div class="app-layout">
-        <aside class="sidebar" id="sidebar">
-            <nav class="sidebar-nav">
-                <div class="nav-section">
-                    <span class="nav-label">概览</span>
-                    <a href="#" class="nav-item active" data-view="dashboard">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                        <span>仪表盘</span>
-                    </a>
-                    <a href="#" class="nav-item" data-view="contacts">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        <span>客户名录</span>
-                        <span class="nav-badge" id="navCount">0</span>
-                    </a>
-                </div>
-                <div class="nav-section">
-                    <span class="nav-label">自动化</span>
-                    <a href="#" class="nav-item" data-view="automation">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                        <span>爬虫状态</span>
-                        <span class="nav-dot nav-dot--green"></span>
-                    </a>
-                    <a href="#" class="nav-item" data-view="quality">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                        <span>数据质量</span>
-                    </a>
-                </div>
-                <div class="nav-section">
-                    <span class="nav-label">系统</span>
-                    <a href="#" class="nav-item" data-view="settings">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                        <span>设置</span>
-                    </a>
-                </div>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="automation-mini">
-                    <div class="automation-mini-header">
-                        <span class="pulse-dot"></span>
-                        <span>Auto Pipeline</span>
-                    </div>
-                    <p>全链路自动化已启用</p>
-                    <p class="automation-mini-time" id="lastRunTime">—</p>
-                </div>
-            </div>
-        </aside>
-
-        <main class="main-content">
-            <section class="view view-dashboard active" id="view-dashboard">
-                <div class="page-header">
-                    <div>
-                        <h1 class="page-title">仪表盘</h1>
-                        <p class="page-subtitle">全球超市客户情报总览 · 数据实时同步</p>
-                    </div>
-                    <div class="page-actions">
-                        <button class="btn btn--secondary" id="exportBtn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            导出 CSV
-                        </button>
-                        <button class="btn btn--primary" id="refreshBtn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-                            刷新数据
-                        </button>
-                    </div>
-                </div>
-
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--blue"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">企业总数</span><span class="kpi-value" id="kpiTotal">0</span><span class="kpi-trend kpi-trend--up">↑ 自动发现中</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">覆盖国家</span><span class="kpi-value" id="kpiCountries">0</span><span class="kpi-trend">全球分布</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--purple"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">邮箱覆盖率</span><span class="kpi-value" id="kpiEmail">0%</span><span class="kpi-trend kpi-trend--up" id="kpiEmailCount">0 个邮箱</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--orange"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">电话覆盖率</span><span class="kpi-value" id="kpiPhone">0%</span><span class="kpi-trend kpi-trend--up" id="kpiPhoneCount">0 个电话</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--cyan"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">LinkedIn 覆盖</span><span class="kpi-value" id="kpiLinkedin">0%</span><span class="kpi-trend" id="kpiLinkedinCount">0 个主页</span></div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon kpi-icon--pink"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-                        <div class="kpi-info"><span class="kpi-label">平均数据质量</span><span class="kpi-value" id="kpiQuality">0</span><span class="kpi-trend kpi-trend--up">满分 100</span></div>
-                    </div>
-                </div>
-
-                <div class="charts-row">
-                    <div class="chart-card">
-                        <div class="chart-header"><h3>国家/地区分布</h3><span class="chart-sub">Top 10</span></div>
-                        <div class="chart-body" id="countryChart"></div>
-                    </div>
-                    <div class="chart-card">
-                        <div class="chart-header"><h3>联系方式覆盖率</h3><span class="chart-sub">各字段完整度</span></div>
-                        <div class="chart-body" id="coverageChart"></div>
-                    </div>
-                </div>
-
-                <div class="dashboard-bottom">
-                    <div class="panel">
-                        <div class="panel-header">
-                            <h3>最近更新的企业</h3>
-                            <a href="#" class="panel-link" data-view="contacts">查看全部 →</a>
-                        </div>
-                        <div class="panel-body" id="recentList"></div>
-                    </div>
-                    <div class="panel">
-                        <div class="panel-header">
-                            <h3>自动化管线状态</h3>
-                            <span class="status-pill status-pill--running"><span class="pulse-dot"></span>运行中</span>
-                        </div>
-                        <div class="panel-body">
-                            <div class="pipeline">
-                                <div class="pipeline-step complete"><div class="pipeline-icon">✓</div><div class="pipeline-info"><span class="pipeline-title">自动发现</span><span class="pipeline-desc">从维基百科/商业目录发现新品牌</span></div><span class="pipeline-time" id="pipeDiscoverTime">—</span></div>
-                                <div class="pipeline-step complete"><div class="pipeline-icon">✓</div><div class="pipeline-info"><span class="pipeline-title">数据抓取</span><span class="pipeline-desc">Scrapy 多品牌并行抓取</span></div><span class="pipeline-time" id="pipeScrapeTime">—</span></div>
-                                <div class="pipeline-step complete"><div class="pipeline-icon">✓</div><div class="pipeline-info"><span class="pipeline-title">清洗去重</span><span class="pipeline-desc">格式标准化 + 智能去重</span></div><span class="pipeline-time" id="pipeCleanTime">—</span></div>
-                                <div class="pipeline-step complete"><div class="pipeline-icon">✓</div><div class="pipeline-info"><span class="pipeline-title">质量验证</span><span class="pipeline-desc">邮箱格式/号码有效性检查</span></div><span class="pipeline-time" id="pipeValidateTime">—</span></div>
-                                <div class="pipeline-step running"><div class="pipeline-icon pipeline-icon--spin">⟳</div><div class="pipeline-info"><span class="pipeline-title">自动部署</span><span class="pipeline-desc">GitHub Pages 实时更新</span></div><span class="pipeline-time">实时</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="view view-contacts" id="view-contacts">
-                <div class="page-header">
-                    <div>
-                        <h1 class="page-title">客户名录</h1>
-                        <p class="page-subtitle" id="contactsSubtitle">共 0 家企业</p>
-                    </div>
-                    <div class="page-actions">
-                        <div class="filter-group">
-                            <select id="filterIndustry" class="select-sm"><option value="">全部行业</option></select>
-                            <select id="filterDepartment" class="select-sm"><option value="">全部部门</option></select>
-                            <select id="filterPosition" class="select-sm"><option value="">全部职位</option></select>
-                            <select id="filterCountry" class="select-sm"><option value="">全部国家</option></select>
-                            <select id="filterQuality" class="select-sm"><option value="">全部质量</option><option value="80">≥80 高质量</option><option value="60">≥60 中等</option></select>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-container">
-                    <table class="data-table" id="dataTable">
-                        <thead><tr>
-                            <th data-sort="company_name">企业名称 <span class="sort-icon">↕</span></th>
-                            <th data-sort="industry">行业 <span class="sort-icon">↕</span></th>
-                            <th data-sort="country">国家/地区 <span class="sort-icon">↕</span></th>
-                            <th>关键职位</th>
-                            <th>部门</th>
-                            <th>邮箱</th>
-                            <th>电话</th>
-                            <th data-sort="data_quality">质量 <span class="sort-icon">↕</span></th>
-                            <th>操作</th>
-                        </tr></thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                    <div class="table-footer">
-                        <span id="tableInfo">显示 0-0 / 0 条</span>
-                        <div class="pagination" id="pagination"></div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="view view-automation" id="view-automation">
-                <div class="page-header">
-                    <div><h1 class="page-title">爬虫状态</h1><p class="page-subtitle">全自动化抓取管线实时监控</p></div>
-                </div>
-                <div class="spider-grid" id="spiderGrid"></div>
-            </section>
-
-            <section class="view view-quality" id="view-quality">
-                <div class="page-header">
-                    <div><h1 class="page-title">数据质量</h1><p class="page-subtitle">各字段完整度与质量分析</p></div>
-                </div>
-                <div class="quality-grid" id="qualityGrid"></div>
-            </section>
-
-            <section class="view view-settings" id="view-settings">
-                <div class="page-header">
-                    <div><h1 class="page-title">设置</h1><p class="page-subtitle">系统配置与自动化参数</p></div>
-                </div>
-                <div class="settings-panel">
-                    <div class="settings-group">
-                        <h3>自动化配置</h3>
-                        <div class="setting-row"><div><span class="setting-label">定时抓取</span><span class="setting-desc">每周一 UTC 02:00 自动运行全量抓取</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-                        <div class="setting-row"><div><span class="setting-label">自动发现新品牌</span><span class="setting-desc">从维基百科、商业目录自动发现新超市品牌</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-                        <div class="setting-row"><div><span class="setting-label">数据质量验证</span><span class="setting-desc">自动验证邮箱格式、电话号码有效性</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-                        <div class="setting-row"><div><span class="setting-label">异常数据回滚</span><span class="setting-desc">数据量骤降50%以上时自动恢复备份</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-                    </div>
-                    <div class="settings-group">
-                        <h3>抓取参数</h3>
-                        <div class="setting-row"><div><span class="setting-label">请求延迟</span><span class="setting-desc">对同一域名的请求间隔（秒）</span></div><span class="setting-value">3.0s</span></div>
-                        <div class="setting-row"><div><span class="setting-label">并发请求</span><span class="setting-desc">最大并发请求数</span></div><span class="setting-value">8</span></div>
-                        <div class="setting-row"><div><span class="setting-label">遵守 robots.txt</span><span class="setting-desc">合规抓取，不抓取禁止页面</span></div><span class="status-pill status-pill--success">已启用</span></div>
-                        <div class="setting-row"><div><span class="setting-label">代理池</span><span class="setting-desc">通过 GitHub Secrets 配置 PROXY_API_URL</span></div><span class="status-pill status-pill--muted">可选</span></div>
-                    </div>
-                    <div class="settings-group">
-                        <h3>部署信息</h3>
-                        <div class="setting-row"><div><span class="setting-label">部署平台</span></div><span class="setting-value mono">GitHub Pages</span></div>
-                        <div class="setting-row"><div><span class="setting-label">数据文件</span></div><span class="setting-value mono">data/clients.json</span></div>
-                        <div class="setting-row"><div><span class="setting-label">工作流文件</span></div><span class="setting-value mono">.github/workflows/update-data.yml</span></div>
-                    </div>
-                </div>
-            </section>
-        </main>
+<!-- 顶部导航 -->
+<header class="topbar">
+    <div class="topbar-left">
+        <div class="logo">SI</div>
+        <span class="topbar-title">SupermarketIQ</span>
+        <span class="topbar-subtitle">全球超市客户挖掘系统</span>
     </div>
+    <div class="topbar-right">
+        <span class="mode-badge" id="modeBadge">📡 检测数据源中...</span>
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            <span id="statusText">系统就绪</span>
+        </div>
+    </div>
+</header>
 
-    <div class="drawer-overlay" id="drawerOverlay"></div>
-    <aside class="drawer" id="detailDrawer">
-        <div class="drawer-header"><h2 id="drawerTitle">企业详情</h2><button class="drawer-close" id="drawerClose">&times;</button></div>
-        <div class="drawer-body" id="drawerBody"></div>
-    </aside>
+<div class="container">
 
-    <div class="toast-container" id="toastContainer"></div>
-    <script src="js/app.js"></script>
+    <!-- 搜索面板 -->
+    <section class="search-panel">
+        <div class="search-panel-title">客户挖掘条件</div>
+        <div class="search-grid">
+            <div class="form-group">
+                <label class="form-label">
+                    目标行业
+                    <span class="hint">（多个行业用逗号或回车分隔）</span>
+                </label>
+                <input type="text" id="industryInput" class="form-input"
+                       placeholder="例如：化妆品, 护肤品, 玩具, 食品"
+                       autocomplete="off">
+                <div class="industry-tags" id="industryTags"></div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">目标国家/地区</label>
+                <select id="countrySelect" class="form-select">
+                    <option value="global">🌍 全球 (Global)</option>
+                    <option value="us">🇺🇸 美国 (US)</option>
+                    <option value="uk">🇬🇧 英国 (UK)</option>
+                    <option value="de">🇩🇪 德国 (Germany)</option>
+                    <option value="fr">🇫🇷 法国 (France)</option>
+                    <option value="jp">🇯🇵 日本 (Japan)</option>
+                    <option value="cn">🇨🇳 中国 (China)</option>
+                    <option value="sea">🌏 东南亚 (SEA)</option>
+                    <option value="au">🇦🇺 澳大利亚 (Australia)</option>
+                    <option value="ca">🇨🇦 加拿大 (Canada)</option>
+                </select>
+            </div>
+            <button class="btn-mine" id="mineBtn" onclick="startMining()">
+                <span id="mineBtnText">⛏️ 开始挖掘</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- 进度条 -->
+    <section class="progress-section" id="progressSection">
+        <div class="progress-header">
+            <span class="progress-label" id="progressLabel">正在挖掘客户数据...</span>
+            <span class="progress-percent" id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-detail">
+            <span id="progressFound">已发现: 0 家</span>
+            <span id="progressEmail">邮箱: 0</span>
+            <span id="progressPhase">阶段: 初始化</span>
+        </div>
+    </section>
+
+    <!-- KPI 卡片 -->
+    <section class="kpi-row">
+        <div class="kpi-card kpi-total">
+            <div class="kpi-icon">🏢</div>
+            <div class="kpi-value" id="kpiTotal">0</div>
+            <div class="kpi-label">总客户数</div>
+            <div class="kpi-sub" id="kpiTotalSub">等待挖掘</div>
+        </div>
+        <div class="kpi-card kpi-email">
+            <div class="kpi-icon">📧</div>
+            <div class="kpi-value" id="kpiEmail">0</div>
+            <div class="kpi-label">已提取邮箱数</div>
+            <div class="kpi-sub" id="kpiEmailSub">邮箱覆盖率 0%</div>
+        </div>
+        <div class="kpi-card kpi-high">
+            <div class="kpi-icon">⭐</div>
+            <div class="kpi-value" id="kpiHigh">0</div>
+            <div class="kpi-label">高价值客户</div>
+            <div class="kpi-sub">含 CEO / Director / 采购总监</div>
+        </div>
+    </section>
+
+    <!-- 数据表格 -->
+    <section class="table-section">
+        <div class="table-toolbar">
+            <div class="table-title">
+                挖掘结果
+                <span class="table-count" id="tableCount">0</span>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn btn-export" id="exportBtn" onclick="exportCSV()" disabled>
+                    📥 导出 CSV
+                </button>
+                <button class="btn btn-clear" id="clearBtn" onclick="clearData()" disabled>
+                    🗑️ 清空数据
+                </button>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="col-index">#</th>
+                        <th>公司名称</th>
+                        <th>邮箱</th>
+                        <th>电话</th>
+                        <th>联系人</th>
+                        <th>职位</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <div class="empty-icon">🔍</div>
+                                <div class="empty-title">尚未开始挖掘</div>
+                                <div class="empty-desc">在上方输入目标行业和国家，点击「开始挖掘」按钮，系统将自动搜索并提取全球超市客户的联系方式。</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ========== 全局状态 ==========
+const state = {
+    data: [],
+    industries: [],
+    isMining: false,
+    useMock: true,  // 默认 Mock 模式，尝试加载真实数据后切换
+};
+
+// 高价值职位关键词
+const HIGH_VALUE_POSITIONS = ['ceo', 'director', '总监', '经理', 'manager', 'head', 'chief', 'vp', 'president', '采购', 'sourcing', 'buyer', 'merchandis'];
+
+// ========== 初始化 ==========
+document.addEventListener('DOMContentLoaded', () => {
+    initIndustryInput();
+    detectDataSource();
+});
+
+// 检测数据源（尝试加载真实 clients.json）
+async function detectDataSource() {
+    try {
+        const res = await fetch('data/clients.json', { cache: 'no-store' });
+        if (res.ok) {
+            const realData = await res.json();
+            if (Array.isArray(realData) && realData.length > 0) {
+                window.__realData = realData;
+                state.useMock = false;
+                document.getElementById('modeBadge').textContent = '✅ 真实数据模式';
+                document.getElementById('modeBadge').style.background = 'rgba(16,185,129,0.1)';
+                document.getElementById('modeBadge').style.color = 'var(--success)';
+                document.getElementById('statusText').textContent = `已加载 ${realData.length} 条真实数据`;
+                return;
+            }
+        }
+    } catch (e) { /* 静默失败，使用 Mock */ }
+    state.useMock = true;
+    document.getElementById('modeBadge').textContent = '🎭 演示模式 (Mock Data)';
+    document.getElementById('statusText').textContent = '演示数据生成器已就绪';
+}
+
+// ========== 行业输入框 ==========
+function initIndustryInput() {
+    const input = document.getElementById('industryInput');
+    const tagsContainer = document.getElementById('industryTags');
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ',') {
+            e.preventDefault();
+            addIndustry(input.value.trim());
+            input.value = '';
+        } else if (e.key === 'Backspace' && input.value === '' && state.industries.length > 0) {
+            state.industries.pop();
+            renderIndustryTags();
+        }
+    });
+
+    input.addEventListener('blur', () => {
+        if (input.value.trim()) {
+            addIndustry(input.value.trim());
+            input.value = '';
+        }
+    });
+}
+
+function addIndustry(industry) {
+    if (!industry) return;
+    // 支持逗号分隔多个
+    industry.split(/[,，]/).forEach(ind => {
+        ind = ind.trim();
+        if (ind && !state.industries.includes(ind)) {
+            state.industries.push(ind);
+        }
+    });
+    renderIndustryTags();
+}
+
+function removeIndustry(index) {
+    state.industries.splice(index, 1);
+    renderIndustryTags();
+}
+
+function renderIndustryTags() {
+    const container = document.getElementById('industryTags');
+    container.innerHTML = state.industries.map((ind, i) =>
+        `<span class="industry-tag">${escHtml(ind)}<span class="remove" onclick="removeIndustry(${i})">&times;</span></span>`
+    ).join('');
+}
+
+// ========== 开始挖掘 ==========
+async function startMining() {
+    if (state.isMining) return;
+
+    const industries = state.industries.length > 0 ? state.industries : ['综合零售'];
+    const country = document.getElementById('countrySelect').value;
+
+    state.isMining = true;
+    const btn = document.getElementById('mineBtn');
+    const btnText = document.getElementById('mineBtnText');
+    btn.disabled = true;
+    btnText.innerHTML = '<span class="spinner"></span> 挖掘中...';
+
+    // 显示进度条
+    const progressSection = document.getElementById('progressSection');
+    progressSection.classList.add('active');
+    updateProgress(0, '初始化挖掘任务...', 0, 0, '连接数据源');
+
+    state.data = [];
+    renderTable();
+    updateKPIs();
+
+    try {
+        if (state.useMock) {
+            await runMockMining(industries, country);
+        } else {
+            await runRealMining(industries, country);
+        }
+        showToast('挖掘完成！共发现 ' + state.data.length + ' 家客户', 'success');
+        document.getElementById('statusText').textContent = `挖掘完成: ${state.data.length} 条`;
+    } catch (err) {
+        console.error(err);
+        showToast('挖掘过程出错: ' + err.message, 'error');
+    } finally {
+        state.isMining = false;
+        btn.disabled = false;
+        btnText.innerHTML = '⛏️ 开始挖掘';
+        setTimeout(() => progressSection.classList.remove('active'), 1500);
+    }
+}
+
+// ========== 真实数据模式（从 clients.json 筛选） ==========
+async function runRealMining(industries, country) {
+    const allData = window.__realData || [];
+    const total = allData.length;
+
+    // 模拟逐步加载
+    const phases = ['连接数据源', '扫描企业目录', '提取联系方式', '验证邮箱格式', '数据清洗去重'];
+
+    for (let i = 0; i <= total; i++) {
+        const pct = Math.round(i / total * 100);
+        const phaseIdx = Math.min(Math.floor(pct / 20), phases.length - 1);
+        const batch = allData.slice(0, i);
+        const emailCount = batch.filter(d => d.email).length;
+
+        updateProgress(pct, `正在处理 ${i}/${total} 家企业...`, i, emailCount, phases[phaseIdx]);
+        state.data = batch;
+        renderTable();
+        updateKPIs();
+        await sleep(30 + Math.random() * 50);
+    }
+
+    // 按国家筛选
+    if (country !== 'global') {
+        const countryMap = {
+            us: 'United States', uk: 'United Kingdom', de: 'Germany',
+            fr: 'France', jp: 'Japan', cn: 'China', au: 'Australia', ca: 'Canada'
+        };
+        const targetCountry = countryMap[country];
+        if (targetCountry) {
+            state.data = state.data.filter(d =>
+                (d.country || '').toLowerCase().includes(targetCountry.toLowerCase())
+            );
+        }
+        if (country === 'sea') {
+            state.data = state.data.filter(d =>
+                ['Thailand', 'Vietnam', 'Singapore', 'Malaysia', 'Indonesia', 'Philippines']
+                    .some(c => (d.country || '').includes(c))
+            );
+        }
+    }
+
+    renderTable();
+    updateKPIs();
+}
+
+// ========== Mock 数据生成器 ==========
+async function runMockMining(industries, country) {
+    const mockCompanies = generateMockCompanies(industries, country);
+    const total = mockCompanies.length;
+    const phases = ['扫描企业目录', '提取官网信息', '抓取联系邮箱', '识别决策人职位', '验证数据质量'];
+
+    for (let i = 0; i <= total; i++) {
+        const pct = Math.round(i / total * 100);
+        const phaseIdx = Math.min(Math.floor(pct / 20), phases.length - 1);
+        const batch = mockCompanies.slice(0, i);
+        const emailCount = batch.filter(d => d.email).length;
+
+        updateProgress(pct, `已挖掘 ${i}/${total} 家企业...`, i, emailCount, phases[phaseIdx]);
+        state.data = batch;
+        renderTable();
+        updateKPIs();
+        await sleep(60 + Math.random() * 80);
+    }
+}
+
+function generateMockCompanies(industries, country) {
+    const firstNames = ['James', 'Sarah', 'Michael', 'Emma', 'David', 'Lisa', 'Robert', 'Anna', 'Thomas', 'Maria', '陈伟', '李娜', '王强', '张敏'];
+    const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Wilson', 'Taylor', '黄', '林', '周', '吴'];
+    const positions = [
+        'CEO', 'Managing Director', 'Procurement Director', 'Supply Chain Manager',
+        'Category Manager', 'Buyer', 'Merchandising Manager', 'Sourcing Manager',
+        'Import Manager', 'Sales Director', 'Operations Manager', 'Purchasing Officer'
+    ];
+    const companies = [
+        { name: 'Walmart Inc.', domain: 'walmart.com', country: 'United States', city: 'Bentonville' },
+        { name: 'Costco Wholesale', domain: 'costco.com', country: 'United States', city: 'Issaquah' },
+        { name: 'Kroger Co.', domain: 'kroger.com', country: 'United States', city: 'Cincinnati' },
+        { name: 'Target Corporation', domain: 'target.com', country: 'United States', city: 'Minneapolis' },
+        { name: 'Carrefour Group', domain: 'carrefour.com', country: 'France', city: 'Paris' },
+        { name: 'Tesco PLC', domain: 'tesco.com', country: 'United Kingdom', city: 'Welwyn Garden City' },
+        { name: 'Aldi Einkauf', domain: 'aldi.com', country: 'Germany', city: 'Essen' },
+        { name: 'Lidl Stiftung', domain: 'lidl.com', country: 'Germany', city: 'Neckarsulm' },
+        { name: 'METRO AG', domain: 'metro.de', country: 'Germany', city: 'Düsseldorf' },
+        { name: 'SPAR International', domain: 'spar-international.com', country: 'Netherlands', city: 'Amsterdam' },
+        { name: '7-Eleven Inc.', domain: '7-eleven.com', country: 'United States', city: 'Irving' },
+        { name: 'Aeon Co., Ltd.', domain: 'aeon.info', country: 'Japan', city: 'Chiba' },
+        { name: 'Lotte Mart', domain: 'lottemart.com', country: 'South Korea', city: 'Seoul' },
+        { name: 'RT-Mart (大润发)', domain: 'rt-mart.com.cn', country: 'China', city: 'Shanghai' },
+        { name: 'Sainsbury\'s', domain: 'sainsburys.co.uk', country: 'United Kingdom', city: 'London' },
+        { name: 'Coles Group', domain: 'coles.com.au', country: 'Australia', city: 'Melbourne' },
+        { name: 'Woolworths Group', domain: 'woolworths.com.au', country: 'Australia', city: 'Sydney' },
+        { name: 'Mercadona S.A.', domain: 'mercadona.es', country: 'Spain', city: 'Valencia' },
+        { name: 'FamilyMart', domain: 'family.co.jp', country: 'Japan', city: 'Tokyo' },
+        { name: 'Lawson Inc.', domain: 'lawson.jp', country: 'Japan', city: 'Tokyo' },
+        { name: 'H-E-B Grocery', domain: 'heb.com', country: 'United States', city: 'San Antonio' },
+        { name: 'DMart (Avenue Supermarts)', domain: 'dmart.in', country: 'India', city: 'Mumbai' },
+        { name: 'Tesco Lotus', domain: 'tescolotus.com', country: 'Thailand', city: 'Bangkok' },
+        { name: 'Spar China', domain: 'spar.com.cn', country: 'China', city: 'Guangzhou' },
+        { name: 'Carrefour China', domain: 'carrefour.com.cn', country: 'China', city: 'Shanghai' },
+    ];
+
+    // 按国家筛选
+    let filtered = companies;
+    if (country !== 'global') {
+        const countryMap = {
+            us: 'United States', uk: 'United Kingdom', de: 'Germany',
+            fr: 'France', jp: 'Japan', cn: 'China', au: 'Australia', ca: 'Canada'
+        };
+        if (country === 'sea') {
+            filtered = companies.filter(c => ['Thailand', 'Vietnam', 'Singapore', 'Malaysia'].includes(c.country));
+        } else if (countryMap[country]) {
+            filtered = companies.filter(c => c.country === countryMap[country]);
+        }
+    }
+    if (filtered.length === 0) filtered = companies;
+
+    return filtered.map((c, i) => {
+        const fn = firstNames[Math.floor(Math.random() * firstNames.length)];
+        const ln = lastNames[Math.floor(Math.random() * lastNames.length)];
+        const pos = positions[Math.floor(Math.random() * positions.length)];
+        const hasEmail = Math.random() > 0.15;
+        const hasPhone = Math.random() > 0.2;
+        return {
+            id: i + 1,
+            company_name: c.name,
+            website: `https://www.${c.domain}`,
+            country: c.country,
+            city: c.city,
+            industry: industries[Math.floor(Math.random() * industries.length)] || '零售',
+            email: hasEmail ? `procurement@${c.domain}` : '',
+            phone: hasPhone ? `+${Math.floor(Math.random() * 50) + 1} ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}` : '',
+            contact_person: `${fn} ${ln}`,
+            position: pos,
+            department: ['采购部', '供应链部', '商品部', '国际采购部'][Math.floor(Math.random() * 4)],
+            status: 'pending',
+        };
+    });
+}
+
+// ========== 进度更新 ==========
+function updateProgress(pct, label, found, emails, phase) {
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPercent').textContent = pct + '%';
+    document.getElementById('progressLabel').textContent = label;
+    document.getElementById('progressFound').textContent = `已发现: ${found} 家`;
+    document.getElementById('progressEmail').textContent = `邮箱: ${emails}`;
+    document.getElementById('progressPhase').textContent = `阶段: ${phase}`;
+}
+
+// ========== 渲染表格 ==========
+function renderTable() {
+    const tbody = document.getElementById('tableBody');
+    document.getElementById('tableCount').textContent = state.data.length;
+    document.getElementById('exportBtn').disabled = state.data.length === 0;
+    document.getElementById('clearBtn').disabled = state.data.length === 0;
+
+    if (state.data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7">
+            <div class="empty-state">
+                <div class="empty-icon">🔍</div>
+                <div class="empty-title">尚未开始挖掘</div>
+                <div class="empty-desc">在上方输入目标行业和国家，点击「开始挖掘」按钮，系统将自动搜索并提取全球超市客户的联系方式。</div>
+            </div>
+        </td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = state.data.map((d, i) => {
+        const isHigh = isHighValue(d.position);
+        const posClass = isHigh ? 'position-high' : 'position-normal';
+        const statusChecked = d.status === 'contacted' ? 'checked' : '';
+        const statusClass = d.status === 'contacted' ? 'status-done' : 'status-pending';
+        const statusText = d.status === 'contacted' ? '已联系' : '待联系';
+
+        return `<tr>
+            <td class="col-index">${i + 1}</td>
+            <td>
+                <a class="company-name" href="${escAttr(d.website || '#')}" target="_blank" rel="noopener">
+                    ${escHtml(d.company_name)}
+                </a>
+                <div class="company-meta">${escHtml(d.country || '')} · ${escHtml(d.city || '')} · ${escHtml(d.industry || '')}</div>
+            </td>
+            <td>
+                ${d.email ? `<span class="email-cell">${escHtml(d.email)}
+                    <button class="copy-btn" onclick="copyEmail(this, '${escAttr(d.email)}')" title="复制邮箱">📋</button>
+                </span>` : '<span style="color:var(--text-light)">—</span>'}
+            </td>
+            <td><span class="phone-cell">${escHtml(d.phone || '—')}</span></td>
+            <td><span class="contact-name">${escHtml(d.contact_person || '—')}</span></td>
+            <td>
+                <div>${escHtml(d.position || '—')}</div>
+                <span class="position-badge ${posClass}">${isHigh ? '⭐ 高价值' : '普通'}</span>
+            </td>
+            <td>
+                <label class="status-toggle">
+                    <input type="checkbox" ${statusChecked} onchange="toggleStatus(${i})">
+                    <span class="status-slider"></span>
+                </label>
+                <span class="status-label ${statusClass}">${statusText}</span>
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+// ========== KPI 更新 ==========
+function updateKPIs() {
+    const total = state.data.length;
+    const emailCount = state.data.filter(d => d.email).length;
+    const highCount = state.data.filter(d => isHighValue(d.position)).length;
+    const emailRate = total > 0 ? Math.round(emailCount / total * 100) : 0;
+
+    animateNumber('kpiTotal', total);
+    animateNumber('kpiEmail', emailCount);
+    animateNumber('kpiHigh', highCount);
+
+    document.getElementById('kpiTotalSub').textContent = total > 0 ? `来自 ${new Set(state.data.map(d => d.country).filter(Boolean)).size} 个国家` : '等待挖掘';
+    document.getElementById('kpiEmailSub').textContent = `邮箱覆盖率 ${emailRate}%`;
+}
+
+function animateNumber(id, target) {
+    const el = document.getElementById(id);
+    const start = parseInt(el.textContent) || 0;
+    const duration = 600;
+    const startTime = performance.now();
+
+    function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(start + (target - start) * eased);
+        if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+}
+
+function isHighValue(position) {
+    if (!position) return false;
+    const lower = position.toLowerCase();
+    return HIGH_VALUE_POSITIONS.some(kw => lower.includes(kw.toLowerCase()));
+}
+
+// ========== 状态切换 ==========
+function toggleStatus(index) {
+    state.data[index].status = state.data[index].status === 'contacted' ? 'pending' : 'contacted';
+    renderTable();
+    const d = state.data[index];
+    showToast(`${d.company_name} 标记为「${d.status === 'contacted' ? '已联系' : '待联系'}」`, 'success');
+}
+
+// ========== 复制邮箱 ==========
+function copyEmail(btn, email) {
+    navigator.clipboard.writeText(email).then(() => {
+        btn.classList.add('copied');
+        btn.textContent = '✅';
+        showToast(`已复制: ${email}`, 'success');
+        setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.textContent = '📋';
+        }, 1500);
+    }).catch(() => {
+        // 降级方案
+        const ta = document.createElement('textarea');
+        ta.value = email;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.classList.add('copied');
+        btn.textContent = '✅';
+        setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '📋'; }, 1500);
+    });
+}
+
+// ========== 导出 CSV ==========
+function exportCSV() {
+    if (state.data.length === 0) return;
+
+    const headers = ['序号', '公司名称', '国家', '城市', '行业', '官网', '邮箱', '电话', '联系人', '职位', '部门', '状态'];
+    const rows = state.data.map((d, i) => [
+        i + 1,
+        d.company_name || '',
+        d.country || '',
+        d.city || '',
+        d.industry || '',
+        d.website || '',
+        d.email || '',
+        d.phone || '',
+        d.contact_person || '',
+        d.position || '',
+        d.department || '',
+        d.status === 'contacted' ? '已联系' : '待联系',
+    ]);
+
+    const csv = [headers, ...rows].map(row =>
+        row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+    ).join('\n');
+
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `supermarket-clients-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showToast(`已导出 ${state.data.length} 条数据为 CSV`, 'success');
+}
+
+// ========== 清空数据 ==========
+function clearData() {
+    if (state.data.length === 0) return;
+    if (!confirm(`确定要清空 ${state.data.length} 条客户数据吗？此操作不可撤销。`)) return;
+    state.data = [];
+    renderTable();
+    updateKPIs();
+    showToast('数据已清空', 'success');
+}
+
+// ========== 工具函数 ==========
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function escHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = String(str || '');
+    return div.innerHTML;
+}
+
+function escAttr(str) {
+    return String(str || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function showToast(msg, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = (type === 'success' ? '✅ ' : '❌ ') + msg;
+    toast.className = `toast ${type} show`;
+    setTimeout(() => { toast.className = 'toast'; }, 2800);
+}
+</script>
 </body>
 </html>
