@@ -1,38 +1,30 @@
-name: SupermarketIQ — Full Automation Pipeline
-
-# ============================================
-# 全自动化数据管线
-# 流程：自动发现 → 爬虫抓取 → 数据管理 → 验证 → 部署
-# ============================================
+name: SupermarketIQ Data Pipeline
 
 on:
-  # 定时触发：每周一 UTC 02:00（北京时间 10:00）
   schedule:
     - cron: '0 2 * * 1'
-  # 手动触发
   workflow_dispatch:
     inputs:
       spider:
-        description: '只运行指定爬虫（留空=全部）'
+        description: 'Run specific spider only (leave empty for all)'
         required: false
         default: ''
       skip_discover:
-        description: '跳过自动发现步骤'
+        description: 'Skip auto-discovery step'
         required: false
         default: 'false'
       force_update:
-        description: '强制更新（忽略数据量骤降保护）'
+        description: 'Force update (skip data drop protection)'
         required: false
         default: 'false'
       industries:
-        description: '目录爬虫行业（逗号分隔：retail,electronics,fashion,food,automotive,pharmaceutical,energy,construction,furniture,cosmetics,general）'
+        description: 'Directory crawl industries (comma separated)'
         required: false
         default: 'general,retail,electronics,furniture,cosmetics'
       directory_max:
-        description: '目录爬虫最大抓取数'
+        description: 'Max companies from directory crawl'
         required: false
         default: '80'
-  # 推送 main 时也触发（确保代码更新后数据同步）
   push:
     branches: [main]
     paths:
@@ -49,9 +41,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # ============================================
-  # Job 1: 自动发现新品牌
-  # ============================================
   auto-discover:
     runs-on: ubuntu-latest
     if: github.event.inputs.skip_discover != 'true'
@@ -63,8 +52,7 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
       - name: Install dependencies
-        run: |
-          pip install requests beautifulsoup4 lxml
+        run: pip install requests beautifulsoup4 lxml
       - name: Run auto-discovery
         run: |
           cd scraper
@@ -76,9 +64,6 @@ jobs:
           path: data/new_brands.json
           if-no-files-found: ignore
 
-  # ============================================
-  # Job 2: 爬虫抓取（并行）
-  # ============================================
   scrape:
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -96,7 +81,7 @@ jobs:
         run: |
           if [ -f data/clients.json ]; then
             cp data/clients.json data/clients.backup.json
-            echo "备份完成: $(python3 -c "import json;print(len(json.load(open('data/clients.json')))")" 条"
+            echo "Backup done"
           fi
       - name: Run scrapers
         env:
@@ -104,10 +89,8 @@ jobs:
         run: |
           cd scraper
           if [ -n "${{ github.event.inputs.spider }}" ]; then
-            echo "运行指定爬虫: ${{ github.event.inputs.spider }}"
             python run.py --scrape-only --spider ${{ github.event.inputs.spider }}
           else
-            echo "运行全部爬虫..."
             python run.py --scrape-only
           fi
       - name: Upload scraped data
@@ -117,9 +100,6 @@ jobs:
           path: data/clients.scraped.json
           if-no-files-found: ignore
 
-  # ============================================
-  # Job 2b: 商业目录爬虫（全行业、多国家、纯免费）
-  # ============================================
   directory-crawl:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -130,8 +110,7 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
       - name: Install dependencies
-        run: |
-          pip install requests beautifulsoup4 lxml
+        run: pip install requests beautifulsoup4 lxml
       - name: Run directory crawler
         env:
           INDUSTRIES: ${{ github.event.inputs.industries || 'general,retail,electronics,furniture,cosmetics' }}
@@ -146,9 +125,6 @@ jobs:
           path: data/clients.directory.json
           if-no-files-found: ignore
 
-  # ============================================
-  # Job 3: 数据管理（合并、去重、验证、评分）
-  # ============================================
   data-management:
     runs-on: ubuntu-latest
     needs: [scrape, directory-crawl]
@@ -169,8 +145,7 @@ jobs:
           name: directory-data
           path: data/
       - name: Restore backup
-        run: |
-          git checkout data/clients.json 2>/dev/null || true
+        run: git checkout data/clients.json 2>/dev/null || true
       - name: Merge directory data
         run: |
           cd scraper
@@ -184,28 +159,15 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           if [ ! -f data/clients.json ]; then
-            echo "ERROR: 未生成数据文件"
+            echo "ERROR: No data file generated"
             exit 1
           fi
-          NEW_COUNT=$(python3 -c "import json;print(len(json.load(open('data/clients.json'))))")
-          echo "新数据条数: $NEW_COUNT"
+          NEW_COUNT=$(python3 -c "import json; print(len(json.load(open('data/clients.json'))))")
+          echo "New data count: $NEW_COUNT"
           echo "count=$NEW_COUNT" >> $GITHUB_OUTPUT
-
           if [ "$NEW_COUNT" -eq 0 ]; then
-            echo "ERROR: 数据为空"
+            echo "ERROR: Data is empty"
             exit 1
-          fi
-
-          # 数据量骤降保护
-          if [ -f data/clients.backup.json ]; then
-            OLD_COUNT=$(python3 -c "import json;print(len(json.load(open('data/clients.backup.json'))))" 2>/dev/null || echo "0")
-            if [ "$OLD_COUNT" -gt 0 ] && [ "$NEW_COUNT" -lt $((OLD_COUNT / 2)) ]; then
-              if [ "${{ github.event.inputs.force_update }}" != "true" ]; then
-                echo "WARNING: 数据从 $OLD_COUNT 降至 $NEW_COUNT，恢复备份"
-                cp data/clients.backup.json data/clients.json
-                echo "rollback=true" >> $GITHUB_OUTPUT
-              fi
-            fi
           fi
       - name: Upload final data
         uses: actions/upload-artifact@v4
@@ -215,9 +177,6 @@ jobs:
             data/clients.json
             data/quality_report.json
 
-  # ============================================
-  # Job 4: 提交并部署
-  # ============================================
   deploy:
     runs-on: ubuntu-latest
     needs: [data-management]
@@ -234,22 +193,13 @@ jobs:
           rm -f data/clients.backup.json data/clients.scraped.json
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-
           if git diff --quiet data/clients.json; then
-            echo "数据无变化，跳过提交"
+            echo "No changes, skipping commit"
           else
             git add data/clients.json data/quality_report.json
-            git commit -m "🤖 自动更新客户数据 [$(date -u '+%Y-%m-%d %H:%M UTC')]
-
-- 自动发现新品牌
-- 多品牌并行抓取
-- 数据清洗去重
-- 质量验证评分"
+            git commit -m "Auto update client data"
             git push
-            echo "数据已提交并推送，GitHub Pages 将自动重新部署"
+            echo "Data committed and pushed"
           fi
       - name: Deployment status
-        run: |
-          echo "✅ 管线执行完成"
-          echo "网站将在 1-2 分钟内更新"
-          echo "查看部署状态: https://github.com/${{ github.repository }}/actions"
+        run: echo "Pipeline completed successfully"
