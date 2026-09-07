@@ -61,6 +61,11 @@
                         <span>客户名录</span>
                         <span class="nav-badge" id="navCount">0</span>
                     </a>
+                    <a href="#" class="nav-item" data-view="discovery">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="M11 8v6M8 11h6"/></svg>
+                        <span>潜客挖掘</span>
+                        <span class="nav-badge" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">NEW</span>
+                    </a>
                 </div>
                 <div class="nav-section">
                     <span class="nav-label">自动化</span>
@@ -223,6 +228,167 @@
                     <div class="table-footer">
                         <span id="tableInfo">显示 0-0 / 0 条</span>
                         <div class="pagination" id="pagination"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="view view-discovery" id="view-discovery">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">潜客挖掘</h1>
+                        <p class="page-subtitle">Apollo.io 级 B2B 潜客搜索 · 多维度筛选 · 智能邮箱生成</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn--secondary" id="discoveryExportBtn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            导出 CSV
+                        </button>
+                        <button class="btn btn--primary" id="discoverySaveBtn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                            保存筛选
+                        </button>
+                    </div>
+                </div>
+
+                <div class="discovery-layout">
+                    <!-- 左侧筛选面板 -->
+                    <div class="discovery-filters">
+                        <div class="filter-group">
+                            <div class="filter-header">
+                                <span>🔍 关键词搜索</span>
+                            </div>
+                            <input type="text" class="filter-input" id="filterKeyword" placeholder="公司名、行业、产品...">
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-header"><span>🏭 行业</span></div>
+                            <select class="filter-select" id="filterIndustry">
+                                <option value="">全部行业</option>
+                                <option value="零售">零售</option>
+                                <option value="综合零售 / 大卖场">大卖场</option>
+                                <option value="折扣超市">折扣超市</option>
+                                <option value="便利店">便利店</option>
+                                <option value="会员制仓储">会员制仓储</option>
+                                <option value="批发 / 现购自运">批发</option>
+                                <option value="电子">电子产品</option>
+                                <option value="服装">服装时尚</option>
+                                <option value="食品">食品饮料</option>
+                                <option value="家居">家居用品</option>
+                                <option value="化妆品">化妆品</option>
+                                <option value="汽车">汽车</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-header"><span>🌍 国家/地区</span></div>
+                            <select class="filter-select" id="filterCountry">
+                                <option value="">全部国家</option>
+                                <option value="美国">美国</option>
+                                <option value="英国">英国</option>
+                                <option value="德国">德国</option>
+                                <option value="法国">法国</option>
+                                <option value="日本">日本</option>
+                                <option value="中国">中国</option>
+                                <option value="澳大利亚">澳大利亚</option>
+                                <option value="加拿大">加拿大</option>
+                                <option value="荷兰">荷兰</option>
+                                <option value="韩国">韩国</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-header"><span>👥 企业规模</span></div>
+                            <div class="filter-checkboxes">
+                                <label class="filter-checkbox"><input type="checkbox" value="1-50" class="size-filter"> 1-50 人</label>
+                                <label class="filter-checkbox"><input type="checkbox" value="51-200" class="size-filter"> 51-200 人</label>
+                                <label class="filter-checkbox"><input type="checkbox" value="201-1000" class="size-filter"> 201-1000 人</label>
+                                <label class="filter-checkbox"><input type="checkbox" value="1001-5000" class="size-filter"> 1001-5000 人</label>
+                                <label class="filter-checkbox"><input type="checkbox" value="5000+" class="size-filter"> 5000+ 人</label>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-header"><span>💼 目标职位</span></div>
+                            <div class="filter-checkboxes">
+                                <label class="filter-checkbox"><input type="checkbox" value="CEO" class="title-filter"> CEO / 创始人</label>
+                                <label class="filter-checkbox"><input type="checkbox" value="Director" class="title-filter"> Director / 总监</label>
+                                <label class="filter-checkbox"><input type="checkbox" value="Manager" class="title-filter"> 采购经理</label>
+                                <label class="filter-checkbox"><input type="checkbox" value="Buyer" class="title-filter"> Buyer / 买手</label>
+                                <label class="filter-checkbox"><input type="checkbox" value="Sourcing" class="title-filter"> Sourcing /  sourcing</label>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-header"><span>📧 数据完整度</span></div>
+                            <div class="filter-checkboxes">
+                                <label class="filter-checkbox"><input type="checkbox" id="filterHasEmail"> 有邮箱</label>
+                                <label class="filter-checkbox"><input type="checkbox" id="filterHasPhone"> 有电话</label>
+                                <label class="filter-checkbox"><input type="checkbox" id="filterHasProcurement"> 有采购邮箱</label>
+                                <label class="filter-checkbox"><input type="checkbox" id="filterHasLinkedIn"> 有 LinkedIn</label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn--outline btn--block" id="resetFiltersBtn">重置筛选</button>
+                    </div>
+
+                    <!-- 右侧结果区 -->
+                    <div class="discovery-results">
+                        <!-- 结果统计 + 视图切换 -->
+                        <div class="discovery-toolbar">
+                            <div class="discovery-stats">
+                                <span id="discoveryCount">0</span> 家公司 ·
+                                <span id="discoveryContacts">0</span> 个潜在联系人
+                            </div>
+                            <div class="discovery-tabs">
+                                <button class="discovery-tab active" data-tab="companies">🏢 公司</button>
+                                <button class="discovery-tab" data-tab="contacts">👤 联系人</button>
+                            </div>
+                        </div>
+
+                        <!-- 公司视图 -->
+                        <div class="discovery-tab-content active" id="tab-companies">
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>公司名称</th>
+                                            <th>行业</th>
+                                            <th>国家</th>
+                                            <th>规模</th>
+                                            <th>采购邮箱</th>
+                                            <th>电话</th>
+                                            <th>潜客评分</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="discoveryCompanyBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 联系人视图 -->
+                        <div class="discovery-tab-content" id="tab-contacts">
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>职位</th>
+                                            <th>公司</th>
+                                            <th>国家</th>
+                                            <th>邮箱（智能生成）</th>
+                                            <th>置信度</th>
+                                            <th>LinkedIn</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="discoveryContactBody"></tbody>
+                                </table>
+                            </div>
+                            <div class="contact-generator-note">
+                                💡 <strong>智能邮箱生成：</strong>根据公司域名和常见命名规则（first.last@、first@、flast@）生成潜在采购联系人邮箱。点击「验证」可检查邮箱是否有效。LinkedIn 链接可直接搜索对应人员。
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

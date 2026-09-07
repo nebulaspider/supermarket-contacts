@@ -950,6 +950,194 @@ input, select { font-family: inherit; }
 .customs-notice strong { color: #1e3a8a; }
 
 /* ============================================
+   v5.0 Apollo.io 风格潜客挖掘
+   ============================================ */
+
+.discovery-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* 筛选面板 */
+.discovery-filters {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+.filter-group {
+    margin-bottom: 20px;
+}
+.filter-header {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.filter-input, .filter-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13.5px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.2s;
+}
+.filter-input:focus, .filter-select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+.filter-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+.filter-checkbox input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+}
+
+/* 结果区 */
+.discovery-results {
+    min-width: 0;
+}
+.discovery-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+.discovery-stats {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+}
+.discovery-stats span {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 16px;
+}
+.discovery-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-tertiary);
+    padding: 4px;
+    border-radius: 8px;
+}
+.discovery-tab {
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.discovery-tab.active {
+    background: var(--primary);
+    color: #fff;
+}
+.discovery-tab-content {
+    display: none;
+}
+.discovery-tab-content.active {
+    display: block;
+}
+
+/* 潜客评分 */
+.lead-score {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.lead-score-bar {
+    width: 50px;
+    height: 6px;
+    background: var(--bg-tertiary);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.lead-score-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+.lead-score-num {
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 24px;
+}
+
+/* 邮箱置信度 */
+.confidence-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+}
+.confidence-high { background: rgba(16,185,129,0.1); color: #10b981; }
+.confidence-medium { background: rgba(245,166,35,0.1); color: #f59e0b; }
+.confidence-low { background: rgba(239,68,68,0.1); color: #ef4444; }
+
+/* 联系人生成提示 */
+.contact-generator-note {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border: 1px solid #93c5fd;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #1e40af;
+    line-height: 1.6;
+}
+
+/* 公司规模标签 */
+.company-size-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+    .discovery-layout {
+        grid-template-columns: 1fr;
+    }
+    .discovery-filters {
+        position: static;
+        max-height: none;
+    }
+}
+
+/* ============================================
    v4.1 客户名录颜色区分 + 主题字号自定义
    ============================================ */
 

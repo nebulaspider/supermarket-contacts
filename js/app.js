@@ -866,3 +866,204 @@ loadData = async function() {
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initPreferences, 100);
 });
+
+// ============================================
+// v5.0 潜客挖掘 — Apollo.io 风格
+// ============================================
+
+// 智能邮箱生成器
+function generateEmails(company) {
+    const domain = extractDomain(company.website || company.email || '');
+    if (!domain) return [];
+
+    // 常见采购职位名称
+    const procurementRoles = [
+        { first: 'Procurement', last: 'Manager', title: 'Procurement Manager' },
+        { first: 'Purchasing', last: 'Manager', title: 'Purchasing Manager' },
+        { first: 'Buyer', last: '', title: 'Buyer' },
+        { first: 'Sourcing', last: 'Manager', title: 'Sourcing Manager' },
+        { first: 'Supply', last: 'Chain', title: 'Supply Chain Manager' },
+        { first: 'Merchandising', last: 'Manager', title: 'Merchandising Manager' },
+    ];
+
+    // 邮箱命名模式
+    const patterns = [
+        { pattern: (f, l) => `${f.toLowerCase()}.${l.toLowerCase()}@${domain}`, conf: 'high' },
+        { pattern: (f, l) => `${f.toLowerCase()}@${domain}`, conf: 'medium' },
+        { pattern: (f, l) => `${f[0].toLowerCase()}${l.toLowerCase()}@${domain}`, conf: 'medium' },
+        { pattern: (f, l) => `${f.toLowerCase()}${l[0].toLowerCase()}@${domain}`, conf: 'low' },
+    ];
+
+    const contacts = [];
+    for (const role of procurementRoles.slice(0, 3)) {
+        for (const p of patterns.slice(0, 2)) {
+            const email = p.pattern(role.first, role.last || role.first);
+            contacts.push({
+                name: `${role.first} ${role.last}`.trim(),
+                title: role.title,
+                email: email,
+                confidence: p.conf,
+                company: company.company_name,
+                country: company.country || '',
+                linkedin: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(company.company_name + ' ' + role.title)}`,
+            });
+        }
+    }
+    return contacts;
+}
+
+function extractDomain(url) {
+    if (!url) return '';
+    try {
+        if (url.includes('@')) {
+            return url.split('@')[1];
+        }
+        const u = new URL(url.startsWith('http') ? url : 'https://' + url);
+        return u.hostname.replace('www.', '');
+    } catch {
+        return '';
+    }
+}
+
+// 潜客评分
+function calculateLeadScore(company) {
+    let score = 0;
+    if (company.email) score += 20;
+    if (company.procurement_email) score += 25;
+    if (company.phone) score += 15;
+    if (company.linkedin) score += 15;
+    if (company.website) score += 10;
+    if (company.position) score += 10;
+    if (company.store_count && parseInt(company.store_count) > 100) score += 5;
+    return Math.min(score, 100);
+}
+
+// 渲染潜客挖掘页面
+function renderDiscovery() {
+    const data = state.data || [];
+
+    // 应用筛选
+    let filtered = applyDiscoveryFilters(data);
+
+    // 更新统计
+    document.getElementById('discoveryCount').textContent = filtered.length;
+    let totalContacts = 0;
+    filtered.forEach(c => { totalContacts += generateEmails(c).length; });
+    document.getElementById('discoveryContacts').textContent = totalContacts;
+
+    // 渲染公司表格
+    const companyBody = document.getElementById('discoveryCompanyBody');
+    companyBody.innerHTML = filtered.slice(0, 50).map(d => {
+        const score = calculateLeadScore(d);
+        const scoreColor = score >= 70 ? '#10b981' : score >= 40 ? '#f59e0b' : '#ef4444';
+        return `<tr onclick="openDrawer('${esc(d.company_name)}')">
+            <td><span class="table-cell-name">${esc(d.company_name)}</span></td>
+            <td>${d.industry ? `<span class="industry-badge">${esc(d.industry)}</span>` : '—'}</td>
+            <td><span class="table-cell-country">${esc(d.country || '—')}</span></td>
+            <td>${d.company_size ? `<span class="company-size-badge">${esc(d.company_size)}</span>` : '—'}</td>
+            <td>${d.procurement_email ? `<span class="procurement-email">${esc(d.procurement_email)}</span>` : (d.email ? `<span class="table-cell-email">${esc(d.email)}</span>` : '—')}</td>
+            <td>${d.phone ? `<span class="table-cell-phone">${esc(d.phone)}</span>` : '—'}</td>
+            <td>
+                <div class="lead-score">
+                    <div class="lead-score-bar"><div class="lead-score-fill" style="width:${score}%;background:${scoreColor}"></div></div>
+                    <span class="lead-score-num" style="color:${scoreColor}">${score}</span>
+                </div>
+            </td>
+            <td><button class="page-btn" onclick="event.stopPropagation();openDrawer('${esc(d.company_name)}')">详情</button></td>
+        </tr>`;
+    }).join('');
+
+    // 渲染联系人表格
+    const contactBody = document.getElementById('discoveryContactBody');
+    let allContacts = [];
+    filtered.forEach(c => {
+        allContacts = allContacts.concat(generateEmails(c));
+    });
+    allContacts = allContacts.slice(0, 100);
+    contactBody.innerHTML = allContacts.map(c => {
+        const confClass = c.confidence === 'high' ? 'confidence-high' : c.confidence === 'medium' ? 'confidence-medium' : 'confidence-low';
+        const confText = c.confidence === 'high' ? '高' : c.confidence === 'medium' ? '中' : '低';
+        return `<tr>
+            <td><span style="font-weight:600;">${esc(c.name)}</span></td>
+            <td><span class="table-cell-position high-value">${esc(c.title)}</span></td>
+            <td>${esc(c.company)}</td>
+            <td>${esc(c.country || '—')}</td>
+            <td><span class="table-cell-email">${esc(c.email)}</span></td>
+            <td><span class="confidence-badge ${confClass}">${confText}</span></td>
+            <td><a href="${esc(c.linkedin)}" target="_blank" style="color:#0077b5;font-weight:600;font-size:13px;">搜索 ↗</a></td>
+            <td><button class="page-btn" onclick="copyText('${esc(c.email)}')">复制邮箱</button></td>
+        </tr>`;
+    }).join('');
+}
+
+function applyDiscoveryFilters(data) {
+    const keyword = document.getElementById('filterKeyword')?.value?.toLowerCase() || '';
+    const industry = document.getElementById('filterIndustry')?.value || '';
+    const country = document.getElementById('filterCountry')?.value || '';
+    const hasEmail = document.getElementById('filterHasEmail')?.checked;
+    const hasPhone = document.getElementById('filterHasPhone')?.checked;
+    const hasProcurement = document.getElementById('filterHasProcurement')?.checked;
+    const hasLinkedIn = document.getElementById('filterHasLinkedIn')?.checked;
+
+    return data.filter(d => {
+        if (keyword && !(d.company_name?.toLowerCase().includes(keyword) || d.industry?.toLowerCase().includes(keyword) || d.product_categories?.toLowerCase().includes(keyword))) return false;
+        if (industry && d.industry !== industry) return false;
+        if (country && d.country !== country) return false;
+        if (hasEmail && !d.email && !d.procurement_email) return false;
+        if (hasPhone && !d.phone) return false;
+        if (hasProcurement && !d.procurement_email) return false;
+        if (hasLinkedIn && !d.linkedin) return false;
+        return true;
+    });
+}
+
+// 潜客挖掘页面事件绑定
+function initDiscovery() {
+    // Tab 切换
+    document.querySelectorAll('.discovery-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.discovery-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.discovery-tab-content').forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+        });
+    });
+
+    // 筛选事件
+    const filterIds = ['filterKeyword', 'filterIndustry', 'filterCountry', 'filterHasEmail', 'filterHasPhone', 'filterHasProcurement', 'filterHasLinkedIn'];
+    filterIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', renderDiscovery);
+            el.addEventListener('change', renderDiscovery);
+        }
+    });
+
+    // 重置筛选
+    document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
+        document.getElementById('filterKeyword').value = '';
+        document.getElementById('filterIndustry').value = '';
+        document.getElementById('filterCountry').value = '';
+        document.querySelectorAll('.filter-checkbox input').forEach(cb => cb.checked = false);
+        renderDiscovery();
+    });
+
+    // 导出 CSV
+    document.getElementById('discoveryExportBtn')?.addEventListener('click', () => {
+        const filtered = applyDiscoveryFilters(state.data || []);
+        exportToCSV(filtered, 'cyrus-ai-leads.csv');
+    });
+}
+
+// 数据加载后渲染潜客挖掘
+const origLoadData2 = loadData;
+loadData = async function() {
+    await origLoadData2();
+    showLastUpdateTime();
+    renderDiscovery();
+};
+
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initDiscovery, 200);
+});
