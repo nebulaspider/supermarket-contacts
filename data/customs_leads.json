@@ -185,13 +185,14 @@
     "address": "Ontario, CA 91761",
     "website": "https://www.elfcosmetics.com",
     "email": "",
-    "phone": "",
+    "phone": "212-239-1530",
     "total_shipments": 6337,
     "last_shipment": "2026-08-27",
     "source": "ImportYeti Customs Data",
     "found_date": "2026-09-08",
     "data_quality": 85,
-    "status": "待联系"
+    "status": "待联系",
+    "contact_note": "有 Wholesale Inquiry 表单，工作时间 Mon-Thu 9:30-5:30 EST, Fri 9:30-3pm EST"
   },
   {
     "company_name": "Diamond Cosmetics",

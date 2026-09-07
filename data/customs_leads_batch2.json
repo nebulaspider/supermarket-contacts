@@ -94,8 +94,10 @@
     "last_shipment": "2026-08-30",
     "source": "ImportYeti Customs Data",
     "found_date": "2026-09-08",
-    "data_quality": 80,
-    "status": "待联系"
+    "data_quality": 85,
+    "status": "待联系",
+    "email": "toys@playmatestoys.com",
+    "contact_note": "有投资者关系页面，上市公司"
   },
   {
     "company_name": "Moose Toys",
@@ -108,8 +110,11 @@
     "last_shipment": "2025-11-10",
     "source": "ImportYeti Customs Data",
     "found_date": "2026-09-08",
-    "data_quality": 80,
-    "status": "待联系"
+    "data_quality": 95,
+    "status": "待联系",
+    "phone": "+1 888 995 8217",
+    "email": "info@moosetoys.com",
+    "contact_note": "媒体邮箱 press@moosetoys.com，美国地址 737 Campus Square West, El Segundo CA 90245，有深圳办公室"
   },
   {
     "company_name": "Jada Toys",
@@ -206,8 +211,9 @@
     "last_shipment": "2026-09-01",
     "source": "ImportYeti Customs Data",
     "found_date": "2026-09-08",
-    "data_quality": 85,
-    "status": "待联系"
+    "data_quality": 70,
+    "status": "待联系",
+    "contact_note": "只有联系表单，有 Custom Products 选项"
   },
   {
     "company_name": "Rawlings Sporting Goods",
