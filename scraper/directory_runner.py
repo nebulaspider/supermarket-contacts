@@ -15,6 +15,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from scraper.directory_sources.wikipedia import WikipediaDirectorySource
 from scraper.directory_sources.europages import EuroPagesDirectorySource
+from scraper.directory_sources.indiamart import IndiaMARTDirectorySource
+from scraper.directory_sources.made_in_china import MadeInChinaDirectorySource
 from scraper.contact_extractor import ContactExtractor
 from scraper.directory_sources.base import CompanyLead
 
@@ -109,6 +111,8 @@ def run_directory_crawl(
     sources = [
         WikipediaDirectorySource(max_pages=3),
         EuroPagesDirectorySource(max_pages=2),
+        IndiaMARTDirectorySource(),
+        MadeInChinaDirectorySource(),
     ]
 
     for industry in industries:

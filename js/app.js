@@ -20,6 +20,7 @@ const VIEW_NAMES = {
     dashboard: '仪表盘',
     contacts: '客户名录',
     discovery: '潜客挖掘',
+    acquisition: '获客中心',
     automation: '爬虫监控',
     quality: '数据质量',
     settings: '设置',
@@ -936,3 +937,86 @@ window.goPage = goPage;
 window.exportCSV = exportCSV;
 window.openUpdateModal = openUpdateModal;
 window.closeUpdateModal = closeUpdateModal;
+
+// ============================================
+// 获客中心 Acquisition Hub
+// ============================================
+function initAcquisition() {
+    const searchBtn = document.getElementById('acqSearchBtn');
+    if (!searchBtn) return;
+
+    const updateLinks = () => {
+        const kw = document.getElementById('acqKeyword')?.value?.trim() || 'product';
+        const country = document.getElementById('acqCountry')?.value || '';
+        const countryName = { USA:'United States', UK:'United Kingdom', Germany:'Germany', France:'France', Japan:'Japan', Australia:'Australia', Canada:'Canada', UAE:'UAE', Brazil:'Brazil', India:'India' }[country] || '';
+        const kwEnc = encodeURIComponent(kw);
+
+        // LinkedIn
+        setLink('li-buyer', `https://www.linkedin.com/search/results/people/?keywords=${kwEnc}%20procurement%20manager${country ? '%20' + encodeURIComponent(countryName) : ''}`);
+        setLink('li-sourcing', `https://www.linkedin.com/search/results/people/?keywords=${kwEnc}%20sourcing%20manager${country ? '%20' + encodeURIComponent(countryName) : ''}`);
+        setLink('li-company', `https://www.linkedin.com/search/results/companies/?keywords=${kwEnc}`);
+
+        // Facebook
+        setLink('fb-group', `https://www.facebook.com/search/groups/?q=${kwEnc}%20sourcing%20buying`);
+        setLink('fb-page', `https://www.facebook.com/search/pages/?q=${kwEnc}%20importer%20distributor`);
+
+        // Instagram
+        setLink('ig-tag', `https://www.instagram.com/explore/tags/${kw.replace(/\s+/g, '')}/`);
+        setLink('ig-account', `https://www.instagram.com/${kw.replace(/\s+/g, '')}/`);
+
+        // X / Twitter
+        setLink('x-looking', `https://x.com/search?q=${kwEnc}%20looking%20for%20supplier&src=typed_query`);
+        setLink('x-sourcing', `https://x.com/search?q=${kwEnc}%20sourcing%20agent&src=typed_query`);
+
+        // TikTok
+        setLink('tt-hashtag', `https://www.tiktok.com/tag/${kw.replace(/\s+/g, '')}`);
+        setLink('tt-creator', `https://www.tiktok.com/search?q=${kwEnc}%20manufacturer`);
+
+        // B2B Platforms
+        setLink('alibaba-search', `https://www.alibaba.com/trade/search?SearchText=${kwEnc}`);
+        setLink('mic-search', `https://www.made-in-china.com/productdirectory.do?subaction=hunt&style=b&code=0&word=${kwEnc}`);
+        setLink('gs-search', `https://www.globalsources.com/search/${kwEnc}.htm`);
+        setLink('indiamart-search', `https://dir.indiamart.com/search.mp?ss=${kwEnc}`);
+        setLink('ml-search', `https://www.mercadolibre.com/jobs/search?q=${kwEnc}`);
+        setLink('ep-search', `https://www.europages.co.uk/companies/${kwEnc}.html`);
+
+        // Google
+        setLink('google-buyer', `https://www.google.com/search?q=${kwEnc}+importer+distributor+buyer${country ? '+' + encodeURIComponent(countryName) : ''}`);
+        setLink('google-distributor', `https://www.google.com/search?q=${kwEnc}+wholesale+distributor${country ? '+' + encodeURIComponent(countryName) : ''}`);
+        setLink('google-wholesaler', `https://www.google.com/search?q=${kwEnc}+wholesaler+supplier${country ? '+' + encodeURIComponent(countryName) : ''}`);
+    };
+
+    searchBtn.addEventListener('click', () => {
+        updateLinks();
+        showToast('🔍 已更新所有渠道搜索链接，点击任意链接开始获客！');
+    });
+
+    document.getElementById('acqKeyword')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { updateLinks(); searchBtn.click(); }
+    });
+
+    // Customs search
+    document.getElementById('customsSearchBtn')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const kw = document.getElementById('customsKeyword')?.value?.trim() || 'product';
+        window.open(`https://importyeti.com/search?q=${encodeURIComponent(kw)}`, '_blank');
+    });
+
+    // Copy email template
+    document.getElementById('copyEmailBtn')?.addEventListener('click', () => {
+        const text = document.getElementById('emailTemplate')?.textContent || '';
+        copyText(text.trim());
+    });
+
+    updateLinks();
+}
+
+function setLink(id, url) {
+    const el = document.getElementById(id);
+    if (el) { el.href = url; el.target = '_blank'; el.rel = 'noopener'; }
+}
+
+// Init on load
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initAcquisition, 300);
+});

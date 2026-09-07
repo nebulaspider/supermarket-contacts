@@ -51,6 +51,13 @@
                 <span class="nav-text">潜客挖掘</span>
                 <span class="nav-badge-new">NEW</span>
             </a>
+            <a href="#" class="nav-link" data-view="acquisition">
+                <span class="nav-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </span>
+                <span class="nav-text">获客中心</span>
+                <span class="nav-badge-new">HOT</span>
+            </a>
         </div>
 
         <div class="nav-section">
@@ -418,6 +425,259 @@
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                             <span>智能邮箱根据公司域名和常见命名规则生成，点击 LinkedIn 搜索可验证并找到对应人员。</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 获客中心 ===== -->
+        <section class="page" id="page-acquisition">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">获客中心</h1>
+                    <p class="page-desc">全渠道免费外贸获客工具 · 社媒/B2B/海关/邮件/论坛</p>
+                </div>
+            </div>
+
+            <!-- 快速搜索栏 -->
+            <div class="acq-search-bar">
+                <input type="text" class="acq-search-input" id="acqKeyword" placeholder="输入你的产品关键词，如：LED bulb, furniture, cosmetics...">
+                <select class="acq-search-select" id="acqCountry">
+                    <option value="">全球</option>
+                    <option value="USA">美国</option>
+                    <option value="UK">英国</option>
+                    <option value="Germany">德国</option>
+                    <option value="France">法国</option>
+                    <option value="Japan">日本</option>
+                    <option value="Australia">澳大利亚</option>
+                    <option value="Canada">加拿大</option>
+                    <option value="UAE">阿联酋</option>
+                    <option value="Brazil">巴西</option>
+                    <option value="India">印度</option>
+                </select>
+                <button class="btn btn--primary" id="acqSearchBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    全渠道搜索
+                </button>
+            </div>
+
+            <!-- 四大渠道卡片 -->
+            <div class="acq-grid">
+
+                <!-- 社媒获客 -->
+                <div class="acq-card acq-card--social">
+                    <div class="acq-card-head">
+                        <div class="acq-card-icon">📱</div>
+                        <div>
+                            <h3>社媒精准获客</h3>
+                            <p>B2B首选 · 免费核心渠道</p>
+                        </div>
+                    </div>
+                    <div class="acq-card-body">
+                        <div class="acq-channel">
+                            <div class="acq-channel-name">
+                                <span class="acq-channel-logo" style="background:#0077b5;">in</span>
+                                <strong>LinkedIn</strong>
+                                <span class="acq-channel-tag">B2B首选</span>
+                            </div>
+                            <div class="acq-channel-links">
+                                <a href="#" class="acq-link" id="li-buyer">🔍 搜采购经理</a>
+                                <a href="#" class="acq-link" id="li-sourcing">🔍 搜Sourcing</a>
+                                <a href="#" class="acq-link" id="li-company">🏢 搜公司</a>
+                            </div>
+                        </div>
+                        <div class="acq-channel">
+                            <div class="acq-channel-name">
+                                <span class="acq-channel-logo" style="background:#1877f2;">f</span>
+                                <strong>Facebook</strong>
+                                <span class="acq-channel-tag">采购群</span>
+                            </div>
+                            <div class="acq-channel-links">
+                                <a href="#" class="acq-link" id="fb-group">👥 搜采购群</a>
+                                <a href="#" class="acq-link" id="fb-page">📄 搜主页</a>
+                            </div>
+                        </div>
+                        <div class="acq-channel">
+                            <div class="acq-channel-name">
+                                <span class="acq-channel-logo" style="background:linear-gradient(135deg,#f09433,#dc2743);">IG</span>
+                                <strong>Instagram</strong>
+                                <span class="acq-channel-tag">视觉品类</span>
+                            </div>
+                            <div class="acq-channel-links">
+                                <a href="#" class="acq-link" id="ig-tag">🏷️ 搜标签</a>
+                                <a href="#" class="acq-link" id="ig-account">👤 搜账号</a>
+                            </div>
+                        </div>
+                        <div class="acq-channel">
+                            <div class="acq-channel-name">
+                                <span class="acq-channel-logo" style="background:#000;">X</span>
+                                <strong>X (Twitter)</strong>
+                                <span class="acq-channel-tag">买家动态</span>
+                            </div>
+                            <div class="acq-channel-links">
+                                <a href="#" class="acq-link" id="x-looking">🔍 搜"Looking for"</a>
+                                <a href="#" class="acq-link" id="x-sourcing">🔍 搜sourcing</a>
+                            </div>
+                        </div>
+                        <div class="acq-channel">
+                            <div class="acq-channel-name">
+                                <span class="acq-channel-logo" style="background:#000;">TT</span>
+                                <strong>TikTok</strong>
+                                <span class="acq-channel-tag">快消/家居</span>
+                            </div>
+                            <div class="acq-channel-links">
+                                <a href="#" class="acq-link" id="tt-hashtag">#️⃣ 搜话题</a>
+                                <a href="#" class="acq-link" id="tt-creator">🎬 搜创作者</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- B2B平台 -->
+                <div class="acq-card acq-card--b2b">
+                    <div class="acq-card-head">
+                        <div class="acq-card-icon">🏪</div>
+                        <div>
+                            <h3>B2B 平台</h3>
+                            <p>免费会员 · 主动报价</p>
+                        </div>
+                    </div>
+                    <div class="acq-card-body">
+                        <div class="acq-platform">
+                            <strong>阿里巴巴国际站</strong>
+                            <span class="acq-platform-tag">免费会员</span>
+                            <a href="#" class="acq-link" id="alibaba-search">🔍 搜索采购需求 →</a>
+                        </div>
+                        <div class="acq-platform">
+                            <strong>Made-in-China</strong>
+                            <span class="acq-platform-tag">免费版</span>
+                            <a href="#" class="acq-link" id="mic-search">🔍 搜索买家 →</a>
+                        </div>
+                        <div class="acq-platform">
+                            <strong>环球资源 Global Sources</strong>
+                            <span class="acq-platform-tag">免费店铺</span>
+                            <a href="#" class="acq-link" id="gs-search">🔍 搜索询盘 →</a>
+                        </div>
+                        <div class="acq-platform">
+                            <strong>IndiaMART</strong>
+                            <span class="acq-platform-tag">印度市场</span>
+                            <a href="#" class="acq-link" id="indiamart-search">🔍 搜索供应商/买家 →</a>
+                        </div>
+                        <div class="acq-platform">
+                            <strong>MercadoLivre</strong>
+                            <span class="acq-platform-tag">拉美市场</span>
+                            <a href="#" class="acq-link" id="ml-search">🔍 搜索产品 →</a>
+                        </div>
+                        <div class="acq-platform">
+                            <strong>EuroPages</strong>
+                            <span class="acq-platform-tag">欧洲企业</span>
+                            <a href="#" class="acq-link" id="ep-search">🔍 搜索欧洲企业 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 海关数据 -->
+                <div class="acq-card acq-card--customs">
+                    <div class="acq-card-head">
+                        <div class="acq-card-icon">📦</div>
+                        <div>
+                            <h3>海关数据</h3>
+                            <p>真实进口记录 · 免费查询</p>
+                        </div>
+                    </div>
+                    <div class="acq-card-body">
+                        <div class="acq-customs-box">
+                            <p>输入产品关键词，免费查询美国进口商真实采购记录：</p>
+                            <div class="acq-customs-search">
+                                <input type="text" class="input" id="customsKeyword" placeholder="产品名，如：led light">
+                                <a href="#" class="btn btn--primary btn--sm" id="customsSearchBtn">查询 ImportYeti →</a>
+                            </div>
+                            <div class="acq-customs-tips">
+                                <p>💡 ImportYeti 免费提供：</p>
+                                <ul>
+                                    <li>美国进口商名称和地址</li>
+                                    <li>供应商信息（中国工厂）</li>
+                                    <li>产品描述和 HS 编码</li>
+                                    <li>提单数量和到货时间</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="acq-platform">
+                            <strong>Panjiva</strong>
+                            <span class="acq-platform-tag">部分免费</span>
+                            <a href="https://panjiva.com" target="_blank" class="acq-link">访问 Panjiva →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 邮件营销 -->
+                <div class="acq-card acq-card--email">
+                    <div class="acq-card-head">
+                        <div class="acq-card-icon">📧</div>
+                        <div>
+                            <h3>邮件营销</h3>
+                            <p>冷邮模板 · 免费工具</p>
+                        </div>
+                    </div>
+                    <div class="acq-card-body">
+                        <div class="acq-template">
+                            <div class="acq-template-title">📝 开发信模板（英文）</div>
+                            <div class="acq-template-body" id="emailTemplate">
+Subject: [Product] Manufacturer from China — Quick Question
+
+Hi [First Name],
+
+I noticed [Company] is a leading [industry] company in [Country].
+
+We're a China-based manufacturer specializing in [product] with [X] years of experience. Our clients include [similar companies].
+
+Would it be useful if I sent you our latest catalog and pricing? No pressure at all.
+
+Best regards,
+[Your Name]
+[Company]
+[Phone/WhatsApp]
+                            </div>
+                            <button class="btn btn--outline btn--sm" id="copyEmailBtn">复制模板</button>
+                        </div>
+                        <div class="acq-platform">
+                            <strong>SendGrid</strong>
+                            <span class="acq-platform-tag">免费100封/天</span>
+                            <a href="https://sendgrid.com" target="_blank" class="acq-link">注册免费账号 →</a>
+                        </div>
+                        <div class="acq-platform">
+                            <strong>Mailchimp</strong>
+                            <span class="acq-platform-tag">免费500联系人</span>
+                            <a href="https://mailchimp.com" target="_blank" class="acq-link">注册免费账号 →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部：论坛 + SEO + 线下 -->
+            <div class="acq-extra">
+                <div class="acq-extra-card">
+                    <h4>💬 行业论坛</h4>
+                    <div class="acq-extra-links">
+                        <a href="https://bbs.fobshanghai.com" target="_blank" class="acq-link">福步外贸论坛</a>
+                        <a href="https://www.globalimporter.net" target="_blank" class="acq-link">环球外贸论坛</a>
+                        <a href="https://www.reddit.com/r/Entrepreneur" target="_blank" class="acq-link">Reddit r/Entrepreneur</a>
+                    </div>
+                </div>
+                <div class="acq-extra-card">
+                    <h4>🔍 Google SEO</h4>
+                    <div class="acq-extra-links">
+                        <a href="#" class="acq-link" id="google-buyer">搜 "[product] importer"</a>
+                        <a href="#" class="acq-link" id="google-distributor">搜 "[product] distributor"</a>
+                        <a href="#" class="acq-link" id="google-wholesaler">搜 "[product] wholesaler"</a>
+                    </div>
+                </div>
+                <div class="acq-extra-card">
+                    <h4>🏢 线下渠道</h4>
+                    <div class="acq-extra-links">
+                        <a href="https://www.cantonfair.org.cn" target="_blank" class="acq-link">广交会官网</a>
+                        <a href="https://www.10times.com" target="_blank" class="acq-link">全球展会搜索</a>
+                        <a href="https://www.ccpit.org" target="_blank" class="acq-link">中国贸促会</a>
                     </div>
                 </div>
             </div>
