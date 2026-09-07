@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-09-07T19:42:55.046551+00:00",
-  "total_records": 102,
-  "average_quality": 39.2,
+  "generated_at": "2026-09-07T19:58:21.813660+00:00",
+  "total_records": 169,
+  "average_quality": 33.2,
   "quality_distribution": {
     "high (>=80)": 15,
     "medium (60-79)": 10,
-    "low (<60)": 77
+    "low (<60)": 144
   },
   "field_coverage": {
-    "company_name": 102,
-    "country": 102,
+    "company_name": 169,
+    "country": 169,
     "city": 25,
     "address": 25,
     "website": 25,
-    "industry": 102,
+    "industry": 169,
     "company_size": 25,
     "founded_year": 25,
     "parent_company": 25,

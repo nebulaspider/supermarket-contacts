@@ -293,8 +293,8 @@
     "twitter": "https://twitter.com/metro_news",
     "instagram": "https://www.instagram.com/metro_de",
     "youtube": "",
-    "source_url": "https://www.metro.de/unternehmen/ueber-uns",
-    "scraped_at": "2026-09-01T00:00:00+00:00",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517527Z",
     "data_quality": 95,
     "industry": "批发 / 现购自运",
     "company_size": "10000+",
@@ -1542,6 +1542,676 @@
     "industry": "零售",
     "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
     "scraped_at": "2026-09-07T19:42:43.963332Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Giant Eagle",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517477Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Shun Fat Supermarket",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517481Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Shoppers Food & Pharmacy",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517482Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Farm Fresh Food & Pharmacy",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517484Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Acme Markets",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517486Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Super Saver Foods",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517488Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "City Market",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517490Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Dillons",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517491Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Hilander Foods",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517493Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "JayC Food Stores",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517495Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "City Market (US grocery store chain)",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517497Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Owen's Market",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517498Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Office Depot",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517500Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Scott's Food & Pharmacy",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517502Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Circle K",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517504Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Allied Stores",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517506Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Houchens Industries",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517507Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Pick-N-Pay Supermarkets",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517509Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Volkswagen Group",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:58:09.517511Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Schwarz Gruppe",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:58:09.517512Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "BMW Group",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:58:09.517514Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Mercedes-Benz Group",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:58:09.517516Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Extra",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517518Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Minimal",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517520Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Famila",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517522Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Kaufland",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517523Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Penny",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517529Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Selgros",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517531Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Norma",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517532Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Konsum",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517534Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "REWE",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517536Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Real",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517538Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "MediaMarkt",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517539Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Globus Holding",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517541Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Globus",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517543Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Tegut",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517545Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Tengelmann Group",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517546Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Praktiker",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517548Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Toyota",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:58:09.517550Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "FamilyMart",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-07T19:58:09.517552Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Aeon",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517553Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Isetan",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517555Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Ito-Yokado",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517557Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Maxvalu Tokai",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517559Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Daiei",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517561Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Seiyu Group",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517562Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Sogo",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517564Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Yaohan",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517566Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Meidi-Ya",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517568Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "UNY",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517569Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Kansai Super",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517571Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Shell",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:58:09.517573Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "BP",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-07T19:58:09.517575Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Co-op",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517577Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Netto UK",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517578Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Budgens",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517580Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Happy Shopper",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517582Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Victor Value",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517584Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Waitrose",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517586Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Morrisons",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517588Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Safeway UK",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517589Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Kwik Save",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517591Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Somerfield",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517593Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Iceland",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517595Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Booths",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517597Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "EG Group",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517598Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Carr's",
+    "website": "",
+    "country": "United Kingdom",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-07T19:58:09.517600Z",
     "data_quality": 24
   }
 ]
