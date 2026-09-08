@@ -2213,5 +2213,1245 @@
     "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
     "scraped_at": "2026-09-07T19:58:09.517600Z",
     "data_quality": 24
+  },
+  {
+    "company_name": "TotalEnergies",
+    "website": "",
+    "country": "France",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692028Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Vitol",
+    "website": "",
+    "country": "Switzerland",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692029Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Glencore",
+    "website": "",
+    "country": "Switzerland",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692030Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Stellantis",
+    "website": "",
+    "country": "Netherlands",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692032Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Samsung Electronics",
+    "website": "",
+    "country": "South Korea",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692033Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Dollarama",
+    "website": "",
+    "country": "Canada",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692034Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Trafigura",
+    "website": "",
+    "country": "Singapore",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692036Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Saudi Aramco",
+    "website": "",
+    "country": "Saudi Arabia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692037Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "State Grid Corporation of China",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692039Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "China State Construction Engineering",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692040Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "China Construction Bank",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692042Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Agricultural Bank of China",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692043Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "China Railway Engineering Corporation",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692045Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Bank of China",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692046Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "China Railway Construction Corporation",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692047Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Rank",
+    "website": "",
+    "country": "Rank",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692049Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Exxon Mobil",
+    "website": "",
+    "country": "Spring, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692050Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "McKesson Corporation",
+    "website": "",
+    "country": "Irving, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692052Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Costco Wholesale",
+    "website": "",
+    "country": "Issaquah, Washington",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692053Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Ford Motor",
+    "website": "",
+    "country": "Dearborn, Michigan",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692055Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Centene",
+    "website": "",
+    "country": "St. Louis, Missouri",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692056Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "The Home Depot",
+    "website": "",
+    "country": "Atlanta, Georgia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692058Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Fannie Mae",
+    "website": "",
+    "country": "Washington, D.C.",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692059Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Walgreens Boots Alliance",
+    "website": "",
+    "country": "Deerfield, Illinois",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692061Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Phillips 66",
+    "website": "",
+    "country": "Houston, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692063Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Marathon Petroleum",
+    "website": "",
+    "country": "Findlay, Ohio",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692064Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Verizon Communications",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692066Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Goldman Sachs Group",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692067Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Wells Fargo",
+    "website": "",
+    "country": "San Francisco, California",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692069Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Valero Energy",
+    "website": "",
+    "country": "San Antonio, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692070Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Comcast",
+    "website": "",
+    "country": "Philadelphia, Pennsylvania",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692071Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "State Farm Insurance",
+    "website": "",
+    "country": "Bloomington, Illinois",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692072Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "AT&T",
+    "website": "",
+    "country": "Dallas, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692074Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Freddie Mac",
+    "website": "",
+    "country": "McLean, Virginia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692075Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Humana",
+    "website": "",
+    "country": "Louisville, Kentucky",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692076Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Morgan Stanley",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692078Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "StoneX Group",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692081Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Tesla",
+    "website": "",
+    "country": "Austin, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692082Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Dell Technologies",
+    "website": "",
+    "country": "Round Rock, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692083Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "PepsiCo",
+    "website": "",
+    "country": "Purchase, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692084Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Walt Disney",
+    "website": "",
+    "country": "Burbank, California",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692086Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "United Parcel Service",
+    "website": "",
+    "country": "Atlanta, Georgia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692087Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Johnson & Johnson",
+    "website": "",
+    "country": "New Brunswick, New Jersey",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692088Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "FedEx",
+    "website": "",
+    "country": "Memphis, Tennessee",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692090Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Archer Daniels Midland",
+    "website": "",
+    "country": "Chicago, Illinois",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692091Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Procter & Gamble",
+    "website": "",
+    "country": "Cincinnati, Ohio",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692093Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Lowe's",
+    "website": "",
+    "country": "Mooresville, North Carolina",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692094Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Energy Transfer Partners",
+    "website": "",
+    "country": "Dallas, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692095Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "RTX",
+    "website": "",
+    "country": "Arlington County, Virginia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692097Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Albertsons",
+    "website": "",
+    "country": "Boise, Idaho",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692098Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Sysco",
+    "website": "",
+    "country": "Houston, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692099Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Progressive",
+    "website": "",
+    "country": "Mayfield Village, Ohio",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692100Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "American Express",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692102Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Lockheed Martin",
+    "website": "",
+    "country": "Bethesda, Maryland",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692103Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "MetLife",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692104Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "HCA Healthcare",
+    "website": "",
+    "country": "Nashville, Tennessee",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692106Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Prudential Financial",
+    "website": "",
+    "country": "Newark, New Jersey",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692107Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Boeing",
+    "website": "",
+    "country": "Arlington County, Virginia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692108Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Caterpillar",
+    "website": "",
+    "country": "Irving, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692109Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Merck",
+    "website": "",
+    "country": "Kenilworth, New Jersey",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692111Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Allstate",
+    "website": "",
+    "country": "Northfield Township, Illinois",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692112Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Pfizer",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692113Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "IBM",
+    "website": "",
+    "country": "Armonk, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692115Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "New York Life Insurance Company",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692116Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Delta Air Lines",
+    "website": "",
+    "country": "Atlanta, Georgia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692117Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Publix Super Markets",
+    "website": "",
+    "country": "Lakeland, Florida",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692119Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Nationwide Mutual Insurance Company",
+    "website": "",
+    "country": "Columbus, Ohio",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692120Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "TD Synnex",
+    "website": "",
+    "country": "Clearwater, Florida",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692121Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "United Airlines Holdings",
+    "website": "",
+    "country": "Chicago, Illinois",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692123Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "ConocoPhillips",
+    "website": "",
+    "country": "Houston, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692124Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "TJX",
+    "website": "",
+    "country": "Framingham, Massachusetts",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692126Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "AbbVie",
+    "website": "",
+    "country": "Lake Bluff, Illinois",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692127Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Enterprise Products Partners",
+    "website": "",
+    "country": "Houston, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692129Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Charter Communications",
+    "website": "",
+    "country": "Stamford, Connecticut",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692130Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Performance Food Group",
+    "website": "",
+    "country": "Richmond, Virginia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692132Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "American Airlines Group",
+    "website": "",
+    "country": "Fort Worth, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692133Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Capital One Financial",
+    "website": "",
+    "country": "Tysons, Virginia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692134Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Cisco Systems",
+    "website": "",
+    "country": "San Jose, California",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692136Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "HP",
+    "website": "",
+    "country": "Palo Alto, California",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692137Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Tyson Foods",
+    "website": "",
+    "country": "Springdale, Arkansas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692139Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Intel",
+    "website": "",
+    "country": "Santa Clara, California",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692140Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Oracle",
+    "website": "",
+    "country": "Austin, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692142Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Broadcom",
+    "website": "",
+    "country": "Palo Alto, California",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692143Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Deere",
+    "website": "",
+    "country": "Moline, Illinois",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692145Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Nike",
+    "website": "",
+    "country": "Beaverton, Oregon",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692146Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Liberty Mutual Insurance Group",
+    "website": "",
+    "country": "Boston, Massachusetts",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692147Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Plains GP Holdings",
+    "website": "",
+    "country": "Houston, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692149Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "USAA",
+    "website": "",
+    "country": "San Antonio, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692150Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Bristol-Myers Squibb",
+    "website": "",
+    "country": "New York City,New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692152Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Ingram Micro Holding",
+    "website": "",
+    "country": "Irvine, California",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692153Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "General Dynamics",
+    "website": "",
+    "country": "Reston, Virginia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692155Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Coca-Cola",
+    "website": "",
+    "country": "Atlanta, Georgia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692156Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "TIAA",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692157Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Travelers",
+    "website": "",
+    "country": "New York City, New York",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692159Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Eli Lilly",
+    "website": "",
+    "country": "Indianapolis, Indiana",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692160Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Koch",
+    "website": "",
+    "country": "Wichita, Kansas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692162Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Mars",
+    "website": "",
+    "country": "McLean, Virginia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692164Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "H-E-B Grocery Company",
+    "website": "",
+    "country": "San Antonio, Texas",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692165Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Reyes Holdings",
+    "website": "",
+    "country": "Rosemont, Illinois",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692167Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Enterprise Mobility",
+    "website": "",
+    "country": "Clayton, Missouri",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692169Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Fidelity Investments",
+    "website": "",
+    "country": "Boston, Massachusetts",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692170Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Southern Glazer's Wine & Spirits",
+    "website": "",
+    "country": "Miramar, Florida",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692172Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Cox Enterprises",
+    "website": "",
+    "country": "Atlanta, Georgia",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+    "scraped_at": "2026-09-08T05:55:07.692173Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "The Kroger Company",
+    "website": "",
+    "country": "Cincinnati",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692175Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "JD.com",
+    "website": "",
+    "country": "Beijing",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692178Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Target Corporation",
+    "website": "",
+    "country": "Minneapolis",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692180Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Ahold Delhaize",
+    "website": "",
+    "country": "Zaandam",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692181Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Edeka",
+    "website": "",
+    "country": "Hamburg",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692186Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "LVMH",
+    "website": "",
+    "country": "Paris",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692187Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Seven & I Holdings",
+    "website": "",
+    "country": "Tokyo",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692189Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Rewe Group",
+    "website": "",
+    "country": "Cologne",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692190Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "E.Leclerc",
+    "website": "",
+    "country": "Ivry-sur-Seine",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692192Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Æon",
+    "website": "",
+    "country": "Chiba",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692193Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Publix",
+    "website": "",
+    "country": "Lakeland",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692195Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "TJX Companies",
+    "website": "",
+    "country": "Framingham",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692196Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Loblaw Companies",
+    "website": "",
+    "country": "Brampton",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692198Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "HE Butt Grocery",
+    "website": "",
+    "country": "San Antonio",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692199Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Best Buy",
+    "website": "",
+    "country": "Richfield",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692200Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Les Mousquetaires",
+    "website": "",
+    "country": "Bondoufle",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692202Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "IKEA",
+    "website": "",
+    "country": "Delft",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692203Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Woolworths Group",
+    "website": "",
+    "country": "Sydney",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692204Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Inditex",
+    "website": "",
+    "country": "Arteixo",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692207Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Dollar General",
+    "website": "",
+    "country": "Goodlettsville",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692208Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Coop",
+    "website": "",
+    "country": "Basel",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-08T05:55:07.692210Z",
+    "data_quality": 24
   }
 ]
