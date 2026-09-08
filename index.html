@@ -8,7 +8,7 @@
     <meta http-equiv="Expires" content="0">
     <title>Cyrus AI — 全球客户情报平台</title>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-    <link rel="stylesheet" href="css/style.css?v=20260908">
+    <link rel="stylesheet" href="css/style.css?v=20260908b">
 </head>
 <body>
 
@@ -319,116 +319,105 @@
             <div class="page-header">
                 <div>
                     <h1 class="page-title">潜客挖掘</h1>
-                    <p class="page-desc">多维度筛选 · 智能邮箱生成 · 采购决策链分析</p>
+                    <p class="page-desc">多维度筛选 · 真实联系方式 · 一键发送邮件</p>
                 </div>
                 <div class="page-actions">
                     <button class="btn btn--outline" id="discoveryExportBtn">导出结果</button>
                 </div>
             </div>
 
-            <div class="discovery-layout">
-                <!-- 筛选面板 -->
-                <div class="discovery-filters">
-                    <div class="filter-card">
-                        <div class="filter-card-title">筛选条件</div>
-
-                        <div class="filter-field">
-                            <label>关键词搜索</label>
-                            <input type="text" class="input" id="filterKeyword" placeholder="公司名、产品、行业...">
+            <!-- 顶部筛选栏 -->
+            <div class="discovery-topbar">
+                <div class="topbar-row">
+                    <div class="topbar-field">
+                        <label>关键词</label>
+                        <input type="text" class="input" id="filterKeyword" placeholder="公司名、产品、行业...">
+                    </div>
+                    <div class="topbar-field">
+                        <label>行业</label>
+                        <select class="input" id="filterIndustryDisc">
+                            <option value="">全部行业</option>
+                            <option value="零售">零售</option>
+                            <option value="综合零售 / 大卖场">大卖场</option>
+                            <option value="折扣超市">折扣超市</option>
+                            <option value="便利店">便利店</option>
+                            <option value="会员制仓储">会员制仓储</option>
+                            <option value="电子">电子产品</option>
+                            <option value="服装">服装时尚</option>
+                            <option value="食品">食品饮料</option>
+                            <option value="家居">家居用品</option>
+                            <option value="化妆品">化妆品</option>
+                            <option value="玩具">玩具</option>
+                            <option value="卫浴">卫浴</option>
+                            <option value="体育">体育用品</option>
+                            <option value="珠宝">珠宝</option>
+                            <option value="宠物">宠物用品</option>
+                        </select>
+                    </div>
+                    <div class="topbar-field">
+                        <label>国家</label>
+                        <select class="input" id="filterCountryDisc">
+                            <option value="">全部国家</option>
+                            <option value="美国">美国</option>
+                            <option value="英国">英国</option>
+                            <option value="德国">德国</option>
+                            <option value="法国">法国</option>
+                            <option value="日本">日本</option>
+                            <option value="中国">中国</option>
+                            <option value="澳大利亚">澳大利亚</option>
+                            <option value="加拿大">加拿大</option>
+                            <option value="荷兰">荷兰</option>
+                            <option value="韩国">韩国</option>
+                            <option value="西班牙">西班牙</option>
+                        </select>
+                    </div>
+                    <div class="topbar-field topbar-field--checks">
+                        <label>数据完整度</label>
+                        <div class="checks-inline">
+                            <label class="checkbox checkbox--sm"><input type="checkbox" id="filterHasEmail"><span>有邮箱</span></label>
+                            <label class="checkbox checkbox--sm"><input type="checkbox" id="filterHasPhone"><span>有电话</span></label>
+                            <label class="checkbox checkbox--sm"><input type="checkbox" id="filterHasLinkedIn"><span>有 LinkedIn</span></label>
                         </div>
-
-                        <div class="filter-field">
-                            <label>行业分类</label>
-                            <select class="input" id="filterIndustryDisc">
-                                <option value="">全部行业</option>
-                                <option value="零售">零售</option>
-                                <option value="综合零售 / 大卖场">大卖场</option>
-                                <option value="折扣超市">折扣超市</option>
-                                <option value="便利店">便利店</option>
-                                <option value="会员制仓储">会员制仓储</option>
-                                <option value="电子">电子产品</option>
-                                <option value="服装">服装时尚</option>
-                                <option value="食品">食品饮料</option>
-                                <option value="家居">家居用品</option>
-                                <option value="化妆品">化妆品</option>
-                            </select>
-                        </div>
-
-                        <div class="filter-field">
-                            <label>目标国家</label>
-                            <select class="input" id="filterCountryDisc">
-                                <option value="">全部国家</option>
-                                <option value="美国">美国</option>
-                                <option value="英国">英国</option>
-                                <option value="德国">德国</option>
-                                <option value="法国">法国</option>
-                                <option value="日本">日本</option>
-                                <option value="中国">中国</option>
-                                <option value="澳大利亚">澳大利亚</option>
-                                <option value="加拿大">加拿大</option>
-                                <option value="荷兰">荷兰</option>
-                            </select>
-                        </div>
-
-                        <div class="filter-field">
-                            <label>数据完整度</label>
-                            <div class="checkbox-group">
-                                <label class="checkbox"><input type="checkbox" id="filterHasEmail"><span>有邮箱</span></label>
-                                <label class="checkbox"><input type="checkbox" id="filterHasPhone"><span>有电话</span></label>
-                                <label class="checkbox"><input type="checkbox" id="filterHasProcurement"><span>有采购邮箱</span></label>
-                                <label class="checkbox"><input type="checkbox" id="filterHasLinkedIn"><span>有 LinkedIn</span></label>
-                            </div>
-                        </div>
-
-                        <button class="btn btn--outline btn--block" id="resetFiltersBtn">重置筛选</button>
+                    </div>
+                    <div class="topbar-actions">
+                        <button class="btn btn--primary btn--sm" id="applyDiscoveryFilters">筛选</button>
+                        <button class="btn btn--outline btn--sm" id="resetFiltersBtn">重置</button>
                     </div>
                 </div>
+            </div>
 
-                <!-- 结果区 -->
-                <div class="discovery-results">
-                    <div class="results-header">
-                        <div class="results-stats">
-                            <span class="results-num" id="discoveryCount">0</span>
-                            <span class="results-label">家匹配公司</span>
-                            <span class="results-divider">·</span>
-                            <span class="results-num" id="discoveryContacts">0</span>
-                            <span class="results-label">个潜在联系人</span>
-                        </div>
-                        <div class="results-tabs">
-                            <button class="results-tab active" data-tab="companies">公司</button>
-                            <button class="results-tab" data-tab="contacts">联系人</button>
-                        </div>
-                    </div>
+            <!-- 结果统计 -->
+            <div class="results-header">
+                <div class="results-stats">
+                    <span class="results-num" id="discoveryCount">0</span>
+                    <span class="results-label">家匹配公司</span>
+                    <span class="results-divider">·</span>
+                    <span class="results-num" id="discoveryEmailCount">0</span>
+                    <span class="results-label">个可发送邮箱</span>
+                    <span class="results-divider">·</span>
+                    <span class="results-num" id="discoveryPhoneCount">0</span>
+                    <span class="results-label">个联系电话</span>
+                </div>
+            </div>
 
-                    <div class="results-panel active" id="panel-companies">
-                        <div class="data-card">
-                            <div class="table-scroll">
-                                <table class="data-table">
-                                    <thead>
-                                        <tr><th>公司</th><th>行业</th><th>国家</th><th>采购邮箱</th><th>电话</th><th>潜客评分</th><th></th></tr>
-                                    </thead>
-                                    <tbody id="discoveryCompanyBody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="results-panel" id="panel-contacts">
-                        <div class="data-card">
-                            <div class="table-scroll">
-                                <table class="data-table">
-                                    <thead>
-                                        <tr><th>姓名</th><th>职位</th><th>公司</th><th>智能邮箱</th><th>置信度</th><th>LinkedIn</th><th></th></tr>
-                                    </thead>
-                                    <tbody id="discoveryContactBody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="generator-hint">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                            <span>智能邮箱根据公司域名和常见命名规则生成，点击 LinkedIn 搜索可验证并找到对应人员。</span>
-                        </div>
-                    </div>
+            <!-- 结果表格 -->
+            <div class="data-card">
+                <div class="table-scroll">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>公司名称</th>
+                                <th>行业</th>
+                                <th>国家/城市</th>
+                                <th>邮箱（可点击发送）</th>
+                                <th>电话</th>
+                                <th>官网</th>
+                                <th>潜客评分</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="discoveryCompanyBody"></tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -847,6 +836,6 @@ Best regards,
 <!-- Toast -->
 <div class="toast-container" id="toastContainer"></div>
 
-<script src="js/app.js?v=20260908"></script>
+<script src="js/app.js?v=20260908b"></script>
 </body>
 </html>

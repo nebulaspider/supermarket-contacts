@@ -633,36 +633,6 @@ function closeDrawer() {
 }
 
 // ===== Discovery (Lead Generation) =====
-function generateEmails(company) {
-    const domain = extractDomain(company.website || company.email || '');
-    if (!domain) return [];
-    const roles = [
-        { name: 'Procurement Manager', first: 'procurement', last: 'manager' },
-        { name: 'Purchasing Manager', first: 'purchasing', last: 'manager' },
-        { name: 'Buyer', first: 'buyer', last: '' },
-        { name: 'Sourcing Manager', first: 'sourcing', last: 'manager' },
-    ];
-    const contacts = [];
-    for (const role of roles.slice(0, 3)) {
-        const patterns = [
-            { email: `${role.first}.${role.last || role.first}@${domain}`, conf: 'high' },
-            { email: `${role.first}@${domain}`, conf: 'medium' },
-        ];
-        for (const p of patterns) {
-            contacts.push({
-                name: role.name,
-                title: role.name,
-                email: p.email,
-                confidence: p.conf,
-                company: company.company_name,
-                country: company.country || '',
-                linkedin: `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(company.company_name + ' ' + role.name)}`,
-            });
-        }
-    }
-    return contacts;
-}
-
 function extractDomain(url) {
     if (!url) return '';
     try {
@@ -686,47 +656,71 @@ function calculateLeadScore(company) {
 function renderDiscovery() {
     const filtered = applyDiscoveryFilters(state.data);
     document.getElementById('discoveryCount').textContent = filtered.length;
-    let totalContacts = 0;
-    filtered.forEach(c => { totalContacts += generateEmails(c).length; });
-    document.getElementById('discoveryContacts').textContent = totalContacts;
 
-    // Company table
+    // 统计真实邮箱和电话
+    const emailCount = filtered.filter(d => d.email && d.email.includes('@')).length;
+    const phoneCount = filtered.filter(d => d.phone).length;
+    document.getElementById('discoveryEmailCount').textContent = emailCount;
+    document.getElementById('discoveryPhoneCount').textContent = phoneCount;
+
+    // 公司表格
     const cBody = document.getElementById('discoveryCompanyBody');
     if (cBody) {
-        cBody.innerHTML = filtered.slice(0, 50).map(d => {
+        cBody.innerHTML = filtered.slice(0, 100).map(d => {
             const score = calculateLeadScore(d);
             const color = score >= 70 ? '#10b981' : score >= 40 ? '#f59e0b' : '#ef4444';
-            return `<tr onclick="openDrawer('${esc(d.company_name)}')">
+            const realEmail = (d.email && d.email.includes('@')) ? d.email : '';
+            const website = d.website || '';
+            const websiteDisplay = website ? website.replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
+
+            // 邮箱列：有真实邮箱则显示可点击的mailto链接，否则显示"官网联系"
+            let emailCell = '—';
+            if (realEmail) {
+                emailCell = `<a href="mailto:${esc(realEmail)}?subject=${encodeURIComponent('Supplier Inquiry - ' + d.company_name)}" class="email-link" title="点击发送邮件">✉️ ${esc(realEmail)}</a>`;
+            } else if (website) {
+                emailCell = `<a href="${esc(website)}" target="_blank" class="website-contact-link" title="访问官网找联系方式">🌐 官网联系页</a>`;
+            }
+
+            // 电话列
+            let phoneCell = '—';
+            if (d.phone) {
+                phoneCell = `<a href="tel:${esc(d.phone.replace(/[^0-9+]/g, ''))}" class="phone-link" title="点击拨打">📞 ${esc(d.phone)}</a>`;
+            }
+
+            // 官网列
+            let webCell = '—';
+            if (website) {
+                webCell = `<a href="${esc(website)}" target="_blank" class="website-link">${esc(websiteDisplay)}</a>`;
+            }
+
+            // 操作列
+            let actions = '';
+            if (realEmail) {
+                actions += `<button class="action-btn action-btn--email" onclick="event.stopPropagation();sendEmail('${esc(realEmail)}','${esc(d.company_name)}')">发送邮件</button>`;
+            }
+            if (website) {
+                actions += `<button class="action-btn" onclick="event.stopPropagation();window.open('${esc(website)}','_blank')">官网</button>`;
+            }
+            actions += `<button class="action-btn" onclick="event.stopPropagation();openDrawer('${esc(d.company_name)}')">详情</button>`;
+
+            return `<tr>
                 <td><span class="cell-name">${esc(d.company_name)}</span></td>
                 <td>${d.industry ? `<span class="industry-tag">${esc(d.industry)}</span>` : '—'}</td>
-                <td><span class="cell-country">${esc(d.country || '—')}</span></td>
-                <td>${d.procurement_email ? `<span class="proc-email">${esc(d.procurement_email)}</span>` : (d.email ? `<span class="cell-email">${esc(d.email)}</span>` : '—')}</td>
-                <td>${d.phone ? `<span class="cell-phone">${esc(d.phone)}</span>` : '—'}</td>
+                <td><span class="cell-country">${esc(d.country || '—')}${d.city ? ' / ' + esc(d.city) : ''}</span></td>
+                <td>${emailCell}</td>
+                <td>${phoneCell}</td>
+                <td>${webCell}</td>
                 <td><div class="lead-score"><div class="lead-score-bar"><div class="lead-score-fill" style="width:${score}%;background:${color}"></div></div><span class="lead-score-num" style="color:${color}">${score}</span></div></td>
-                <td><button class="action-btn" onclick="event.stopPropagation();openDrawer('${esc(d.company_name)}')">详情</button></td>
+                <td class="action-cell">${actions}</td>
             </tr>`;
-        }).join('') || `<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无匹配数据</td></tr>`;
+        }).join('') || `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无匹配数据</td></tr>`;
     }
+}
 
-    // Contact table
-    const pBody = document.getElementById('discoveryContactBody');
-    if (pBody) {
-        let all = [];
-        filtered.forEach(c => { all = all.concat(generateEmails(c)); });
-        all = all.slice(0, 100);
-        pBody.innerHTML = all.map(c => {
-            const confClass = c.confidence === 'high' ? 'confidence-high' : c.confidence === 'medium' ? 'confidence-medium' : 'confidence-low';
-            return `<tr>
-                <td style="font-weight:600;">${esc(c.name)}</td>
-                <td><span class="cell-position high">${esc(c.title)}</span></td>
-                <td>${esc(c.company)}</td>
-                <td><span class="cell-email">${esc(c.email)}</span></td>
-                <td><span class="confidence-tag ${confClass}">${c.confidence === 'high' ? '高' : c.confidence === 'medium' ? '中' : '低'}</span></td>
-                <td><a href="${esc(c.linkedin)}" target="_blank" class="linkedin-link">搜索 ↗</a></td>
-                <td><button class="action-btn" onclick="copyText('${esc(c.email)}')">复制</button></td>
-            </tr>`;
-        }).join('') || `<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无联系人数据</td></tr>`;
-    }
+function sendEmail(email, company) {
+    const subject = encodeURIComponent('Supplier Inquiry - ' + company);
+    const body = encodeURIComponent(`Dear ${company} Team,\n\nI hope this email finds you well. We are a manufacturer/supplier specializing in [your product category]. We would like to explore potential business opportunities with your company.\n\nCould you please direct me to the appropriate person in your procurement/purchasing department?\n\nBest regards,\n[Your Name]\n[Your Company]`);
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
 }
 
 function applyDiscoveryFilters(data) {
@@ -735,48 +729,39 @@ function applyDiscoveryFilters(data) {
     const country = document.getElementById('filterCountryDisc')?.value || '';
     const hasEmail = document.getElementById('filterHasEmail')?.checked;
     const hasPhone = document.getElementById('filterHasPhone')?.checked;
-    const hasProc = document.getElementById('filterHasProcurement')?.checked;
     const hasLi = document.getElementById('filterHasLinkedIn')?.checked;
 
     return data.filter(d => {
         if (kw && !(d.company_name?.toLowerCase().includes(kw) || d.industry?.toLowerCase().includes(kw) || d.product_categories?.toLowerCase().includes(kw))) return false;
         if (industry && d.industry !== industry) return false;
         if (country && d.country !== country) return false;
-        if (hasEmail && !d.email && !d.procurement_email) return false;
+        if (hasEmail && !(d.email && d.email.includes('@'))) return false;
         if (hasPhone && !d.phone) return false;
-        if (hasProc && !d.procurement_email) return false;
         if (hasLi && !d.linkedin) return false;
         return true;
     });
 }
 
 function initDiscovery() {
-    // Tabs
-    document.querySelectorAll('.results-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            document.querySelectorAll('.results-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.results-panel').forEach(p => p.classList.remove('active'));
-            tab.classList.add('active');
-            document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
-        });
-    });
+    // 筛选按钮
+    document.getElementById('applyDiscoveryFilters')?.addEventListener('click', renderDiscovery);
 
-    // Filters
-    ['filterKeyword', 'filterIndustryDisc', 'filterCountryDisc', 'filterHasEmail', 'filterHasPhone', 'filterHasProcurement', 'filterHasLinkedIn'].forEach(id => {
+    // 实时筛选
+    ['filterKeyword', 'filterIndustryDisc', 'filterCountryDisc', 'filterHasEmail', 'filterHasPhone', 'filterHasLinkedIn'].forEach(id => {
         const el = document.getElementById(id);
         if (el) { el.addEventListener('input', renderDiscovery); el.addEventListener('change', renderDiscovery); }
     });
 
-    // Reset
+    // 重置
     document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
         document.getElementById('filterKeyword').value = '';
         document.getElementById('filterIndustryDisc').value = '';
         document.getElementById('filterCountryDisc').value = '';
-        document.querySelectorAll('.checkbox-group input').forEach(cb => cb.checked = false);
+        document.querySelectorAll('.checks-inline input').forEach(cb => cb.checked = false);
         renderDiscovery();
     });
 
-    // Export
+    // 导出
     document.getElementById('discoveryExportBtn')?.addEventListener('click', () => {
         exportCSV(applyDiscoveryFilters(state.data));
     });
