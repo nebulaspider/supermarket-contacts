@@ -22,6 +22,7 @@ const VIEW_NAMES = {
     discovery: '潜客挖掘',
     acquisition: '获客中心',
     facebook: 'Facebook 获客',
+    effective: '高效获客',
     automation: '爬虫监控',
     quality: '数据质量',
     settings: '设置',
@@ -33,8 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initPreferences();
     initDiscovery();
     initFacebook();
+    initEffective();
     loadData();
     loadFacebookData();
+    loadEffectiveData();
 });
 
 // ===== Events =====
@@ -130,6 +133,7 @@ function switchView(view) {
     closeMobileSidebar();
     if (view === 'discovery') renderDiscovery();
     if (view === 'facebook') renderFbTable();
+    if (view === 'effective') renderEffTable();
     if (view === 'dashboard') setTimeout(() => Object.values(state.charts).forEach(c => c?.resize()), 100);
 }
 
@@ -901,6 +905,93 @@ function initFacebook() {
             电话: d.phone || '',
             粉丝数: d.facebook_fans || '',
             质量分: d.data_quality
+        })));
+    });
+}
+
+// ===== Effective Leads (高效获客) =====
+let effState = { all: [], filtered: [] };
+
+async function loadEffectiveData() {
+    try {
+        const resp = await fetch('data/effective_leads.json', { cache: 'no-cache' });
+        if (!resp.ok) return;
+        effState.all = await resp.json();
+        effState.filtered = [...effState.all];
+
+        document.getElementById('effTotal').textContent = effState.all.length;
+        document.getElementById('effEmail').textContent = effState.all.filter(d => d.email).length;
+        document.getElementById('effPhone').textContent = effState.all.filter(d => d.phone).length;
+        document.getElementById('effWA').textContent = effState.all.filter(d => d.whatsapp).length;
+
+        const industries = [...new Set(effState.all.map(d => d.industry).filter(Boolean))].sort();
+        document.getElementById('effIndustry').innerHTML = '<option value="">全部行业</option>' +
+            industries.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join('');
+
+        renderEffTable();
+    } catch (e) {
+        console.error('Effective data load error:', e);
+    }
+}
+
+function renderEffTable() {
+    const tbody = document.getElementById('effTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = effState.filtered.map((d, i) => {
+        const q = d.data_quality || 50;
+        const qColor = q >= 80 ? '#10b981' : q >= 60 ? '#f59e0b' : '#ef4444';
+        const email = d.email ? `<a href="mailto:${esc(d.email)}" style="color:#3b82f6;text-decoration:none;font-weight:600;font-size:13px;">${esc(d.email)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
+        const phone = d.phone ? `<a href="tel:${esc(d.phone)}" style="color:#10b981;text-decoration:none;font-weight:600;font-size:13px;">${esc(d.phone)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
+        const wa = d.whatsapp ? `<a href="https://wa.me/${esc(d.whatsapp)}" target="_blank" style="color:#25D366;text-decoration:none;font-weight:700;font-size:13px;">💬 联系</a>` : '<span style="color:var(--text-tertiary);">—</span>';
+        const web = d.website ? `<a href="https://${esc(d.website)}" target="_blank" style="color:var(--text-secondary);text-decoration:none;font-size:12px;">${esc(d.website)}</a>` : '—';
+
+        return `<tr>
+            <td style="color:var(--text-tertiary);">${i+1}</td>
+            <td><span class="cell-name">${esc(d.company_name)}</span></td>
+            <td><span class="industry-tag" style="background:#8b5cf615;color:#8b5cf6;">${esc(d.industry)}</span></td>
+            <td>${email}</td>
+            <td>${phone}</td>
+            <td>${wa}</td>
+            <td>${web}</td>
+            <td><span style="color:${qColor};font-weight:700;">${q}</span></td>
+        </tr>`;
+    }).join('') || `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无数据</td></tr>`;
+}
+
+function applyEffFilters() {
+    const kw = document.getElementById('effKeyword')?.value?.toLowerCase() || '';
+    const ind = document.getElementById('effIndustry')?.value || '';
+    const contact = document.getElementById('effContact')?.value || '';
+
+    effState.filtered = effState.all.filter(d => {
+        if (kw && !(d.company_name?.toLowerCase().includes(kw) || d.industry?.toLowerCase().includes(kw) || d.email?.toLowerCase().includes(kw) || d.website?.toLowerCase().includes(kw))) return false;
+        if (ind && d.industry !== ind) return false;
+        if (contact === 'email' && !d.email) return false;
+        if (contact === 'phone' && !d.phone) return false;
+        if (contact === 'whatsapp' && !d.whatsapp) return false;
+        if (contact === 'all' && (!d.email || !d.phone)) return false;
+        return true;
+    });
+    renderEffTable();
+}
+
+function initEffective() {
+    ['effKeyword', 'effIndustry', 'effContact'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.addEventListener('input', applyEffFilters); el.addEventListener('change', applyEffFilters); }
+    });
+    document.getElementById('effFilterBtn')?.addEventListener('click', applyEffFilters);
+    document.getElementById('effResetBtn')?.addEventListener('click', () => {
+        document.getElementById('effKeyword').value = '';
+        document.getElementById('effIndustry').value = '';
+        document.getElementById('effContact').value = '';
+        applyEffFilters();
+    });
+    document.getElementById('effExportBtn')?.addEventListener('click', () => {
+        exportCSV(effState.filtered.map(d => ({
+            公司名称: d.company_name, 行业: d.industry, 邮箱: d.email,
+            电话: d.phone, WhatsApp: d.whatsapp, 官网: d.website, 质量分: d.data_quality
         })));
     });
 }
