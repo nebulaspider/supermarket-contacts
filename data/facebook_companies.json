@@ -4,11 +4,16 @@
     "industry": "家具批发",
     "country": "美国",
     "city": "Houston, TX",
-    "address": "10300 Westpark Drive, Houston, TX",
+    "address": "10300 Westpark Drive, Houston, TX 77042",
     "source": "Facebook Page",
     "facebook_fans": 51,
     "status": "待联系",
-    "data_quality": 60
+    "data_quality": 90,
+    "phone": "(713) 777-5888",
+    "fax": "(713) 777-0585",
+    "website": "www.aaafurnitureusa.com",
+    "contact_person": "Alex Y Lu Sr (President)",
+    "email_format": "{first_initial}{last}@aaafurnitureusa.com"
   },
   {
     "company_name": "Amazing Furniture",
@@ -63,7 +68,11 @@
     "source": "Facebook Page",
     "facebook_fans": 2,
     "status": "待联系",
-    "data_quality": 50
+    "data_quality": 75,
+    "phone": "800-693-5385",
+    "email": "sales@vanitii.com",
+    "website": "vanitii.com",
+    "note": "VANITII - 家具批发供应商"
   },
   {
     "company_name": "Pavilion USA Wholesale",
@@ -74,7 +83,11 @@
     "source": "Facebook Page",
     "facebook_fans": 14,
     "status": "待联系",
-    "data_quality": 45
+    "data_quality": 70,
+    "phone": "314-997-5959",
+    "email": "info@kassirco.com",
+    "website": "kassirco.com",
+    "note": "批发分销商"
   },
   {
     "company_name": "Cosmeticswholesaleusa",
@@ -85,7 +98,11 @@
     "source": "Facebook Page",
     "facebook_fans": 0,
     "status": "待联系",
-    "data_quality": 65
+    "data_quality": 80,
+    "phone": "(213) 746-7774",
+    "email": "support@perfumes.la",
+    "whatsapp": "213-926-8645",
+    "website": "perfumes.la"
   },
   {
     "company_name": "Cosmetics Wholesale USA",
@@ -96,7 +113,11 @@
     "source": "Facebook Page",
     "facebook_fans": 6906,
     "status": "待联系",
-    "data_quality": 60
+    "data_quality": 85,
+    "phone": "(323) 507-8581",
+    "email": "cosmeticosalpormayorlainc@gmail.com",
+    "whatsapp": "+1 (562) 399-1841",
+    "website": "flawlessbeautywholesale.com"
   },
   {
     "company_name": "SUV Cosmetics Wholesale USA",
@@ -129,29 +150,39 @@
     "source": "Facebook Page",
     "facebook_fans": 540,
     "status": "待联系",
-    "data_quality": 65
+    "data_quality": 85,
+    "email": "CUSTOMERSERVICE@PETSTORESUSA.COM",
+    "phone": "888-300-5139",
+    "website": "www.petstoresusa.com"
   },
   {
     "company_name": "Pet Brands USA",
     "industry": "宠物用品",
     "country": "美国",
     "city": "",
-    "address": "",
+    "address": "9550 Satellite Blvd, Suite 150, Orlando FL 32837",
     "source": "Facebook Page",
     "facebook_fans": 7,
     "status": "待联系",
-    "data_quality": 45
+    "data_quality": 85,
+    "phone": "+1 (833) 762-3436",
+    "email": "info@dcpetdistribution.com",
+    "website": "dcpetdistribution.com"
   },
   {
     "company_name": "USA Pet Supplies",
     "industry": "宠物用品",
     "country": "美国",
     "city": "",
-    "address": "",
+    "address": "5 Cherry Hill Drive, Danvers, MA 01923",
     "source": "Facebook Page",
     "facebook_fans": 92,
     "status": "待联系",
-    "data_quality": 50
+    "data_quality": 80,
+    "phone": "800-738-3343",
+    "email": "Support@PetEdge.com",
+    "website": "www.petedge.com",
+    "note": "PetEdge / Boss Pet Products"
   },
   {
     "company_name": "All Doll-Toy USA",
@@ -162,7 +193,10 @@
     "source": "Facebook Page",
     "facebook_fans": 3,
     "status": "待联系",
-    "data_quality": 45
+    "data_quality": 75,
+    "phone": "1-877-407-3001",
+    "email": "sales@starmakerdistribution.com",
+    "website": "www.starmakerdistribution.com"
   },
   {
     "company_name": "MiaMagnetico",
@@ -180,11 +214,15 @@
     "industry": "电子批发",
     "country": "美国",
     "city": "",
-    "address": "",
+    "address": "2734 Thompson Creek Road, Pomona, CA 91767",
     "source": "Facebook Page",
     "facebook_fans": 128,
     "status": "待联系",
-    "data_quality": 55
+    "data_quality": 85,
+    "phone": "(585) 666-7888",
+    "email": "support@rootmi.com",
+    "website": "rootmi.com",
+    "note": "ROOTMI Technology - 消费电子批发"
   },
   {
     "company_name": "Modern Electronics USA",
@@ -195,7 +233,9 @@
     "source": "Facebook Page",
     "facebook_fans": 0,
     "status": "待联系",
-    "data_quality": 55
+    "data_quality": 65,
+    "phone": "(405) 632-6797",
+    "website": "www.mecopier.com"
   },
   {
     "company_name": "YoungJi Electronics USA",
@@ -213,22 +253,28 @@
     "industry": "卫浴批发",
     "country": "美国",
     "city": "Meridian, ID",
-    "address": "Meridian, ID",
+    "address": "13506 Sherman Way, Van Nuys, CA 91405",
     "source": "Facebook Page",
     "facebook_fans": 0,
     "status": "待联系",
-    "data_quality": 55
+    "data_quality": 85,
+    "phone": "818-989-6268",
+    "email": "vanitywholesale01@gmail.com",
+    "website": "bathroomvanitywholesale.com"
   },
   {
     "company_name": "Fancywood Cabinetry Inc",
     "industry": "卫浴/橱柜",
     "country": "美国",
     "city": "City of Industry, CA",
-    "address": "1365 Darius Ct, City of Industry, CA",
+    "address": "771 Shallowford Rd, Suite 211/220, Kennesaw, GA 30144",
     "source": "Facebook Page",
     "facebook_fans": 4,
     "status": "待联系",
-    "data_quality": 55
+    "data_quality": 90,
+    "phone": "678-427-5014",
+    "email": "fancywoodworks@gmail.com",
+    "website": "www.fancywoodworks.com"
   },
   {
     "company_name": "Wolseley Canada Inc",
@@ -239,7 +285,10 @@
     "source": "Facebook Page",
     "facebook_fans": 2,
     "status": "待联系",
-    "data_quality": 60
+    "data_quality": 70,
+    "phone": "1-800-876-2567",
+    "email": "DealerServices@BossPetEdge.com",
+    "website": "www.bosspetedge.com"
   },
   {
     "company_name": "Home Good USA",
@@ -250,7 +299,10 @@
     "source": "Facebook Page",
     "facebook_fans": 2,
     "status": "待联系",
-    "data_quality": 45
+    "data_quality": 80,
+    "phone": "(737) 227-8869",
+    "email": "info@betterpricesupply.com",
+    "website": "betterpricesupply.com"
   },
   {
     "company_name": "Home Service USA",
@@ -261,7 +313,12 @@
     "source": "Facebook Page",
     "facebook_fans": 11,
     "status": "待联系",
-    "data_quality": 45
+    "data_quality": 85,
+    "phone": "+1 (315) 975-9186",
+    "email": "support@velmardistribution.com",
+    "whatsapp": "+1 (315) 975-9186",
+    "website": "www.velmardistribution.com",
+    "note": "Velmar Distribution - 有WhatsApp群"
   },
   {
     "company_name": "Trailbound USA",
@@ -272,7 +329,11 @@
     "source": "Facebook Page",
     "facebook_fans": 4974,
     "status": "待联系",
-    "data_quality": 65
+    "data_quality": 70,
+    "phone": "1-800-335-5621",
+    "email": "wholesale@fatbraintoyco.com",
+    "website": "www.fatbraintoyco.com",
+    "note": "Fat Brain Toy Co - 户外/玩具批发"
   },
   {
     "company_name": "Claire Elaine Creative",
@@ -294,7 +355,10 @@
     "source": "Facebook Page",
     "facebook_fans": 0,
     "status": "待联系",
-    "data_quality": 50
+    "data_quality": 65,
+    "phone": "800-829-8222",
+    "website": "www.gexcoenterprises.com",
+    "note": "Gexco Enterprises - 体育用品批发"
   },
   {
     "company_name": "Cixi Beisen Tourist Products",
@@ -313,12 +377,13 @@
     "country": "美国",
     "city": "",
     "address": "",
-    "phone": "1-888-858-5041",
+    "phone": "1-888-858-5041 / (888) 808-4651",
     "website": "www.usaofficesupplies.com",
     "source": "Facebook Page",
     "facebook_fans": 652,
     "status": "待联系",
-    "data_quality": 70
+    "data_quality": 80,
+    "email": "admin@usaofficemachines.com"
   },
   {
     "company_name": "Office Network USA",
@@ -384,7 +449,9 @@
     "source": "Facebook Page",
     "facebook_fans": 828,
     "status": "待联系",
-    "data_quality": 60
+    "data_quality": 60,
+    "website": "bergkoch.com",
+    "note": "厨具品牌，官网无公开联系方式"
   },
   {
     "company_name": "Bröndbi",
@@ -424,11 +491,14 @@
     "industry": "促销品/定制",
     "country": "美国",
     "city": "Ontario, CA",
-    "address": "Ontario, CA",
+    "address": "1530 Sunbluff Drive, Diamond Bar, CA",
     "source": "Facebook Page",
     "facebook_fans": 0,
     "status": "待联系",
-    "data_quality": 55
+    "data_quality": 65,
+    "phone": "(909) 612-0022",
+    "website": "",
+    "note": "体育用品批发"
   },
   {
     "company_name": "Uniq Promo Ltd",
@@ -439,7 +509,10 @@
     "source": "Facebook Page",
     "facebook_fans": 0,
     "status": "待联系",
-    "data_quality": 55
+    "data_quality": 70,
+    "phone": "1-800-426-2168",
+    "email": "cs@berghoff-usa.com",
+    "website": "www.shopberghoff.com"
   },
   {
     "company_name": "Biovita USA",
@@ -483,7 +556,11 @@
     "source": "Facebook Page",
     "facebook_fans": 7,
     "status": "待联系",
-    "data_quality": 45
+    "data_quality": 75,
+    "phone": "1-800-344-4115",
+    "email": "info@designimports.com",
+    "website": "www.designimports.com",
+    "note": "Design Imports - 家居鞋类批发"
   },
   {
     "company_name": "Fashion Shoes (wholesale & retailer)",
@@ -582,7 +659,11 @@
     "source": "Facebook Page",
     "facebook_fans": 0,
     "status": "待联系",
-    "data_quality": 50
+    "data_quality": 75,
+    "phone": "845-418-6793",
+    "email": "support@quickwayimports.com",
+    "website": "www.quickwayimports.com",
+    "note": "Quickway Imports - 纽约家居母婴批发"
   },
   {
     "company_name": "USA Baby",
@@ -593,7 +674,10 @@
     "source": "Facebook Page",
     "facebook_fans": 0,
     "status": "待联系",
-    "data_quality": 45
+    "data_quality": 75,
+    "phone": "+1 (305) 432-8661",
+    "email": "info@globalretailltd.com",
+    "website": "globalretailltd.com"
   },
   {
     "company_name": "Baby USA Phoenix",

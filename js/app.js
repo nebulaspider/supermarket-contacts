@@ -823,16 +823,18 @@ function renderFbTable() {
         const typeColor = d.type === 'contact' ? '#3b82f6' : '#f59e0b';
         const quality = d.data_quality || 50;
         const qColor = quality >= 70 ? '#10b981' : quality >= 50 ? '#f59e0b' : '#ef4444';
-        const fans = d.facebook_fans ? d.facebook_fans.toLocaleString() : '—';
         const name = d.name || d.company_name || '—';
+        const phone = d.phone ? `<a href="tel:${esc(d.phone)}" style="color:#10b981;text-decoration:none;font-weight:600;">${esc(d.phone)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
+        const email = d.email ? `<a href="mailto:${esc(d.email)}" style="color:#3b82f6;text-decoration:none;font-weight:600;">${esc(d.email)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
+        const whatsapp = d.whatsapp ? `<a href="https://wa.me/${esc(d.whatsapp.replace(/[^0-9]/g,''))}" target="_blank" style="color:#25D366;text-decoration:none;font-weight:600;">💬 ${esc(d.whatsapp)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
 
         let actions = '';
         if (d.type === 'contact') {
-            actions += `<button class="action-btn" onclick="searchFbProfile('${esc(name)}')">Facebook 搜索</button>`;
+            actions += `<button class="action-btn" onclick="searchFbProfile('${esc(name)}')">FB搜索</button>`;
         } else {
             actions += `<button class="action-btn" onclick="searchFbPage('${esc(name)}')">访问主页</button>`;
         }
-        if (d.phone) actions += `<a href="tel:${esc(d.phone)}" class="action-btn" style="text-decoration:none;">📞 电话</a>`;
+        if (d.website) actions += `<a href="https://${esc(d.website.replace(/^https?:\/\//,''))}" target="_blank" class="action-btn" style="text-decoration:none;">🌐官网</a>`;
 
         return `<tr>
             <td><span class="cell-name">${esc(name)}</span></td>
@@ -840,11 +842,13 @@ function renderFbTable() {
             <td>${esc(d.title || d.industry || '—')}</td>
             <td>${esc(d.company || '—')}</td>
             <td><span class="cell-country">${esc(d.country || '—')}${d.city ? ' / ' + esc(d.city) : ''}</span></td>
-            <td>${fans}</td>
+            <td>${phone}</td>
+            <td>${email}</td>
+            <td>${whatsapp}</td>
             <td><span style="color:${qColor};font-weight:700;">${quality}</span></td>
             <td class="action-cell">${actions}</td>
         </tr>`;
-    }).join('') || `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无数据</td></tr>`;
+    }).join('') || `<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无数据</td></tr>`;
 }
 
 function applyFbFilters() {
