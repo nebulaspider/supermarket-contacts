@@ -1,0 +1,79 @@
+[
+  {
+    "company_name": "AAA Furniture USA",
+    "industry": "家具批发",
+    "country": "美国",
+    "city": "Houston, TX",
+    "address": "10300 Westpark Drive, Houston, TX",
+    "source": "Facebook Page",
+    "facebook_fans": 51,
+    "status": "待联系",
+    "data_quality": 60
+  },
+  {
+    "company_name": "Amazing Furniture",
+    "industry": "家具批发",
+    "country": "美国",
+    "city": "New York, NY",
+    "address": "140 58th St, New York, NY",
+    "source": "Facebook Page",
+    "facebook_fans": 447,
+    "status": "待联系",
+    "data_quality": 65
+  },
+  {
+    "company_name": "Usa Furniture",
+    "industry": "家具批发",
+    "country": "美国",
+    "city": "Hialeah, Miami, FL",
+    "address": "270 W 22nd ST, Hialeah, FL",
+    "source": "Facebook Page",
+    "facebook_fans": 22,
+    "status": "待联系",
+    "data_quality": 55
+  },
+  {
+    "company_name": "Aldora Furniture USA",
+    "industry": "家具",
+    "country": "美国",
+    "city": "",
+    "address": "",
+    "source": "Facebook Page",
+    "facebook_fans": 144,
+    "status": "待联系",
+    "data_quality": 50
+  },
+  {
+    "company_name": "Wholesale Furniture Brokers",
+    "industry": "家具批发",
+    "country": "美国",
+    "city": "",
+    "address": "",
+    "source": "Facebook Page",
+    "facebook_fans": 16,
+    "status": "待联系",
+    "data_quality": 50
+  },
+  {
+    "company_name": "Stendmar Modern Furniture / Besco USA",
+    "industry": "家具",
+    "country": "美国",
+    "city": "Ontario, CA",
+    "address": "1930 S Rochester Ave, Ontario, CA",
+    "source": "Facebook Page",
+    "facebook_fans": 2,
+    "status": "待联系",
+    "data_quality": 50
+  },
+  {
+    "company_name": "Pavilion USA Wholesale",
+    "industry": "家具批发",
+    "country": "美国",
+    "city": "",
+    "address": "",
+    "source": "Facebook Page",
+    "facebook_fans": 14,
+    "status": "待联系",
+    "data_quality": 45
+  }
+]
