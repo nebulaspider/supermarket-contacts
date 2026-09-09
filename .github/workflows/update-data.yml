@@ -2,7 +2,8 @@ name: SupermarketIQ Data Pipeline
 
 on:
   schedule:
-    - cron: '0 2 * * 1'
+    # 每天 UTC 2:00 (香港时间 10:00) 自动运行
+    - cron: '0 2 * * *'
   workflow_dispatch:
     inputs:
       spider:
@@ -182,7 +183,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [data-management]
-    if: needs.data-management.outputs.rollback != 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Download final data
