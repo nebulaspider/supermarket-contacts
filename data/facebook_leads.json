@@ -405,5 +405,82 @@
     "industry": "酒类/零售",
     "status": "待联系",
     "data_quality": 55
+  },
+  {
+    "name": "Thananun Rueangchaya (Dollary)",
+    "title": "Procurement Analyst",
+    "company": "PTT Oil and Retail Business",
+    "country": "泰国",
+    "city": "Bangkok",
+    "source": "Facebook Search",
+    "industry": "石油零售/采购",
+    "status": "待联系",
+    "data_quality": 60
+  },
+  {
+    "name": "Cindy Davis",
+    "title": "Buyer (fashion)",
+    "company": "Ministry of Retail",
+    "country": "美国",
+    "city": "Ozark, MO",
+    "source": "Facebook Search",
+    "industry": "时尚零售",
+    "status": "待联系",
+    "data_quality": 60
+  },
+  {
+    "name": "Emma Mary",
+    "title": "Fashion Buyer",
+    "company": "",
+    "country": "意大利",
+    "city": "Milan",
+    "source": "Facebook Search",
+    "industry": "时尚",
+    "status": "待联系",
+    "data_quality": 50
+  },
+  {
+    "name": "Larissa Razuvaeva",
+    "title": "Buyer (fashion)",
+    "company": "Four Seasons",
+    "country": "俄罗斯",
+    "city": "St. Petersburg",
+    "source": "Facebook Search",
+    "industry": "时尚/酒店",
+    "status": "待联系",
+    "data_quality": 55
+  },
+  {
+    "name": "Sabrina Batts-Hopaon",
+    "title": "Vendor Coordinator",
+    "company": "Premium Retail Services",
+    "country": "美国",
+    "city": "Hampton",
+    "source": "Facebook Search",
+    "industry": "零售服务",
+    "status": "待联系",
+    "data_quality": 55
+  },
+  {
+    "name": "Stefani Copsey",
+    "title": "Retail Merchandiser/Vendor",
+    "company": "Danone",
+    "country": "美国",
+    "city": "Bushwood, MD",
+    "source": "Facebook Search",
+    "industry": "食品饮料",
+    "status": "待联系",
+    "data_quality": 55
+  },
+  {
+    "name": "Marwa Youssef",
+    "title": "Senior Procurement Specialist",
+    "company": "Magrabi Retail",
+    "country": "埃及",
+    "city": "Cairo",
+    "source": "Facebook Search",
+    "industry": "零售/采购",
+    "status": "待联系",
+    "data_quality": 60
   }
 ]

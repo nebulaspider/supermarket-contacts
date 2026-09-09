@@ -528,5 +528,93 @@
     "facebook_fans": 32,
     "status": "待联系",
     "data_quality": 45
+  },
+  {
+    "company_name": "Solar Garden Led Lights Wholesale USA",
+    "industry": "太阳能灯/园艺",
+    "country": "美国",
+    "city": "",
+    "address": "",
+    "source": "Facebook Page",
+    "facebook_fans": 15,
+    "status": "待联系",
+    "data_quality": 50
+  },
+  {
+    "company_name": "USA Lawn and Garden",
+    "industry": "园艺服务",
+    "country": "美国",
+    "city": "Stafford, VA",
+    "address": "Garrisonville, Stafford, VA",
+    "source": "Facebook Page",
+    "facebook_fans": 16,
+    "status": "待联系",
+    "data_quality": 45
+  },
+  {
+    "company_name": "Best Garden Shop USA",
+    "industry": "园艺电商",
+    "country": "美国",
+    "city": "",
+    "address": "",
+    "source": "Facebook Page",
+    "facebook_fans": 0,
+    "status": "待联系",
+    "data_quality": 40
+  },
+  {
+    "company_name": "USA Home Decor",
+    "industry": "家居装饰",
+    "country": "美国",
+    "city": "",
+    "address": "",
+    "source": "Facebook Page",
+    "facebook_fans": 6331,
+    "status": "待联系",
+    "data_quality": 55
+  },
+  {
+    "company_name": "Baby USA",
+    "industry": "母婴用品",
+    "country": "美国",
+    "city": "Los Angeles, CA",
+    "address": "Los Angeles, CA",
+    "source": "Facebook Page",
+    "facebook_fans": 0,
+    "status": "待联系",
+    "data_quality": 50
+  },
+  {
+    "company_name": "USA Baby",
+    "industry": "母婴用品",
+    "country": "美国",
+    "city": "",
+    "address": "",
+    "source": "Facebook Page",
+    "facebook_fans": 0,
+    "status": "待联系",
+    "data_quality": 45
+  },
+  {
+    "company_name": "Baby USA Phoenix",
+    "industry": "母婴用品",
+    "country": "美国",
+    "city": "Phoenix, AZ",
+    "address": "Phoenix, AZ",
+    "source": "Facebook Page",
+    "facebook_fans": 2,
+    "status": "待联系",
+    "data_quality": 40
+  },
+  {
+    "company_name": "Bfsuma Natural Health Supplements",
+    "industry": "保健品批发",
+    "country": "乌干达",
+    "city": "Kampala",
+    "address": "Wandegeya, Kampala",
+    "source": "Facebook Page",
+    "facebook_fans": 80,
+    "status": "待联系",
+    "data_quality": 50
   }
 ]
