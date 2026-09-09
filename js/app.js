@@ -923,6 +923,8 @@ async function loadEffectiveData() {
         document.getElementById('effEmail').textContent = effState.all.filter(d => d.email).length;
         document.getElementById('effPhone').textContent = effState.all.filter(d => d.phone).length;
         document.getElementById('effWA').textContent = effState.all.filter(d => d.whatsapp).length;
+        document.getElementById('effFB').textContent = effState.all.filter(d => d.facebook).length;
+        document.getElementById('effIG').textContent = effState.all.filter(d => d.instagram).length;
 
         const industries = [...new Set(effState.all.map(d => d.industry).filter(Boolean))].sort();
         document.getElementById('effIndustry').innerHTML = '<option value="">全部行业</option>' +
@@ -946,6 +948,14 @@ function renderEffTable() {
         const wa = d.whatsapp ? `<a href="https://wa.me/${esc(d.whatsapp)}" target="_blank" style="color:#25D366;text-decoration:none;font-weight:700;font-size:13px;">💬 联系</a>` : '<span style="color:var(--text-tertiary);">—</span>';
         const web = d.website ? `<a href="https://${esc(d.website)}" target="_blank" style="color:var(--text-secondary);text-decoration:none;font-size:12px;">${esc(d.website)}</a>` : '—';
 
+        // 社交媒体链接
+        let socialLinks = '';
+        if (d.facebook) socialLinks += `<a href="https://facebook.com/${esc(d.facebook)}" target="_blank" title="Facebook" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#1877f2;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">f</a>`;
+        if (d.instagram) socialLinks += `<a href="https://instagram.com/${esc(d.instagram)}" target="_blank" title="Instagram" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#e4405f;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">IG</a>`;
+        if (d.linkedin) socialLinks += `<a href="https://linkedin.com/company/${esc(d.linkedin)}" target="_blank" title="LinkedIn" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#0a66c2;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">in</a>`;
+        if (d.twitter) socialLinks += `<a href="https://twitter.com/${esc(d.twitter)}" target="_blank" title="Twitter" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#1da1f2;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">X</a>`;
+        if (!socialLinks) socialLinks = '<span style="color:var(--text-tertiary);">—</span>';
+
         return `<tr>
             <td style="color:var(--text-tertiary);">${i+1}</td>
             <td><span class="cell-name">${esc(d.company_name)}</span></td>
@@ -953,10 +963,11 @@ function renderEffTable() {
             <td>${email}</td>
             <td>${phone}</td>
             <td>${wa}</td>
+            <td>${socialLinks}</td>
             <td>${web}</td>
             <td><span style="color:${qColor};font-weight:700;">${q}</span></td>
         </tr>`;
-    }).join('') || `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无数据</td></tr>`;
+    }).join('') || `<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无数据</td></tr>`;
 }
 
 function applyEffFilters() {
@@ -991,7 +1002,9 @@ function initEffective() {
     document.getElementById('effExportBtn')?.addEventListener('click', () => {
         exportCSV(effState.filtered.map(d => ({
             公司名称: d.company_name, 行业: d.industry, 邮箱: d.email,
-            电话: d.phone, WhatsApp: d.whatsapp, 官网: d.website, 质量分: d.data_quality
+            电话: d.phone, WhatsApp: d.whatsapp, Facebook: d.facebook,
+            Instagram: d.instagram, LinkedIn: d.linkedin, Twitter: d.twitter,
+            官网: d.website, 质量分: d.data_quality
         })));
     });
 }

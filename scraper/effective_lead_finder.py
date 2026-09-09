@@ -119,7 +119,26 @@ def extract_contacts(html):
             if w not in whatsapp and len(w) >= 8:
                 whatsapp.append(w)
 
-    return emails[:5], phones[:5], whatsapp[:3]
+    # 社交媒体
+    social = {}
+    social_patterns = {
+        'facebook': r'https?://(?:www\.)?facebook\.com/([a-zA-Z0-9._-]+)',
+        'instagram': r'https?://(?:www\.)?instagram\.com/([a-zA-Z0-9._-]+)',
+        'linkedin': r'https?://(?:www\.)?linkedin\.com/(?:company|in)/([a-zA-Z0-9._-]+)',
+        'twitter': r'https?://(?:www\.)?(?:twitter|x)\.com/([a-zA-Z0-9._-]+)',
+        'youtube': r'https?://(?:www\.)?youtube\.com/(?:c|channel|@)([a-zA-Z0-9._-]+)',
+        'pinterest': r'https?://(?:www\.)?pinterest\.com/([a-zA-Z0-9._-]+)',
+    }
+    for platform, pattern in social_patterns.items():
+        matches = re.findall(pattern, html, re.IGNORECASE)
+        for m in matches:
+            m = m.strip().rstrip('/')
+            if m and m not in ['pages', 'share', 'sharer', 'dialog', 'login', 'signup', 'home', 'tr', 'watch', 'hashtag']:
+                if platform not in social:
+                    social[platform] = m
+                break
+
+    return emails[:5], phones[:5], whatsapp[:3], social
 
 def get_company_name(html, url):
     title_match = re.search(r'<title>([^<]+)</title>', html, re.IGNORECASE)
@@ -143,22 +162,24 @@ def crawl_company(url, industry, country):
         return None
 
     company_name = get_company_name(html, url)
-    emails, phones, whatsapp = extract_contacts(html)
+    emails, phones, whatsapp, social = extract_contacts(html)
 
     # 尝试contact页面
-    if not emails or not phones:
+    if not emails or not phones or not social:
         for path in ['/contact', '/contact-us', '/contact-us/', '/about', '/about-us', '/support', '/wholesale', '/vendor']:
-            if len(emails) >= 2 and len(phones) >= 2:
+            if len(emails) >= 2 and len(phones) >= 2 and social:
                 break
             ch = fetch(url.rstrip('/') + path, timeout=10)
             if ch:
-                e2, p2, w2 = extract_contacts(ch)
+                e2, p2, w2, s2 = extract_contacts(ch)
                 for e in e2:
                     if e not in emails: emails.append(e)
                 for p in p2:
                     if p not in phones: phones.append(p)
                 for w in w2:
                     if w not in whatsapp: whatsapp.append(w)
+                for k, v in s2.items():
+                    if k not in social: social[k] = v
             time.sleep(random.uniform(0.3, 1))
 
     # 地址
@@ -169,9 +190,9 @@ def crawl_company(url, industry, country):
         address = re.sub(r'\s+', ' ', address)[:150]
 
     has_contact = bool(emails or phones or whatsapp)
-    quality = min((30 if emails else 0) + (30 if phones else 0) + (20 if whatsapp else 0) + (10 if address else 0) + (10 if company_name != domain else 0), 100)
+    quality = min((30 if emails else 0) + (30 if phones else 0) + (20 if whatsapp else 0) + (10 if address else 0) + (10 if company_name != domain else 0) + (10 if social else 0), 100)
 
-    print(f"{'✓' if has_contact else '○'} 邮箱:{len(emails)} 电话:{len(phones)} WA:{len(whatsapp)}")
+    print(f"{'✓' if has_contact else '○'} 邮箱:{len(emails)} 电话:{len(phones)} WA:{len(whatsapp)} 社交:{len(social)}")
 
     return {
         'company_name': company_name,
@@ -184,6 +205,12 @@ def crawl_company(url, industry, country):
         'phone': phones[0] if phones else '',
         'all_phones': phones,
         'whatsapp': whatsapp[0] if whatsapp else '',
+        'social': social,
+        'facebook': social.get('facebook', ''),
+        'instagram': social.get('instagram', ''),
+        'linkedin': social.get('linkedin', ''),
+        'twitter': social.get('twitter', ''),
+        'youtube': social.get('youtube', ''),
         'address': address,
         'data_quality': quality,
         'source': 'DuckDuckGo + Website',
