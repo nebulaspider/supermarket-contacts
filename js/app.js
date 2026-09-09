@@ -21,6 +21,7 @@ const VIEW_NAMES = {
     contacts: '客户名录',
     discovery: '潜客挖掘',
     acquisition: '获客中心',
+    facebook: 'Facebook 获客',
     automation: '爬虫监控',
     quality: '数据质量',
     settings: '设置',
@@ -31,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     bindEvents();
     initPreferences();
     initDiscovery();
+    initFacebook();
     loadData();
+    loadFacebookData();
 });
 
 // ===== Events =====
@@ -126,6 +129,7 @@ function switchView(view) {
     document.getElementById('breadcrumbCurrent').textContent = VIEW_NAMES[view] || view;
     closeMobileSidebar();
     if (view === 'discovery') renderDiscovery();
+    if (view === 'facebook') renderFbTable();
     if (view === 'dashboard') setTimeout(() => Object.values(state.charts).forEach(c => c?.resize()), 100);
 }
 
@@ -764,6 +768,136 @@ function initDiscovery() {
     // 导出
     document.getElementById('discoveryExportBtn')?.addEventListener('click', () => {
         exportCSV(applyDiscoveryFilters(state.data));
+    });
+}
+
+// ===== Facebook Leads =====
+let fbState = { contacts: [], companies: [], all: [], filtered: [] };
+
+async function loadFacebookData() {
+    try {
+        const [cResp, pResp] = await Promise.all([
+            fetch('data/facebook_leads.json', { cache: 'no-cache' }),
+            fetch('data/facebook_companies.json', { cache: 'no-cache' })
+        ]);
+        fbState.contacts = await cResp.json();
+        fbState.companies = await pResp.json();
+
+        // 合并为统一列表
+        fbState.all = [
+            ...fbState.contacts.map(c => ({ ...c, type: 'contact', typeLabel: '联系人' })),
+            ...fbState.companies.map(c => ({ ...c, type: 'company', typeLabel: '公司', name: c.company_name, title: c.industry }))
+        ];
+        fbState.filtered = [...fbState.all];
+
+        // 更新 KPI
+        document.getElementById('fbContacts').textContent = fbState.contacts.length;
+        document.getElementById('fbCompanies').textContent = fbState.companies.length;
+        const countries = new Set(fbState.all.map(d => d.country).filter(Boolean));
+        document.getElementById('fbCountries').textContent = countries.size;
+        document.getElementById('fbTotal').textContent = fbState.all.length;
+
+        // 填充国家和行业下拉
+        populateFbFilters();
+        renderFbTable();
+    } catch (e) {
+        console.error('Facebook data load error:', e);
+    }
+}
+
+function populateFbFilters() {
+    const countrySelect = document.getElementById('fbCountry');
+    const industrySelect = document.getElementById('fbIndustry');
+    const countries = [...new Set(fbState.all.map(d => d.country).filter(Boolean))].sort();
+    const industries = [...new Set(fbState.all.map(d => d.industry).filter(Boolean))].sort();
+
+    countrySelect.innerHTML = '<option value="">全部国家</option>' + countries.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+    industrySelect.innerHTML = '<option value="">全部行业</option>' + industries.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join('');
+}
+
+function renderFbTable() {
+    const tbody = document.getElementById('fbTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = fbState.filtered.map(d => {
+        const typeColor = d.type === 'contact' ? '#3b82f6' : '#f59e0b';
+        const quality = d.data_quality || 50;
+        const qColor = quality >= 70 ? '#10b981' : quality >= 50 ? '#f59e0b' : '#ef4444';
+        const fans = d.facebook_fans ? d.facebook_fans.toLocaleString() : '—';
+        const name = d.name || d.company_name || '—';
+
+        let actions = '';
+        if (d.type === 'contact') {
+            actions += `<button class="action-btn" onclick="searchFbProfile('${esc(name)}')">Facebook 搜索</button>`;
+        } else {
+            actions += `<button class="action-btn" onclick="searchFbPage('${esc(name)}')">访问主页</button>`;
+        }
+        if (d.phone) actions += `<a href="tel:${esc(d.phone)}" class="action-btn" style="text-decoration:none;">📞 电话</a>`;
+
+        return `<tr>
+            <td><span class="cell-name">${esc(name)}</span></td>
+            <td><span class="industry-tag" style="background:${typeColor}15;color:${typeColor};">${d.typeLabel}</span></td>
+            <td>${esc(d.title || d.industry || '—')}</td>
+            <td>${esc(d.company || '—')}</td>
+            <td><span class="cell-country">${esc(d.country || '—')}${d.city ? ' / ' + esc(d.city) : ''}</span></td>
+            <td>${fans}</td>
+            <td><span style="color:${qColor};font-weight:700;">${quality}</span></td>
+            <td class="action-cell">${actions}</td>
+        </tr>`;
+    }).join('') || `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无数据</td></tr>`;
+}
+
+function applyFbFilters() {
+    const kw = document.getElementById('fbKeyword')?.value?.toLowerCase() || '';
+    const type = document.getElementById('fbType')?.value || '';
+    const country = document.getElementById('fbCountry')?.value || '';
+    const industry = document.getElementById('fbIndustry')?.value || '';
+
+    fbState.filtered = fbState.all.filter(d => {
+        if (kw && !(d.name?.toLowerCase().includes(kw) || d.company?.toLowerCase().includes(kw) || d.industry?.toLowerCase().includes(kw) || d.title?.toLowerCase().includes(kw))) return false;
+        if (type && d.type !== type) return false;
+        if (country && d.country !== country) return false;
+        if (industry && d.industry !== industry) return false;
+        return true;
+    });
+    renderFbTable();
+}
+
+function searchFbProfile(name) {
+    window.open(`https://www.facebook.com/search/people/?q=${encodeURIComponent(name)}`, '_blank');
+}
+
+function searchFbPage(name) {
+    window.open(`https://www.facebook.com/search/pages/?q=${encodeURIComponent(name)}`, '_blank');
+}
+
+function initFacebook() {
+    ['fbKeyword', 'fbType', 'fbCountry', 'fbIndustry'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.addEventListener('input', applyFbFilters); el.addEventListener('change', applyFbFilters); }
+    });
+    document.getElementById('fbFilterBtn')?.addEventListener('click', applyFbFilters);
+    document.getElementById('fbResetBtn')?.addEventListener('click', () => {
+        document.getElementById('fbKeyword').value = '';
+        document.getElementById('fbType').value = '';
+        document.getElementById('fbCountry').value = '';
+        document.getElementById('fbIndustry').value = '';
+        applyFbFilters();
+    });
+    document.getElementById('fbExportBtn')?.addEventListener('click', () => {
+        exportCSV(fbState.filtered.map(d => ({
+            名称: d.name || d.company_name,
+            类型: d.typeLabel,
+            职位: d.title,
+            行业: d.industry,
+            公司: d.company,
+            国家: d.country,
+            城市: d.city,
+            地址: d.address,
+            电话: d.phone || '',
+            粉丝数: d.facebook_fans || '',
+            质量分: d.data_quality
+        })));
     });
 }
 
