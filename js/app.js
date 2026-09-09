@@ -830,7 +830,14 @@ function renderFbTable() {
         const name = d.name || d.company_name || '—';
         const phone = d.phone ? `<a href="tel:${esc(d.phone)}" style="color:#10b981;text-decoration:none;font-weight:600;">${esc(d.phone)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
         const email = d.email ? `<a href="mailto:${esc(d.email)}" style="color:#3b82f6;text-decoration:none;font-weight:600;">${esc(d.email)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
-        const whatsapp = d.whatsapp ? `<a href="https://wa.me/${esc(d.whatsapp.replace(/[^0-9]/g,''))}" target="_blank" style="color:#25D366;text-decoration:none;font-weight:600;">💬 ${esc(d.whatsapp)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
+        const whatsapp = d.whatsapp ? (() => {
+            const digits = String(d.whatsapp).replace(/\D/g, '');
+            let display = d.whatsapp;
+            if (digits.length === 10) display = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+            else if (digits.length === 11 && digits.startsWith('1')) display = `+1 (${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
+            else if (digits.length >= 11) display = `+${digits.slice(0,digits.length-10)} (${digits.slice(-10,-7)}) ${digits.slice(-7,-4)}-${digits.slice(-4)}`;
+            return `<a href="https://wa.me/${digits}" target="_blank" style="color:#25D366;text-decoration:none;font-weight:600;">💬 ${display}</a>`;
+        })() : '<span style="color:var(--text-tertiary);">—</span>';
 
         let actions = '';
         if (d.type === 'contact') {
@@ -945,7 +952,14 @@ function renderEffTable() {
         const qColor = q >= 80 ? '#10b981' : q >= 60 ? '#f59e0b' : '#ef4444';
         const email = d.email ? `<a href="mailto:${esc(d.email)}" style="color:#3b82f6;text-decoration:none;font-weight:600;font-size:13px;">${esc(d.email)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
         const phone = d.phone ? `<a href="tel:${esc(d.phone)}" style="color:#10b981;text-decoration:none;font-weight:600;font-size:13px;">${esc(d.phone)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
-        const wa = d.whatsapp ? `<a href="https://wa.me/${esc(d.whatsapp)}" target="_blank" style="color:#25D366;text-decoration:none;font-weight:700;font-size:13px;">💬 联系</a>` : '<span style="color:var(--text-tertiary);">—</span>';
+        const wa = d.whatsapp ? (() => {
+            const digits = String(d.whatsapp).replace(/\D/g, '');
+            let display = d.whatsapp;
+            if (digits.length === 10) display = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+            else if (digits.length === 11 && digits.startsWith('1')) display = `+1 (${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
+            else if (digits.length >= 11) display = `+${digits.slice(0,digits.length-10)} (${digits.slice(-10,-7)}) ${digits.slice(-7,-4)}-${digits.slice(-4)}`;
+            return `<a href="https://wa.me/${digits}" target="_blank" style="color:#25D366;text-decoration:none;font-weight:700;font-size:13px;">💬 ${display}</a>`;
+        })() : '<span style="color:var(--text-tertiary);">—</span>';
         const web = d.website ? `<a href="https://${esc(d.website)}" target="_blank" style="color:var(--text-secondary);text-decoration:none;font-size:12px;">${esc(d.website)}</a>` : '—';
 
         // 社交媒体链接
