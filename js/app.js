@@ -917,7 +917,70 @@ function initFacebook() {
 }
 
 // ===== Effective Leads (高效获客) =====
-let effState = { all: [], filtered: [] };
+let effState = { all: [], filtered: [], selected: new Set() };
+
+// ===== localStorage 存储管理 =====
+const LS_KEYS = {
+    tags: 'cyrus_eff_tags',       // { website: ['hot','contacted'] }
+    followups: 'cyrus_eff_follow', // { website: [{date, content}] }
+    favorites: 'cyrus_eff_fav'     // [website, website]
+};
+
+function getLS(key) {
+    try { return JSON.parse(localStorage.getItem(key)) || (key === LS_KEYS.favorites ? [] : {}); }
+    catch { return key === LS_KEYS.favorites ? [] : {}; }
+}
+function setLS(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+
+function getLeadTags(website) {
+    const tags = getLS(LS_KEYS.tags);
+    return tags[website] || [];
+}
+function setLeadTags(website, tagList) {
+    const tags = getLS(LS_KEYS.tags);
+    if (tagList.length) tags[website] = tagList; else delete tags[website];
+    setLS(LS_KEYS.tags, tags);
+}
+function toggleLeadTag(website, tag) {
+    const current = getLeadTags(website);
+    const idx = current.indexOf(tag);
+    if (idx >= 0) current.splice(idx, 1); else current.push(tag);
+    setLeadTags(website, current);
+    return current;
+}
+function isFavorite(website) {
+    return getLS(LS_KEYS.favorites).includes(website);
+}
+function toggleFavorite(website) {
+    const favs = getLS(LS_KEYS.favorites);
+    const idx = favs.indexOf(website);
+    if (idx >= 0) favs.splice(idx, 1); else favs.push(website);
+    setLS(LS_KEYS.favorites, favs);
+    return favs.includes(website);
+}
+function getFollowups(website) {
+    const all = getLS(LS_KEYS.followups);
+    return all[website] || [];
+}
+function addFollowup(website, content) {
+    const all = getLS(LS_KEYS.followups);
+    if (!all[website]) all[website] = [];
+    all[website].unshift({ date: new Date().toISOString(), content });
+    setLS(LS_KEYS.followups, all);
+}
+
+const TAG_LABELS = {
+    favorite: { label: '⭐ 收藏', class: 'tag-favorite' },
+    hot: { label: '🔥 重点', class: 'tag-hot' },
+    contacted: { label: '✅ 已联系', class: 'tag-contacted' },
+    pending: { label: '⏳ 待跟进', class: 'tag-pending' }
+};
+
+function renderTagBadges(website) {
+    const tags = getLeadTags(website);
+    if (isFavorite(website) && !tags.includes('favorite')) tags.unshift('favorite');
+    return tags.map(t => TAG_LABELS[t] ? `<span class="tag-badge ${TAG_LABELS[t].class}">${TAG_LABELS[t].label}</span>` : '').join('') || '<span style="color:var(--text-tertiary);font-size:12px;">—</span>';
+}
 
 async function loadEffectiveData() {
     try {
@@ -950,44 +1013,74 @@ function renderEffTable() {
     tbody.innerHTML = effState.filtered.map((d, i) => {
         const q = d.data_quality || 50;
         const qColor = q >= 80 ? '#10b981' : q >= 60 ? '#f59e0b' : '#ef4444';
-        const email = d.email ? `<a href="mailto:${esc(d.email)}" style="color:#3b82f6;text-decoration:none;font-weight:600;font-size:13px;">${esc(d.email)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
-        const phone = d.phone ? `<a href="tel:${esc(d.phone)}" style="color:#10b981;text-decoration:none;font-weight:600;font-size:13px;">${esc(d.phone)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
+        const email = d.email ? `<a href="mailto:${esc(d.email)}" onclick="event.stopPropagation()" style="color:#3b82f6;text-decoration:none;font-weight:600;font-size:13px;">${esc(d.email)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
+        const phone = d.phone ? `<a href="tel:${esc(d.phone)}" onclick="event.stopPropagation()" style="color:#10b981;text-decoration:none;font-weight:600;font-size:13px;">${esc(d.phone)}</a>` : '<span style="color:var(--text-tertiary);">—</span>';
         const wa = d.whatsapp ? (() => {
             const digits = String(d.whatsapp).replace(/\D/g, '');
             let display = d.whatsapp;
             if (digits.length === 10) display = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
             else if (digits.length === 11 && digits.startsWith('1')) display = `+1 (${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
             else if (digits.length >= 11) display = `+${digits.slice(0,digits.length-10)} (${digits.slice(-10,-7)}) ${digits.slice(-7,-4)}-${digits.slice(-4)}`;
-            return `<a href="https://wa.me/${digits}" target="_blank" style="color:#25D366;text-decoration:none;font-weight:700;font-size:13px;">💬 ${display}</a>`;
+            return `<a href="https://wa.me/${digits}" target="_blank" onclick="event.stopPropagation()" style="color:#25D366;text-decoration:none;font-weight:700;font-size:13px;">💬 ${display}</a>`;
         })() : '<span style="color:var(--text-tertiary);">—</span>';
-        const web = d.website ? `<a href="https://${esc(d.website)}" target="_blank" style="color:var(--text-secondary);text-decoration:none;font-size:12px;">${esc(d.website)}</a>` : '—';
+        const web = d.website ? `<a href="https://${esc(d.website)}" target="_blank" onclick="event.stopPropagation()" style="color:var(--text-secondary);text-decoration:none;font-size:12px;">${esc(d.website)}</a>` : '—';
 
-        // 社交媒体链接
         let socialLinks = '';
-        if (d.facebook) socialLinks += `<a href="https://facebook.com/${esc(d.facebook)}" target="_blank" title="Facebook" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#1877f2;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">f</a>`;
-        if (d.instagram) socialLinks += `<a href="https://instagram.com/${esc(d.instagram)}" target="_blank" title="Instagram" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#e4405f;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">IG</a>`;
-        if (d.linkedin) socialLinks += `<a href="https://linkedin.com/company/${esc(d.linkedin)}" target="_blank" title="LinkedIn" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#0a66c2;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">in</a>`;
-        if (d.twitter) socialLinks += `<a href="https://twitter.com/${esc(d.twitter)}" target="_blank" title="Twitter" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#1da1f2;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">X</a>`;
+        if (d.facebook) socialLinks += `<a href="https://facebook.com/${esc(d.facebook)}" target="_blank" onclick="event.stopPropagation()" title="Facebook" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#1877f2;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">f</a>`;
+        if (d.instagram) socialLinks += `<a href="https://instagram.com/${esc(d.instagram)}" target="_blank" onclick="event.stopPropagation()" title="Instagram" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#e4405f;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">IG</a>`;
+        if (d.linkedin) socialLinks += `<a href="https://linkedin.com/company/${esc(d.linkedin)}" target="_blank" onclick="event.stopPropagation()" title="LinkedIn" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#0a66c2;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">in</a>`;
+        if (d.twitter) socialLinks += `<a href="https://twitter.com/${esc(d.twitter)}" target="_blank" onclick="event.stopPropagation()" title="Twitter" style="display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#1da1f2;color:#fff;border-radius:50%;font-size:11px;margin-right:3px;text-decoration:none;">X</a>`;
         if (!socialLinks) socialLinks = '<span style="color:var(--text-tertiary);">—</span>';
 
-        return `<tr>
+        const checked = effState.selected.has(d.website) ? 'checked' : '';
+        const rowClass = effState.selected.has(d.website) ? 'selected' : '';
+
+        return `<tr class="${rowClass}" data-website="${esc(d.website)}">
+            <td onclick="event.stopPropagation()"><input type="checkbox" class="eff-row-check" data-website="${esc(d.website)}" ${checked}></td>
             <td style="color:var(--text-tertiary);">${i+1}</td>
             <td><span class="cell-name">${esc(d.company_name)}</span></td>
             <td><span class="industry-tag" style="background:#8b5cf615;color:#8b5cf6;">${esc(d.industry)}</span></td>
             <td>${email}</td>
             <td>${phone}</td>
             <td>${wa}</td>
+            <td>${renderTagBadges(d.website)}</td>
             <td>${socialLinks}</td>
             <td>${web}</td>
             <td><span style="color:${qColor};font-weight:700;">${q}</span></td>
         </tr>`;
-    }).join('') || `<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无数据</td></tr>`;
+    }).join('') || `<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无数据</td></tr>`;
+
+    // 绑定行点击和复选框
+    tbody.querySelectorAll('tr[data-website]').forEach(tr => {
+        tr.addEventListener('click', () => openLeadModal(tr.dataset.website));
+    });
+    tbody.querySelectorAll('.eff-row-check').forEach(cb => {
+        cb.addEventListener('change', (e) => {
+            const ws = e.target.dataset.website;
+            if (e.target.checked) effState.selected.add(ws); else effState.selected.delete(ws);
+            e.target.closest('tr').classList.toggle('selected', e.target.checked);
+            updateBatchBar();
+        });
+    });
+}
+
+function updateBatchBar() {
+    const bar = document.getElementById('effBatchBar');
+    const count = effState.selected.size;
+    document.getElementById('effSelectedCount').textContent = count;
+    bar.style.display = count > 0 ? 'flex' : 'none';
+    const allCb = document.getElementById('effCheckAll');
+    if (allCb) {
+        const visible = effState.filtered.map(d => d.website);
+        allCb.checked = visible.length > 0 && visible.every(w => effState.selected.has(w));
+    }
 }
 
 function applyEffFilters() {
     const kw = document.getElementById('effKeyword')?.value?.toLowerCase() || '';
     const ind = document.getElementById('effIndustry')?.value || '';
     const contact = document.getElementById('effContact')?.value || '';
+    const tagFilter = document.getElementById('effTag')?.value || '';
 
     effState.filtered = effState.all.filter(d => {
         if (kw && !(d.company_name?.toLowerCase().includes(kw) || d.industry?.toLowerCase().includes(kw) || d.email?.toLowerCase().includes(kw) || d.website?.toLowerCase().includes(kw))) return false;
@@ -996,13 +1089,206 @@ function applyEffFilters() {
         if (contact === 'phone' && !d.phone) return false;
         if (contact === 'whatsapp' && !d.whatsapp) return false;
         if (contact === 'all' && (!d.email || !d.phone)) return false;
+        if (tagFilter) {
+            if (tagFilter === 'favorite') {
+                if (!isFavorite(d.website)) return false;
+            } else {
+                if (!getLeadTags(d.website).includes(tagFilter)) return false;
+            }
+        }
         return true;
     });
     renderEffTable();
 }
 
+// ===== 客户详情弹窗 =====
+let currentModalWebsite = null;
+
+function openLeadModal(website) {
+    const lead = effState.all.find(d => d.website === website);
+    if (!lead) return;
+    currentModalWebsite = website;
+
+    document.getElementById('modalCompanyName').textContent = lead.company_name;
+    document.getElementById('modalTags').innerHTML = renderTagBadges(website);
+
+    const q = lead.data_quality || 50;
+    const qColor = q >= 80 ? '#10b981' : q >= 60 ? '#f59e0b' : '#ef4444';
+
+    const socialLinks = [];
+    if (lead.facebook) socialLinks.push(`<a href="https://facebook.com/${esc(lead.facebook)}" target="_blank">Facebook</a>`);
+    if (lead.instagram) socialLinks.push(`<a href="https://instagram.com/${esc(lead.instagram)}" target="_blank">Instagram</a>`);
+    if (lead.linkedin) socialLinks.push(`<a href="https://linkedin.com/company/${esc(lead.linkedin)}" target="_blank">LinkedIn</a>`);
+    if (lead.twitter) socialLinks.push(`<a href="https://twitter.com/${esc(lead.twitter)}" target="_blank">Twitter/X</a>`);
+
+    const followups = getFollowups(website);
+    const followupHTML = followups.length ? followups.map(f => {
+        const d = new Date(f.date);
+        const dateStr = d.toLocaleDateString('zh-CN') + ' ' + d.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'});
+        return `<div class="followup-item"><div class="followup-date">${dateStr}</div><div class="followup-content">${esc(f.content)}</div></div>`;
+    }).join('') : '<div class="followup-empty">暂无跟进记录</div>';
+
+    const tagOptions = Object.entries(TAG_LABELS).filter(([k]) => k !== 'favorite').map(([key, val]) => {
+        const active = getLeadTags(website).includes(key) ? 'active' : '';
+        return `<div class="tag-option ${active}" data-tag="${key}">${val.label}</div>`;
+    }).join('');
+
+    const favActive = isFavorite(website) ? 'active' : '';
+
+    document.getElementById('modalBody').innerHTML = `
+        <div class="detail-grid">
+            <div class="detail-item">
+                <div class="detail-label">行业</div>
+                <div class="detail-value">${esc(lead.industry || '—')}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">质量分</div>
+                <div class="detail-value" style="color:${qColor};font-weight:700;">${q}/100</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">✉️ 邮箱</div>
+                <div class="detail-value">${lead.email ? `<a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a>` : '—'}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">📞 电话</div>
+                <div class="detail-value">${lead.phone ? `<a href="tel:${esc(lead.phone)}">${esc(lead.phone)}</a>` : '—'}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">💬 WhatsApp</div>
+                <div class="detail-value">${lead.whatsapp ? `<a href="https://wa.me/${String(lead.whatsapp).replace(/\D/g,'')}" target="_blank">${esc(lead.whatsapp)}</a>` : '—'}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">🌐 官网</div>
+                <div class="detail-value">${lead.website ? `<a href="https://${esc(lead.website)}" target="_blank">${esc(lead.website)}</a>` : '—'}</div>
+            </div>
+            <div class="detail-item detail-full">
+                <div class="detail-label">🔗 社交媒体</div>
+                <div class="detail-value">${socialLinks.length ? socialLinks.join(' · ') : '—'}</div>
+            </div>
+        </div>
+
+        <div class="detail-actions">
+            ${lead.email ? `<a href="mailto:${esc(lead.email)}" class="btn btn--primary btn--sm">✉️ 发邮件</a>` : ''}
+            ${lead.phone ? `<a href="tel:${esc(lead.phone)}" class="btn btn--outline btn--sm">📞 拨打电话</a>` : ''}
+            ${lead.whatsapp ? `<a href="https://wa.me/${String(lead.whatsapp).replace(/\D/g,'')}" target="_blank" class="btn btn--outline btn--sm">💬 WhatsApp</a>` : ''}
+            ${lead.website ? `<a href="https://${esc(lead.website)}" target="_blank" class="btn btn--outline btn--sm">🌐 访问官网</a>` : ''}
+            <button class="btn btn--outline btn--sm" id="modalFavBtn">${isFavorite(website) ? '⭐ 已收藏' : '☆ 收藏'}</button>
+        </div>
+
+        <div style="margin-bottom:8px;font-size:13px;font-weight:600;color:var(--text-secondary);">🏷️ 标签</div>
+        <div class="tag-selector" id="modalTagSelector">
+            <div class="tag-option ${favActive}" data-tag="favorite">⭐ 收藏</div>
+            ${tagOptions}
+        </div>
+
+        <div class="followup-section">
+            <div class="followup-title">
+                <span>📝 跟进记录</span>
+                <span style="font-size:12px;color:var(--text-tertiary);">${followups.length} 条记录</span>
+            </div>
+            <div class="followup-input-row">
+                <input type="text" id="followupInput" placeholder="记录跟进内容，例如：已发开发信，等待回复...">
+                <button class="btn btn--primary btn--sm" id="addFollowupBtn">添加</button>
+            </div>
+            <div class="followup-list" id="followupList">${followupHTML}</div>
+        </div>
+    `;
+
+    // 绑定事件
+    document.querySelectorAll('#modalTagSelector .tag-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            const tag = opt.dataset.tag;
+            if (tag === 'favorite') {
+                toggleFavorite(website);
+            } else {
+                toggleLeadTag(website, tag);
+            }
+            opt.classList.toggle('active');
+            document.getElementById('modalTags').innerHTML = renderTagBadges(website);
+            renderEffTable();
+        });
+    });
+
+    document.getElementById('modalFavBtn').addEventListener('click', () => {
+        toggleFavorite(website);
+        document.getElementById('modalFavBtn').textContent = isFavorite(website) ? '⭐ 已收藏' : '☆ 收藏';
+        document.getElementById('modalTags').innerHTML = renderTagBadges(website);
+        renderEffTable();
+    });
+
+    document.getElementById('addFollowupBtn').addEventListener('click', () => {
+        const input = document.getElementById('followupInput');
+        const content = input.value.trim();
+        if (!content) return;
+        addFollowup(website, content);
+        input.value = '';
+        openLeadModal(website); // 刷新
+    });
+    document.getElementById('followupInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') document.getElementById('addFollowupBtn').click();
+    });
+
+    document.getElementById('leadModal').classList.add('active');
+}
+
+function closeLeadModal() {
+    document.getElementById('leadModal').classList.remove('active');
+    currentModalWebsite = null;
+}
+
+// ===== 批量操作 =====
+function getSelectedLeads() {
+    return effState.all.filter(d => effState.selected.has(d.website));
+}
+
+function batchExport() {
+    const leads = getSelectedLeads();
+    if (!leads.length) return;
+    exportCSV(leads.map(d => ({
+        公司名称: d.company_name, 行业: d.industry, 邮箱: d.email,
+        电话: d.phone, WhatsApp: d.whatsapp, Facebook: d.facebook,
+        Instagram: d.instagram, LinkedIn: d.linkedin, Twitter: d.twitter,
+        官网: d.website, 质量分: d.data_quality,
+        标签: getLeadTags(d.website).join('|'),
+        收藏: isFavorite(d.website) ? '是' : '否'
+    })));
+}
+
+function batchEmail() {
+    const leads = getSelectedLeads().filter(d => d.email);
+    if (!leads.length) { alert('选中的客户中没有邮箱地址'); return; }
+    const bcc = leads.map(d => d.email).join(',');
+    window.location.href = `mailto:?bcc=${encodeURIComponent(bcc)}&subject=${encodeURIComponent('Business Cooperation Inquiry')}`;
+}
+
+function batchTag() {
+    const tag = prompt('输入标签：hot=重点, contacted=已联系, pending=待跟进\n（留空则清除所有标签）');
+    if (tag === null) return;
+    const websites = [...effState.selected];
+    websites.forEach(ws => {
+        if (tag) {
+            const current = getLeadTags(ws);
+            if (!current.includes(tag)) { current.push(tag); setLeadTags(ws, current); }
+        } else {
+            setLeadTags(ws, []);
+        }
+    });
+    renderEffTable();
+    alert(`已为 ${websites.length} 个客户${tag ? '添加' : '清除'}标签`);
+}
+
+function batchFavorite() {
+    const websites = [...effState.selected];
+    let added = 0;
+    websites.forEach(ws => {
+        if (!isFavorite(ws)) { toggleFavorite(ws); added++; }
+    });
+    renderEffTable();
+    alert(`已收藏 ${added} 个客户`);
+}
+
 function initEffective() {
-    ['effKeyword', 'effIndustry', 'effContact'].forEach(id => {
+    ['effKeyword', 'effIndustry', 'effContact', 'effTag'].forEach(id => {
         const el = document.getElementById(id);
         if (el) { el.addEventListener('input', applyEffFilters); el.addEventListener('change', applyEffFilters); }
     });
@@ -1011,6 +1297,7 @@ function initEffective() {
         document.getElementById('effKeyword').value = '';
         document.getElementById('effIndustry').value = '';
         document.getElementById('effContact').value = '';
+        document.getElementById('effTag').value = '';
         applyEffFilters();
     });
     document.getElementById('effExportBtn')?.addEventListener('click', () => {
@@ -1020,6 +1307,41 @@ function initEffective() {
             Instagram: d.instagram, LinkedIn: d.linkedin, Twitter: d.twitter,
             官网: d.website, 质量分: d.data_quality
         })));
+    });
+
+    // 全选
+    document.getElementById('effCheckAll')?.addEventListener('change', (e) => {
+        effState.filtered.forEach(d => {
+            if (e.target.checked) effState.selected.add(d.website);
+            else effState.selected.delete(d.website);
+        });
+        renderEffTable();
+        updateBatchBar();
+    });
+
+    // 批量操作
+    document.getElementById('effSelectAll')?.addEventListener('click', () => {
+        effState.filtered.forEach(d => effState.selected.add(d.website));
+        renderEffTable();
+        updateBatchBar();
+    });
+    document.getElementById('effClearSel')?.addEventListener('click', () => {
+        effState.selected.clear();
+        renderEffTable();
+        updateBatchBar();
+    });
+    document.getElementById('effBatchExport')?.addEventListener('click', batchExport);
+    document.getElementById('effBatchEmail')?.addEventListener('click', batchEmail);
+    document.getElementById('effBatchTag')?.addEventListener('click', batchTag);
+    document.getElementById('effBatchFav')?.addEventListener('click', batchFavorite);
+
+    // 弹窗关闭
+    document.getElementById('modalClose')?.addEventListener('click', closeLeadModal);
+    document.getElementById('leadModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'leadModal') closeLeadModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLeadModal();
     });
 }
 
