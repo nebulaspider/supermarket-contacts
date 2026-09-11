@@ -1685,3 +1685,90 @@ body.font-xl .page-title { font-size: 30px; }
     .modal { margin: 10px; }
     .modal-header, .modal-body { padding: 16px; }
 }
+
+/* ===== 爬虫状态面板 ===== */
+.crawler-status-card {
+    background: linear-gradient(135deg, #0a2540 0%, #1a3a5c 100%);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+.crawler-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.crawler-status-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+.crawler-dot {
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+}
+.crawler-status-info {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.crawler-sep { opacity: 0.3; }
+.crawler-progress-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 12px;
+}
+.crawler-progress-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.crawler-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+}
+.crawler-progress-label span:last-child {
+    font-weight: 700;
+    color: #f5a623;
+}
+.crawler-progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.crawler-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s ease;
+}
+.crawler-auto-note {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+    .crawler-progress-row { grid-template-columns: repeat(2, 1fr); }
+    .crawler-status-header { flex-direction: column; align-items: flex-start; }
+}

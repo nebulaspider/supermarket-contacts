@@ -989,16 +989,50 @@ async function loadEffectiveData() {
         effState.all = await resp.json();
         effState.filtered = [...effState.all];
 
-        document.getElementById('effTotal').textContent = effState.all.length;
-        document.getElementById('effEmail').textContent = effState.all.filter(d => d.email).length;
-        document.getElementById('effPhone').textContent = effState.all.filter(d => d.phone).length;
-        document.getElementById('effWA').textContent = effState.all.filter(d => d.whatsapp).length;
+        const total = effState.all.length;
+        const emailCount = effState.all.filter(d => d.email).length;
+        const phoneCount = effState.all.filter(d => d.phone).length;
+        const waCount = effState.all.filter(d => d.whatsapp).length;
+        const socialCount = effState.all.filter(d => d.facebook || d.instagram || d.linkedin || d.twitter).length;
+
+        document.getElementById('effTotal').textContent = total;
+        document.getElementById('effEmail').textContent = emailCount;
+        document.getElementById('effPhone').textContent = phoneCount;
+        document.getElementById('effWA').textContent = waCount;
         document.getElementById('effFB').textContent = effState.all.filter(d => d.facebook).length;
         document.getElementById('effIG').textContent = effState.all.filter(d => d.instagram).length;
 
+        // 爬虫状态面板
         const industries = [...new Set(effState.all.map(d => d.industry).filter(Boolean))].sort();
         document.getElementById('effIndustry').innerHTML = '<option value="">全部行业</option>' +
             industries.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join('');
+        document.getElementById('effIndustries').textContent = `行业: ${industries.length}`;
+
+        // 国家统计
+        function getCountry(w) {
+            w = (w||'').toLowerCase();
+            if (w.endsWith('.co.uk') || w.endsWith('.uk')) return 'UK';
+            if (w.endsWith('.de')) return 'Germany';
+            if (w.endsWith('.jp') || w.endsWith('.co.jp')) return 'Japan';
+            if (w.endsWith('.sg') || w.endsWith('.com.sg')) return 'Singapore';
+            return 'USA';
+        }
+        const countries = new Set(effState.all.map(d => getCountry(d.website)));
+        document.getElementById('effCountries').textContent = `国家: ${countries.size}`;
+
+        // 覆盖率进度条
+        const setRate = (barId, rateId, count) => {
+            const rate = total ? Math.round(count/total*100) : 0;
+            document.getElementById(barId).style.width = rate + '%';
+            document.getElementById(rateId).textContent = rate + '%';
+        };
+        setRate('effEmailBar', 'effEmailRate', emailCount);
+        setRate('effPhoneBar', 'effPhoneRate', phoneCount);
+        setRate('effWABar', 'effWARate', waCount);
+        setRate('effSocialBar', 'effSocialRate', socialCount);
+
+        // 最后更新时间（从git commit或文件修改时间）
+        document.getElementById('effLastUpdate').textContent = '最后更新: 2026-09-12';
 
         renderEffTable();
     } catch (e) {

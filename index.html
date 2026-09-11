@@ -8,7 +8,7 @@
     <meta http-equiv="Expires" content="0">
     <title>Cyrus AI — 全球客户情报平台</title>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-    <link rel="stylesheet" href="css/style.css?v=20260912b">
+    <link rel="stylesheet" href="css/style.css?v=20260912c">
 </head>
 <body>
 
@@ -848,6 +848,64 @@ Best regards,
                 </div>
             </div>
 
+            <!-- 爬虫进度状态面板 -->
+            <div class="crawler-status-card">
+                <div class="crawler-status-header">
+                    <div class="crawler-status-title">
+                        <span class="crawler-dot"></span>
+                        <span>爬虫状态</span>
+                    </div>
+                    <div class="crawler-status-info">
+                        <span id="effLastUpdate">最后更新: —</span>
+                        <span class="crawler-sep">|</span>
+                        <span id="effIndustries">行业: 0</span>
+                        <span class="crawler-sep">|</span>
+                        <span id="effCountries">国家: 0</span>
+                    </div>
+                </div>
+                <div class="crawler-progress-row">
+                    <div class="crawler-progress-item">
+                        <div class="crawler-progress-label">
+                            <span>邮箱覆盖率</span>
+                            <span id="effEmailRate">0%</span>
+                        </div>
+                        <div class="crawler-progress-bar">
+                            <div class="crawler-progress-fill" id="effEmailBar" style="width:0%;background:#3b82f6;"></div>
+                        </div>
+                    </div>
+                    <div class="crawler-progress-item">
+                        <div class="crawler-progress-label">
+                            <span>电话覆盖率</span>
+                            <span id="effPhoneRate">0%</span>
+                        </div>
+                        <div class="crawler-progress-bar">
+                            <div class="crawler-progress-fill" id="effPhoneBar" style="width:0%;background:#10b981;"></div>
+                        </div>
+                    </div>
+                    <div class="crawler-progress-item">
+                        <div class="crawler-progress-label">
+                            <span>WhatsApp覆盖率</span>
+                            <span id="effWARate">0%</span>
+                        </div>
+                        <div class="crawler-progress-bar">
+                            <div class="crawler-progress-fill" id="effWABar" style="width:0%;background:#25D366;"></div>
+                        </div>
+                    </div>
+                    <div class="crawler-progress-item">
+                        <div class="crawler-progress-label">
+                            <span>社交媒体覆盖率</span>
+                            <span id="effSocialRate">0%</span>
+                        </div>
+                        <div class="crawler-progress-bar">
+                            <div class="crawler-progress-fill" id="effSocialBar" style="width:0%;background:#8b5cf6;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="crawler-auto-note">
+                    ⚙️ 自动更新: 每天香港时间 10:00 自动运行爬虫 · 数据来源: DuckDuckGo + 官网提取
+                </div>
+            </div>
+
             <div class="discovery-topbar">
                 <div class="topbar-row">
                     <div class="topbar-field" style="flex:2;">
@@ -1111,6 +1169,6 @@ Best regards,
 <!-- Toast -->
 <div class="toast-container" id="toastContainer"></div>
 
-<script src="js/app.js?v=20260912b"></script>
+<script src="js/app.js?v=20260912c"></script>
 </body>
 </html>
