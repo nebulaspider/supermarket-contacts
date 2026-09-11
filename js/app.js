@@ -1569,6 +1569,18 @@ function initAcquisition() {
         setLink('tt-hashtag', `https://www.tiktok.com/tag/${kw.replace(/\s+/g, '')}`);
         setLink('tt-creator', `https://www.tiktok.com/search?q=${kwEnc}%20manufacturer`);
 
+        // Pinterest
+        setLink('pin-search', `https://www.pinterest.com/search/pins/?q=${kwEnc}%20wholesale`);
+        setLink('pin-board', `https://www.pinterest.com/search/boards/?q=${kwEnc}%20supplier`);
+
+        // YouTube
+        setLink('yt-channel', `https://www.youtube.com/results?search_query=${kwEnc}%20manufacturer%20factory`);
+        setLink('yt-video', `https://www.youtube.com/results?search_query=${kwEnc}%20wholesale%20supplier`);
+
+        // WhatsApp
+        setLink('wa-group', `https://www.google.com/search?q=${kwEnc}+whatsapp+group+link+sourcing`);
+        setLink('wa-business', `https://www.google.com/search?q=${kwEnc}+whatsapp+business+contact+buyer`);
+
         // B2B Platforms
         setLink('alibaba-search', `https://www.alibaba.com/trade/search?SearchText=${kwEnc}`);
         setLink('mic-search', `https://www.made-in-china.com/productdirectory.do?subaction=hunt&style=b&code=0&word=${kwEnc}`);
@@ -1576,11 +1588,18 @@ function initAcquisition() {
         setLink('indiamart-search', `https://dir.indiamart.com/search.mp?ss=${kwEnc}`);
         setLink('ml-search', `https://www.mercadolibre.com/jobs/search?q=${kwEnc}`);
         setLink('ep-search', `https://www.europages.co.uk/companies/${kwEnc}.html`);
+        setLink('tradekey-search', `https://www.tradekey.com/search/?keyword=${kwEnc}`);
+        setLink('ec21-search', `https://www.ec21.com/search/?keyword=${kwEnc}`);
+        setLink('kompass-search', `https://www.kompass.com/searchCompanies?text=${kwEnc}`);
+        setLink('thomas-search', `https://www.thomasnet.com/search.html?searchnav=true&what=${kwEnc}`);
+        setLink('dhgate-search', `https://www.dhgate.com/wholesale/search.do?act=search&searchkey=${kwEnc}`);
 
         // Google
         setLink('google-buyer', `https://www.google.com/search?q=${kwEnc}+importer+distributor+buyer${country ? '+' + encodeURIComponent(countryName) : ''}`);
         setLink('google-distributor', `https://www.google.com/search?q=${kwEnc}+wholesale+distributor${country ? '+' + encodeURIComponent(countryName) : ''}`);
         setLink('google-wholesaler', `https://www.google.com/search?q=${kwEnc}+wholesaler+supplier${country ? '+' + encodeURIComponent(countryName) : ''}`);
+        setLink('google-b2b', `https://www.google.com/search?q=${kwEnc}+B2B+buyer+procurement+manager${country ? '+' + encodeURIComponent(countryName) : ''}`);
+        setLink('gmaps-search', `https://www.google.com/maps/search/${kwEnc}+wholesale+distributor${country ? '+in+'+encodeURIComponent(countryName) : ''}`);
     };
 
     searchBtn.addEventListener('click', () => {
