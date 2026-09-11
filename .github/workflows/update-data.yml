@@ -2,8 +2,8 @@ name: SupermarketIQ Data Pipeline
 
 on:
   schedule:
-    # 每天 UTC 2:00 (香港时间 10:00) 自动运行
-    - cron: '0 2 * * *'
+    # 每6小时自动运行 (香港时间: 02:00, 08:00, 14:00, 20:00)
+    - cron: '0 */6 * * *'
   workflow_dispatch:
     inputs:
       spider:
