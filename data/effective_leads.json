@@ -353,6 +353,139 @@
     "status": "待联系"
   },
   {
+    "company_name": "Wholesale Accessories UK",
+    "industry": "fashion accessories",
+    "country": "UK",
+    "website": "europafashions.co.uk",
+    "url": "https://www.europafashions.co.uk/collections/accessories",
+    "email": "sales@europafashions.co.uk",
+    "all_emails": [
+      "sales@europafashions.co.uk"
+    ],
+    "phone": "1728550765",
+    "all_phones": [
+      "1728550765",
+      "2612909411",
+      "1756476393",
+      "19113999703",
+      "14821002175"
+    ],
+    "whatsapp": "447445569695",
+    "social": {
+      "facebook": "Europafashions",
+      "instagram": "europafashions",
+      "linkedin": "europafashions",
+      "twitter": "EuropaFashions",
+      "youtube": "EuropaFashionsBirmingham"
+    },
+    "facebook": "Europafashions",
+    "instagram": "europafashions",
+    "linkedin": "europafashions",
+    "twitter": "EuropaFashions",
+    "youtube": "EuropaFashionsBirmingham",
+    "address": "",
+    "data_quality": 100,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Sports Wholesale",
+    "industry": "sporting goods",
+    "country": "UK",
+    "website": "sportswholesale.co.uk",
+    "url": "https://sportswholesale.co.uk/",
+    "email": "info@sportswholesale.co.uk",
+    "all_emails": [
+      "info@sportswholesale.co.uk"
+    ],
+    "phone": "+4474556490",
+    "all_phones": [
+      "+4474556490",
+      "-1774960160",
+      "4474556490",
+      "785.1723472"
+    ],
+    "whatsapp": "7455649070",
+    "social": {
+      "linkedin": "dirac-trading-group"
+    },
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "dirac-trading-group",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 100,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "B2B Wholesale Electronics Distributor in Germany",
+    "industry": "consumer electronics",
+    "country": "Germany",
+    "website": "vnukov-co.de",
+    "url": "https://vnukov-co.de/",
+    "email": "wholesale@vnukovco.com",
+    "all_emails": [
+      "wholesale@vnukovco.com"
+    ],
+    "phone": "736-3835636",
+    "all_phones": [
+      "736-3835636",
+      "239-3633646",
+      "339-3339356",
+      "233-6331656",
+      "966-6130326"
+    ],
+    "whatsapp": "4917660998954",
+    "social": {
+      "instagram": "vnukov_co",
+      "linkedin": "artem-vnukov-594bb1390"
+    },
+    "facebook": "",
+    "instagram": "vnukov_co",
+    "linkedin": "artem-vnukov-594bb1390",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 100,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Stationery Supplies",
+    "industry": "stationery",
+    "country": "Singapore",
+    "website": "packink.co",
+    "url": "https://www.packink.co/collections/office-stationery-supplies",
+    "email": "hello@packink.co",
+    "all_emails": [
+      "hello@packink.co"
+    ],
+    "phone": "1708412680",
+    "all_phones": [
+      "1708412680",
+      "1708399636",
+      "5285377978",
+      "4724247051",
+      "10782148078"
+    ],
+    "whatsapp": "6587504800",
+    "social": {
+      "facebook": "packinkco",
+      "instagram": "packinkco"
+    },
+    "facebook": "packinkco",
+    "instagram": "packinkco",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 100,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
     "company_name": "Nova Furniture",
     "industry": "furniture",
     "country": "USA",
@@ -2399,38 +2532,6 @@
     "status": "待联系"
   },
   {
-    "company_name": "Drone Importers & Drone Buyers",
-    "industry": "drones",
-    "country": "USA",
-    "website": "importer.tradekey.com",
-    "url": "https://importer.tradekey.com/drone-importer.html",
-    "email": "eg.sample@xyz.com",
-    "all_emails": [
-      "eg.sample@xyz.com"
-    ],
-    "phone": "(114) 322-2197",
-    "all_phones": [
-      "-1143222197",
-      "1687431137",
-      "9999999999",
-      "1577168797",
-      "1748340268"
-    ],
-    "whatsapp": "",
-    "social": {
-      "facebook": "TradeKeyOfficial"
-    },
-    "facebook": "TradeKeyOfficial",
-    "instagram": "",
-    "linkedin": "",
-    "twitter": "",
-    "youtube": "",
-    "address": "",
-    "data_quality": 80,
-    "source": "DuckDuckGo + Website",
-    "status": "待联系"
-  },
-  {
     "company_name": "Board Game Wholesale Supplier for Boutiques",
     "industry": "board games puzzles",
     "country": "USA",
@@ -3159,6 +3260,541 @@
     "facebook": "",
     "instagram": "medical_wholesale",
     "linkedin": "medicalwholesale",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Absolute Home Textiles",
+    "industry": "home textiles",
+    "country": "UK",
+    "website": "absolutehometextiles.co.uk",
+    "url": "https://www.absolutehometextiles.co.uk/",
+    "email": "info@abtex.co.uk",
+    "all_emails": [
+      "info@abtex.co.uk",
+      "sample@email.tst"
+    ],
+    "phone": "17826720000",
+    "all_phones": [
+      "17826720000",
+      "1478087648",
+      "16817168255",
+      ".2204460492",
+      "-1037255699"
+    ],
+    "whatsapp": "",
+    "social": {
+      "instagram": "absolutehometextiles",
+      "twitter": "absolutetextile"
+    },
+    "facebook": "",
+    "instagram": "absolutehometextiles",
+    "linkedin": "",
+    "twitter": "absolutetextile",
+    "youtube": "",
+    "address": "Ground Floor Swan Mill Number 3 Higher Swan Lane Bolton BL3 3BJ Tel: 01204653023 Vat No.992 4058 93",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "United Kingdom Beauty and Personal Care B2B Trade Marketplace",
+    "industry": "beauty products",
+    "country": "UK",
+    "website": "beautetrade.com",
+    "url": "https://www.beautetrade.com/united-kingdom/",
+    "email": "info@beautetrade.com",
+    "all_emails": [
+      "info@beautetrade.com"
+    ],
+    "phone": "+1 302 250-4329",
+    "all_phones": [
+      "+1 302 250-4329",
+      "9999999999",
+      "+1-817-886-4487",
+      "3416111501",
+      "0011000615"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "beautetrade",
+      "instagram": "beaute_trade",
+      "linkedin": "beautetrade",
+      "twitter": "beautetrade",
+      "youtube": "Beautetrade",
+      "pinterest": "beautetrade"
+    },
+    "facebook": "beautetrade",
+    "instagram": "beaute_trade",
+    "linkedin": "beautetrade",
+    "twitter": "beautetrade",
+    "youtube": "Beautetrade",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Smash Sports LTD",
+    "industry": "sporting goods",
+    "country": "UK",
+    "website": "smashsports.co.uk",
+    "url": "https://www.smashsports.co.uk/",
+    "email": "office@smashsports.co.uk",
+    "all_emails": [
+      "office@smashsports.co.uk",
+      "605a7baede844d278b89dc95ae0a9123@sentry-next.wixpress.com",
+      "79baaa8e09c746d2b7401643b99792e0@sentry.wixpress.com",
+      "88170cb0c9d64f94b5821ca7fd2d55a4@sentry-next.wixpress.com",
+      "9a65e97ebe8141fca0c4fd686f70996b@sentry.wixpress.com"
+    ],
+    "phone": "151529-6095",
+    "all_phones": [
+      "151529-6095",
+      "2545352419",
+      "9274209201",
+      "-9288338191",
+      "17886921219"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "SmashSportsLTD2004",
+      "twitter": "smashsportsuk",
+      "youtube": "hannel"
+    },
+    "facebook": "SmashSportsLTD2004",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "smashsportsuk",
+    "youtube": "hannel",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Electrical wholesale Manolya",
+    "industry": "consumer electronics",
+    "country": "Germany",
+    "website": "manolya.de",
+    "url": "https://manolya.de/en/",
+    "email": "info@manolya.de",
+    "all_emails": [
+      "info@manolya.de"
+    ],
+    "phone": "-1789096828",
+    "all_phones": [
+      "-1789096828",
+      ".1580893560",
+      ".2083333333",
+      "6216254844",
+      "-9295090158",
+      "-1789097466",
+      "0527777238",
+      "397 444 7755",
+      ".3900586942",
+      "-1789095745",
+      "6117096582",
+      "-1517169908"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "manolya.de",
+      "linkedin": "manolya-e-kfr",
+      "twitter": "manolya_de"
+    },
+    "facebook": "manolya.de",
+    "instagram": "",
+    "linkedin": "manolya-e-kfr",
+    "twitter": "manolya_de",
+    "youtube": "",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Top 12 Wholesale Distributors in Germany (Updated 2026)",
+    "industry": "household goods",
+    "country": "Germany",
+    "website": "b2bridge.io",
+    "url": "https://b2bridge.io/blog/wholesale-distributors-in-germany/",
+    "email": "support@b2bridge.io",
+    "all_emails": [
+      "support@b2bridge.io"
+    ],
+    "phone": "1789009457",
+    "all_phones": [
+      "1789009457",
+      "-1760006829",
+      "-1760006859",
+      "-1760006906",
+      "-1760601774",
+      "1788765760",
+      "+8498351359",
+      "2457515454",
+      "5650644616",
+      "17883629874",
+      "1789034244",
+      "-1618871850",
+      "7102040101",
+      "1788763972"
+    ],
+    "whatsapp": "",
+    "social": {
+      "linkedin": "hanh-vu-b300b22b0",
+      "twitter": "i",
+      "youtube": "b2bridge"
+    },
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "hanh-vu-b300b22b0",
+    "twitter": "i",
+    "youtube": "b2bridge",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Cosmetic supplies wholesale and B2B Shop &ndash; Fantasia Beauty",
+    "industry": "beauty products",
+    "country": "Germany",
+    "website": "fantasia-beauty.de",
+    "url": "https://www.fantasia-beauty.de/en-gb/",
+    "email": "info@fantasia-beauty.de",
+    "all_emails": [
+      "info@fantasia-beauty.de"
+    ],
+    "phone": "17072576031",
+    "all_phones": [
+      "17072576031",
+      "+4926369755"
+    ],
+    "whatsapp": "",
+    "social": {
+      "instagram": "fantasiabeauty",
+      "linkedin": "fantasia-beauty-b2b-kosmetikbedarf-grosshandel",
+      "youtube": "FantasiaBeauty"
+    },
+    "facebook": "",
+    "instagram": "fantasiabeauty",
+    "linkedin": "fantasia-beauty-b2b-kosmetikbedarf-grosshandel",
+    "twitter": "",
+    "youtube": "FantasiaBeauty",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Japanese Wholesale Electronics Suppliers",
+    "industry": "consumer electronics",
+    "country": "Japan",
+    "website": "japanconvoy.com",
+    "url": "https://japanconvoy.com/category/electronics",
+    "email": "info@japanconvoy.com",
+    "all_emails": [
+      "info@japanconvoy.com",
+      "you@company.com",
+      "market@japanconvoy.com"
+    ],
+    "phone": "+8170849586",
+    "all_phones": [
+      "+8170849586"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "japanconvoy",
+      "instagram": "japanconvoy",
+      "linkedin": "japanconvoy",
+      "twitter": "japanconvoy"
+    },
+    "facebook": "japanconvoy",
+    "instagram": "japanconvoy",
+    "linkedin": "japanconvoy",
+    "twitter": "japanconvoy",
+    "youtube": "",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Top 5 Japanese Stationery Wholesalers",
+    "industry": "stationery",
+    "country": "Japan",
+    "website": "la-lumi.com",
+    "url": "https://la-lumi.com/japanese-stationery-wholesale-suppliers/",
+    "email": "melody@la-lumi.com",
+    "all_emails": [
+      "melody@la-lumi.com"
+    ],
+    "phone": "1789075581",
+    "all_phones": [
+      "1789075581",
+      "9162188131",
+      "+8615067442"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "lalumifashionstationery",
+      "instagram": "lalumistationery",
+      "linkedin": "lalumi-fashion-stationery",
+      "youtube": "LalumiFashionStationery"
+    },
+    "facebook": "lalumifashionstationery",
+    "instagram": "lalumistationery",
+    "linkedin": "lalumi-fashion-stationery",
+    "twitter": "",
+    "youtube": "LalumiFashionStationery",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "ZenPop Japan Stationery Store",
+    "industry": "stationery",
+    "country": "Japan",
+    "website": "store.zenpop.jp",
+    "url": "https://store.zenpop.jp/pages/our-wholesale-services",
+    "email": "partner@zenpop.jp",
+    "all_emails": [
+      "partner@zenpop.jp"
+    ],
+    "phone": "5202457209",
+    "all_phones": [
+      "5202457209",
+      "5365081671",
+      "5267871295",
+      "4233493451",
+      "17251134645"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "zenpopjapan",
+      "instagram": "zenpopjapan",
+      "youtube": "ZenPopJapan"
+    },
+    "facebook": "zenpopjapan",
+    "instagram": "zenpopjapan",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "ZenPopJapan",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Singapore Leading Electronics Distributor",
+    "industry": "consumer electronics",
+    "country": "Singapore",
+    "website": "detronics.com.sg",
+    "url": "https://www.detronics.com.sg/",
+    "email": "sales_3@tronics.com.sg",
+    "all_emails": [
+      "sales_3@tronics.com.sg"
+    ],
+    "phone": "-1585631694",
+    "all_phones": [
+      "-1585631694",
+      "-1585324897",
+      "-1585534754",
+      "-1733909954",
+      "1789145137"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "DeTronics-Pte-Ltd-111502606988553"
+    },
+    "facebook": "DeTronics-Pte-Ltd-111502606988553",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Singapore Wholesale Supplier",
+    "industry": "beauty products",
+    "country": "Singapore",
+    "website": "wholesale.growesupply.com",
+    "url": "https://wholesale.growesupply.com/",
+    "email": "sales@growesupply.com",
+    "all_emails": [
+      "sales@growesupply.com",
+      "customersupport@growesupply.com",
+      "customersuccess@growesupply.com"
+    ],
+    "phone": "0721206820",
+    "all_phones": [
+      "0721206820",
+      "6582835474",
+      "6587936168",
+      "2417975228",
+      "103.7446555"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "growesupply",
+      "instagram": "growesupply"
+    },
+    "facebook": "growesupply",
+    "instagram": "growesupply",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Kitchenware Wholesale Distributors",
+    "industry": "kitchenware",
+    "country": "Singapore",
+    "website": "pohhua.com.sg",
+    "url": "https://www.pohhua.com.sg/",
+    "email": "pohhua35@singnet.com.sg",
+    "all_emails": [
+      "pohhua35@singnet.com.sg",
+      "605a7baede844d278b89dc95ae0a9123@sentry-next.wixpress.com",
+      "9a65e97ebe8141fca0c4fd686f70996b@sentry.wixpress.com",
+      "8eb368c655b84e029ed79ad7a5c1718e@sentry.wixpress.com"
+    ],
+    "phone": "2545352419",
+    "all_phones": [
+      "2545352419",
+      "17891446868",
+      "-1499859556",
+      "2147483648",
+      "8299127319"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "wix",
+      "linkedin": "wix-com",
+      "twitter": "Wix"
+    },
+    "facebook": "wix",
+    "instagram": "",
+    "linkedin": "wix-com",
+    "twitter": "Wix",
+    "youtube": "",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Sia Huat™",
+    "industry": "kitchenware",
+    "country": "Singapore",
+    "website": "siahuat.com",
+    "url": "https://www.siahuat.com/",
+    "email": "shsr@siahuat.com.sg",
+    "all_emails": [
+      "shsr@siahuat.com.sg",
+      "enquiry@siahuat.com"
+    ],
+    "phone": ".6666666666",
+    "all_phones": [
+      ".6666666666",
+      "1786933815",
+      "15990277796",
+      "11019454011",
+      "6083609523"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "siahuat",
+      "instagram": "siahuat",
+      "youtube": "hannel"
+    },
+    "facebook": "siahuat",
+    "instagram": "siahuat",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "hannel",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Homepage",
+    "industry": "stationery",
+    "country": "Singapore",
+    "website": "kongbeng.com",
+    "url": "https://kongbeng.com/",
+    "email": "sales@kongbeng.com",
+    "all_emails": [
+      "sales@kongbeng.com"
+    ],
+    "phone": "-1747207159",
+    "all_phones": [
+      "-1747207159",
+      "1432968725",
+      "1775546774",
+      "3636424785",
+      "4972934333",
+      "103.8417700",
+      "+6562581611",
+      "10000750761"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "Kong-Beng-Stationery-Sports-Pte-Ltd-174720715919932",
+      "pinterest": "pin",
+      "instagram": "kongbeng1947"
+    },
+    "facebook": "Kong-Beng-Stationery-Sports-Pte-Ltd-174720715919932",
+    "instagram": "kongbeng1947",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 80,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Best Toy Shop &amp; Party Supplies Singapore",
+    "industry": "toys games",
+    "country": "Singapore",
+    "website": "sintattoys.com",
+    "url": "https://www.sintattoys.com/",
+    "email": "sean@sintattoys.com",
+    "all_emails": [
+      "%20sean@sintattoys.com",
+      "sean@sintattoys.com"
+    ],
+    "phone": "1503674327",
+    "all_phones": [
+      "1503674327",
+      "1789145385",
+      "1665139667",
+      "1775738971",
+      "1758878420",
+      "1789145388",
+      "10318060080"
+    ],
+    "whatsapp": "",
+    "social": {
+      "instagram": "sintat_toys"
+    },
+    "facebook": "",
+    "instagram": "sintat_toys",
+    "linkedin": "",
     "twitter": "",
     "youtube": "",
     "address": "",
@@ -4419,6 +5055,384 @@
     "status": "待联系"
   },
   {
+    "company_name": "No.1 Watch Wholesaler of Luxury Timepieces",
+    "industry": "watches jewelry",
+    "country": "UK",
+    "website": "watchdistribution.co.uk",
+    "url": "https://www.watchdistribution.co.uk/",
+    "email": "sales@watchdistribution.co.uk",
+    "all_emails": [
+      "sales@watchdistribution.co.uk"
+    ],
+    "phone": "1776323314",
+    "all_phones": [
+      "1776323314",
+      "1789138019",
+      "1789137737",
+      "1789137751",
+      "1789137738",
+      "1789138304",
+      "1789138323",
+      "1789142434",
+      "1789144482"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "S. Green &amp; Sons",
+    "industry": "home textiles",
+    "country": "UK",
+    "website": "sgreenandsons.co.uk",
+    "url": "https://www.sgreenandsons.co.uk/",
+    "email": "sales@sgreenandsons.co.uk",
+    "all_emails": [
+      "sales@sgreenandsons.co.uk"
+    ],
+    "phone": "8551425221",
+    "all_phones": [
+      "8551425221",
+      "-1601227302",
+      "-2103324261",
+      "-1563085430",
+      "-2085977194",
+      "-1358106205",
+      "-1897588390",
+      "0208807950",
+      "0000008180",
+      "3053914031",
+      "-1542008156",
+      "3095458623",
+      "-1826827310",
+      "-1781315989",
+      "-2065530309"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Consumer Electronics ltd",
+    "industry": "consumer electronics",
+    "country": "UK",
+    "website": "consumerelectronicsltd.com",
+    "url": "https://www.consumerelectronicsltd.com/contact.html",
+    "email": "info@consumerelectronicsltd.co.uk",
+    "all_emails": [
+      "info@consumerelectronicsltd.co.uk"
+    ],
+    "phone": "952.4420147",
+    "all_phones": [
+      "952.4420147",
+      "16769997608"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Nidex Limited",
+    "industry": "consumer electronics",
+    "country": "UK",
+    "website": "nidexltd.co.uk",
+    "url": "https://nidexltd.co.uk/",
+    "email": "nidexlimited@gmail.com",
+    "all_emails": [
+      "nidexlimited@gmail.com"
+    ],
+    "phone": "878.8973382",
+    "all_phones": [
+      "878.8973382",
+      ".0740227011",
+      ".6445425571",
+      "16454308521"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Wholesale branded sportswear, accessories, footwear, equipment",
+    "industry": "sporting goods",
+    "country": "UK",
+    "website": "bbsports.co.uk",
+    "url": "https://www.bbsports.co.uk/sports-goods-wholesale/",
+    "email": "sales@bbsports.co.uk",
+    "all_emails": [
+      "sales@bbsports.co.uk"
+    ],
+    "phone": "4307927920",
+    "all_phones": [
+      "4307927920"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Wholesaling home textiles since 1921",
+    "industry": "home textiles",
+    "country": "Germany",
+    "website": "schaeferhometextile.com",
+    "url": "https://www.schaeferhometextile.com/english/",
+    "email": "info@schaeferhometextile.com",
+    "all_emails": [
+      "info@schaeferhometextile.com"
+    ],
+    "phone": "11058874620",
+    "all_phones": [
+      "11058874620",
+      "1522608942",
+      "1521829973",
+      "1526994948",
+      "1291739762",
+      "1291742862"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "GULRAJ TRADING CORPORATION ELECTRONIC EXPORTERS FROM JAPAN",
+    "industry": "consumer electronics",
+    "country": "Japan",
+    "website": "gulraj.co.jp",
+    "url": "https://www.gulraj.co.jp/en/",
+    "email": "siru@gulraj.co.jp",
+    "all_emails": [
+      "siru@gulraj.co.jp",
+      "prakash@gulraj.co.jp",
+      "okada@gulraj.co.jp"
+    ],
+    "phone": "1680155956",
+    "all_phones": [
+      "1680155956",
+      "1680085617",
+      "1679646729",
+      "562.1169380",
+      "135.4931753"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Japanese Stationery Supplier &amp; Wholesale Partner",
+    "industry": "stationery",
+    "country": "Japan",
+    "website": "echomind.co.jp",
+    "url": "https://www.echomind.co.jp/overseas/",
+    "email": "toiawase@echomind.co.jp",
+    "all_emails": [
+      "toiawase@echomind.co.jp"
+    ],
+    "phone": "+8166962608",
+    "all_phones": [
+      "+8166962608",
+      ".4980392156",
+      ".5490196078",
+      ".9882352941",
+      ".7176470588"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "South Valley Enterprises",
+    "industry": "kitchenware",
+    "country": "Singapore",
+    "website": "southvalley.com.sg",
+    "url": "https://southvalley.com.sg/",
+    "email": "sales@southvalley.com.sg",
+    "all_emails": [
+      "sales@southvalley.com.sg"
+    ],
+    "phone": "1786675817",
+    "all_phones": [
+      "1786675817",
+      "1781559979",
+      "6567420606",
+      "977.4906400",
+      "17109462214"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Singapore Customized Stationery Supplier, Printing, Wholesale, Distributor",
+    "industry": "stationery",
+    "country": "Singapore",
+    "website": "globalasiaprintings.com",
+    "url": "https://globalasiaprintings.com/product-category/stationery/",
+    "email": "",
+    "all_emails": [],
+    "phone": "1788425162",
+    "all_phones": [
+      "1788425162",
+      "1789106675",
+      "-2644536267",
+      "17645513099",
+      "6586934657",
+      "1789131338",
+      "17233077433",
+      "15743244557"
+    ],
+    "whatsapp": "1788425162",
+    "social": {
+      "facebook": "GlobalAsiaPrintings",
+      "instagram": "globalasiaprintings"
+    },
+    "facebook": "GlobalAsiaPrintings",
+    "instagram": "globalasiaprintings",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Gily Fashion Trading Company",
+    "industry": "fashion accessories",
+    "country": "Singapore",
+    "website": "gilyfashion.com.sg",
+    "url": "http://www.gilyfashion.com.sg/",
+    "email": "enquiry@gilyfashion.com.sg",
+    "all_emails": [
+      "enquiry@gilyfashion.com.sg"
+    ],
+    "phone": "-1426473702",
+    "all_phones": [
+      "-1426473702",
+      "-1438762275"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Singapore Fashion Accessory Suppliers",
+    "industry": "fashion accessories",
+    "country": "Singapore",
+    "website": "fibre2fashion.com",
+    "url": "https://www.fibre2fashion.com/accessories/singapore-suppliers",
+    "email": "",
+    "all_emails": [
+      "support@weglot.com",
+      "inquiry@fibre2fashion.com",
+      "b2b@fibre2fashion.com"
+    ],
+    "phone": "0123456789",
+    "all_phones": [
+      "0123456789",
+      "2893257120",
+      "4572450196",
+      "-2544442066",
+      "6514233035"
+    ],
+    "whatsapp": "9909946908",
+    "social": {
+      "facebook": "fibre2fashion",
+      "instagram": "fibre2fashion",
+      "linkedin": "fibre2fashion",
+      "twitter": "fibre2fashion",
+      "pinterest": "fibre2fashion"
+    },
+    "facebook": "fibre2fashion",
+    "instagram": "fibre2fashion",
+    "linkedin": "fibre2fashion",
+    "twitter": "fibre2fashion",
+    "youtube": "",
+    "address": "",
+    "data_quality": 70,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
     "company_name": "Wholesale Office Supplies",
     "industry": "office supplies",
     "country": "USA",
@@ -4475,6 +5489,38 @@
     "youtube": "",
     "address": "",
     "data_quality": 60,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Drone Importers & Drone Buyers",
+    "industry": "drones",
+    "country": "USA",
+    "website": "importer.tradekey.com",
+    "url": "https://importer.tradekey.com/drone-importer.html",
+    "email": "",
+    "all_emails": [
+      "eg.sample@xyz.com"
+    ],
+    "phone": "(114) 322-2197",
+    "all_phones": [
+      "-1143222197",
+      "1687431137",
+      "9999999999",
+      "1577168797",
+      "1748340268"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "TradeKeyOfficial"
+    },
+    "facebook": "TradeKeyOfficial",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 50,
     "source": "DuckDuckGo + Website",
     "status": "待联系"
   },
@@ -5899,6 +6945,358 @@
     "status": "待联系"
   },
   {
+    "company_name": "Fashion Accessories Wholesale UK",
+    "industry": "fashion accessories",
+    "country": "UK",
+    "website": "thewholesaler.co.uk",
+    "url": "https://www.thewholesaler.co.uk/fashion-accessories-wholesale/",
+    "email": "",
+    "all_emails": [],
+    "phone": ".1655741638",
+    "all_phones": [
+      ".1655741638",
+      "1782126710",
+      "1782126974",
+      "1782126564",
+      "10881903580",
+      "974179-1920",
+      "1782126853",
+      "1782130591",
+      "5737098903",
+      "1782130142",
+      "1789135125",
+      "1782127112"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "thewholesaleruk",
+      "twitter": "thewholesaleruk"
+    },
+    "facebook": "thewholesaleruk",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "thewholesaleruk",
+    "youtube": "",
+    "address": "",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Wholesale Watches",
+    "industry": "watches jewelry",
+    "country": "UK",
+    "website": "jewellery-world.co.uk",
+    "url": "https://www.jewellery-world.co.uk/watches.html",
+    "email": "",
+    "all_emails": [],
+    "phone": "1781519764",
+    "all_phones": [
+      "1781519764",
+      "6157675165",
+      "161 834 5007",
+      "1679309060",
+      "1789144375"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "people",
+      "instagram": "jewelleryworldltd",
+      "twitter": "1jewelleryworld"
+    },
+    "facebook": "people",
+    "instagram": "jewelleryworldltd",
+    "linkedin": "",
+    "twitter": "1jewelleryworld",
+    "youtube": "",
+    "address": "",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Kitchenware Wholesale Distributors, Bulk Buy Kitchen Items",
+    "industry": "kitchen gadgets",
+    "country": "UK",
+    "website": "efghousewares.co.uk",
+    "url": "https://www.efghousewares.co.uk/shop-by-department/kitchenware",
+    "email": "",
+    "all_emails": [],
+    "phone": "-4101004288",
+    "all_phones": [
+      "-4101004288",
+      "0449752624",
+      "7066557073",
+      "6066706274",
+      "17883629874"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "efghousewares",
+      "instagram": "efghousewares",
+      "twitter": "EFGHousewares"
+    },
+    "facebook": "efghousewares",
+    "instagram": "efghousewares",
+    "linkedin": "",
+    "twitter": "EFGHousewares",
+    "youtube": "",
+    "address": "29 Mollison Avenue, Brimsdown, Enfield, EN3 7NL E : [email&#160;protected] T: 0208 805 5756",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "We Can Connect You With The Right Japanese Distributors",
+    "industry": "consumer electronics",
+    "country": "Japan",
+    "website": "japanesedistributors.com",
+    "url": "https://japanesedistributors.com/",
+    "email": "",
+    "all_emails": [],
+    "phone": "1782928187",
+    "all_phones": [
+      "1782928187",
+      "7496969728",
+      "17883629874",
+      "1788671466",
+      "8353091581",
+      "1788671469"
+    ],
+    "whatsapp": "",
+    "social": {
+      "linkedin": "japanesedistributors"
+    },
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "japanesedistributors",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "How many Household goods wholesalers are there in Japan in 2026",
+    "industry": "household goods",
+    "country": "Japan",
+    "website": "poidata.io",
+    "url": "https://www.poidata.io/index.php/report/household-goods-wholesaler/japan",
+    "email": "",
+    "all_emails": [],
+    "phone": "17883629874",
+    "all_phones": [
+      "17883629874"
+    ],
+    "whatsapp": "",
+    "social": {
+      "linkedin": "poidata-io",
+      "twitter": "poidata_io"
+    },
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "poidata-io",
+    "twitter": "poidata_io",
+    "youtube": "",
+    "address": "",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Import \"Household Items\" products from Japan at wholesale prices",
+    "industry": "household goods",
+    "country": "Japan",
+    "website": "superdelivery.com",
+    "url": "https://www.superdelivery.com/en/do/psl/5134/?vi=1",
+    "email": "",
+    "all_emails": [],
+    "phone": "2449401065",
+    "all_phones": [
+      "2449401065",
+      "2449436459",
+      "2449445271",
+      "2526203294",
+      "2449448879"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "superdelivery.en",
+      "instagram": "superdelivery_english"
+    },
+    "facebook": "superdelivery.en",
+    "instagram": "superdelivery_english",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "RACCOON COMMERCE, Inc. 1-14-14 Nihonbashi-Kakigaracho Chuo-ku TOKYO 103-0014, JAPAN",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Globalkitchen Japan",
+    "industry": "kitchenware",
+    "country": "Japan",
+    "website": "globalkitchenjapan.com",
+    "url": "https://www.globalkitchenjapan.com/",
+    "email": "",
+    "all_emails": [
+      "xxx@xxx.xxx",
+      "support@globalkitchenjapan.com"
+    ],
+    "phone": "18752742707",
+    "all_phones": [
+      "18752742707",
+      "2909735017",
+      "17438385668",
+      "0433565821",
+      "11672398368"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "globalkitchenjp",
+      "instagram": "globalkitchenjapan"
+    },
+    "facebook": "globalkitchenjp",
+    "instagram": "globalkitchenjapan",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "JS-BASE",
+    "industry": "stationery",
+    "country": "Japan",
+    "website": "js-base.com",
+    "url": "https://js-base.com/",
+    "email": "",
+    "all_emails": [
+      "info@yourwebsite.com"
+    ],
+    "phone": "17181045582",
+    "all_phones": [
+      "17181045582",
+      "1789144253",
+      "2147483645",
+      "14509645627",
+      "2456570681"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "sharer.php",
+      "twitter": "intent",
+      "pinterest": "pin"
+    },
+    "facebook": "sharer.php",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "intent",
+    "youtube": "",
+    "address": "",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Household Products and Homewares",
+    "industry": "kitchenware",
+    "country": "Singapore",
+    "website": "namshiang.com.sg",
+    "url": "https://namshiang.com.sg/",
+    "email": "",
+    "all_emails": [],
+    "phone": "6392468208",
+    "all_phones": [
+      "6392468208",
+      "1695463307",
+      "1415073233",
+      "1373458464",
+      "1415598944"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "Nam-Shiang-266243857354423",
+      "instagram": "nam_shiang",
+      "linkedin": "13597037",
+      "youtube": "hannel"
+    },
+    "facebook": "Nam-Shiang-266243857354423",
+    "instagram": "nam_shiang",
+    "linkedin": "13597037",
+    "twitter": "",
+    "youtube": "hannel",
+    "address": "",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Bulk Toy Wholesale Singapore",
+    "industry": "toys games",
+    "country": "Singapore",
+    "website": "mtradenoveltystore.com",
+    "url": "https://www.mtradenoveltystore.com/bulk/",
+    "email": "",
+    "all_emails": [],
+    "phone": "1484103892",
+    "all_phones": [
+      "1484103892",
+      "436.1756191",
+      "997.1756192",
+      "506.1756192",
+      "388.1756192"
+    ],
+    "whatsapp": "",
+    "social": {
+      "facebook": "MtradeNoveltyStore"
+    },
+    "facebook": "MtradeNoveltyStore",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "50 Gambas Crescent, #05-06, Proxima@Gambas, Singapore 757022 UEN No.: 201622961M, GST Reg No.: 201622961M",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Companies in Wholesale Of Toys And Games Industry",
+    "industry": "toys games",
+    "country": "Singapore",
+    "website": "sgpbusiness.com",
+    "url": "https://www.sgpbusiness.com/activities/industrial-classification/Wholesale-And-Retail-Trade/Wholesale-Trade/Wholesale-Of-Household-Goods/Wholesale-Of-Sporting-And-Other-Recreational-Goods/Wholesale-Of-Toys-And-Games",
+    "email": "",
+    "all_emails": [],
+    "phone": "1783838169",
+    "all_phones": [
+      "1783838169",
+      "1788024432",
+      "-1714172330",
+      "2147483647",
+      "3427499277"
+    ],
+    "whatsapp": "",
+    "social": {
+      "instagram": "sgpbusiness"
+    },
+    "facebook": "",
+    "instagram": "sgpbusiness",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 50,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
     "company_name": "Wholesale Tech Distributor &amp; B2B Electronic Appliances",
     "industry": "electronics",
     "country": "USA",
@@ -7177,6 +8575,193 @@
     "twitter": "",
     "youtube": "",
     "address": "",
+    "data_quality": 40,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "List of UK Electronics Importers",
+    "industry": "consumer electronics",
+    "country": "UK",
+    "website": "uk.ezilon.com",
+    "url": "https://uk.ezilon.com/uk/business/electronics_and_electrical/electronics_importers/index.shtml",
+    "email": "",
+    "all_emails": [],
+    "phone": "17883629874",
+    "all_phones": [
+      "17883629874"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 40,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Beauty Wholesale Supplies",
+    "industry": "beauty products",
+    "country": "UK",
+    "website": "luxurybeautywholesale.co.uk",
+    "url": "https://luxurybeautywholesale.co.uk/",
+    "email": "",
+    "all_emails": [],
+    "phone": "1776709739",
+    "all_phones": [
+      "1776709739",
+      "1776796258",
+      "3738305644",
+      "7335370521",
+      "3418005502"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 40,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Home Page",
+    "industry": "sporting goods",
+    "country": "UK",
+    "website": "sportingwholesale.com",
+    "url": "https://sportingwholesale.com/",
+    "email": "",
+    "all_emails": [],
+    "phone": "6391908693",
+    "all_phones": [
+      "6391908693",
+      "18500976972",
+      "330602-3278"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 40,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "B2B wholesaler for sporting goods in Germany",
+    "industry": "sporting goods",
+    "country": "Germany",
+    "website": "sportdepotgmbh.com",
+    "url": "https://www.sportdepotgmbh.com/en-en",
+    "email": "",
+    "all_emails": [],
+    "phone": "13356396829",
+    "all_phones": [
+      "13356396829",
+      "8755240671",
+      "1753068529",
+      "1754448297",
+      "13298376175"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 40,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Source Japanese Products",
+    "industry": "household goods",
+    "country": "Japan",
+    "website": "apides.co.jp",
+    "url": "https://www.apides.co.jp/business_biz/en.html",
+    "email": "",
+    "all_emails": [],
+    "phone": "-1080391926",
+    "all_phones": [
+      "-1080391926"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 40,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "contact",
+    "industry": "kitchenware",
+    "country": "Japan",
+    "website": "imotosangyo.biz",
+    "url": "https://imotosangyo.biz/contact/",
+    "email": "",
+    "all_emails": [],
+    "phone": "1789144143",
+    "all_phones": [
+      "1789144143",
+      "052-914-5551"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "",
+    "data_quality": 40,
+    "source": "DuckDuckGo + Website",
+    "status": "待联系"
+  },
+  {
+    "company_name": "Top 25 Beauty Products Wholesaler suppliers in Singapore",
+    "industry": "beauty products",
+    "country": "Singapore",
+    "website": "yoys.sg",
+    "url": "https://www.yoys.sg/places/beauty-products-wholesaler",
+    "email": "",
+    "all_emails": [],
+    "phone": "1789144555",
+    "all_phones": [
+      "1789144555",
+      "-0249502749",
+      "6450571001",
+      "+6596733948",
+      "3219643300",
+      "3369815050",
+      "2777286941",
+      "17883629874",
+      "1789144198"
+    ],
+    "whatsapp": "",
+    "social": {},
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "twitter": "",
+    "youtube": "",
+    "address": "Singapore , Singapore",
     "data_quality": 40,
     "source": "DuckDuckGo + Website",
     "status": "待联系"
