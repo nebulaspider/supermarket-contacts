@@ -1076,11 +1076,11 @@ function renderEffTable() {
             <td><span class="industry-tag" style="background:#8b5cf615;color:#8b5cf6;">${esc(d.industry)}</span></td>
             <td>${email}</td>
             <td>${phone}</td>
-            <td>${wa}</td>
-            <td>${renderTagBadges(d.website)}</td>
-            <td>${socialLinks}</td>
-            <td>${web}</td>
-            <td><span style="color:${qColor};font-weight:700;">${q}</span></td>
+            <td class="hide-mobile">${wa}</td>
+            <td class="hide-mobile">${renderTagBadges(d.website)}</td>
+            <td class="hide-mobile">${socialLinks}</td>
+            <td class="hide-mobile">${web}</td>
+            <td class="hide-mobile"><span style="color:${qColor};font-weight:700;">${q}</span></td>
         </tr>`;
     }).join('') || `<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--text-tertiary);">暂无数据</td></tr>`;
 

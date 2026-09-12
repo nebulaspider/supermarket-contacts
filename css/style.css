@@ -418,6 +418,7 @@ body.font-xl { font-size: 18px; }
     transition: all 0.2s;
 }
 .kpi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.kpi-row--6 { grid-template-columns: repeat(6, 1fr); }
 .kpi-top {
     display: flex;
     justify-content: space-between;
@@ -563,6 +564,7 @@ body.font-xl { font-size: 18px; }
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .data-table {
     width: 100%;
+    min-width: 900px;
     border-collapse: collapse;
     font-size: 13px;
 }
@@ -1353,6 +1355,7 @@ body.font-xl .page-title { font-size: 30px; }
    ============================================ */
 @media (max-width: 1200px) {
     .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .kpi-row--6 { grid-template-columns: repeat(3, 1fr); }
     .chart-row { grid-template-columns: 1fr; }
 }
 
@@ -1386,8 +1389,12 @@ body.font-xl .page-title { font-size: 30px; }
     .page-actions .btn { flex: 1; }
 
     .kpi-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .kpi-row--6 { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .kpi-card { padding: 14px; }
     .kpi-value { font-size: 22px; }
+
+    /* 手机上隐藏表格次要列 */
+    .data-table .hide-mobile { display: none; }
 
     .chart-body { height: 240px; padding: 12px; }
 
@@ -1401,6 +1408,7 @@ body.font-xl .page-title { font-size: 30px; }
 
 @media (max-width: 480px) {
     .kpi-row { grid-template-columns: 1fr; }
+    .kpi-row--6 { grid-template-columns: repeat(2, 1fr); }
     .filter-item { min-width: 100%; }
 }
 
