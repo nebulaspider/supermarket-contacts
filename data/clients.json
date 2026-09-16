@@ -3453,5 +3453,25 @@
     "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
     "scraped_at": "2026-09-08T05:55:07.692210Z",
     "data_quality": 24
+  },
+  {
+    "company_name": "Kohl's",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-16T12:07:10.693858Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Meijer",
+    "website": "",
+    "country": "United States",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
+    "scraped_at": "2026-09-16T12:07:10.693892Z",
+    "data_quality": 24
   }
 ]
