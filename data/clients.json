@@ -3473,5 +3473,125 @@
     "source_url": "https://en.wikipedia.org/wiki/List_of_supermarket_chains",
     "scraped_at": "2026-09-16T12:07:10.693892Z",
     "data_quality": 24
+  },
+  {
+    "company_name": "Auchan",
+    "website": "",
+    "country": "Croix",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080390Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Jerónimo Martins",
+    "website": "",
+    "country": "Lisbon",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080393Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Asda",
+    "website": "",
+    "country": "Leeds",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080395Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Groupe ADEO",
+    "website": "",
+    "country": "Ronchin",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080396Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Reliance Retail",
+    "website": "",
+    "country": "Mumbai",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080398Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Migros",
+    "website": "",
+    "country": "Zürich",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080399Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Dollar Tree",
+    "website": "",
+    "country": "Chesapeake",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080401Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Coopérative U",
+    "website": "",
+    "country": "Rungis",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080402Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Coles Group",
+    "website": "",
+    "country": "Hawthorn East",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080404Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "FEMSA",
+    "website": "",
+    "country": "Monterrey",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080405Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "CP All",
+    "website": "",
+    "country": "Bangkok",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080407Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "EssilorLuxottica",
+    "website": "",
+    "country": "Charenton-le-Pont",
+    "city": "",
+    "industry": "零售",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
+    "scraped_at": "2026-09-21T12:06:48.080409Z",
+    "data_quality": 24
   }
 ]
