@@ -3593,5 +3593,155 @@
     "source_url": "https://en.wikipedia.org/wiki/List_of_largest_retail_companies",
     "scraped_at": "2026-09-21T12:06:48.080409Z",
     "data_quality": 24
+  },
+  {
+    "company_name": "China National Petroleum Corporation",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019050Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "China Petrochemical Corporation",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019052Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "Alphabet",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019054Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "UnitedHealth Group",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019056Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "Berkshire Hathaway",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019057Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "CVS Health",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019059Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "Microsoft",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019061Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "Cencora",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019063Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "JPMorgan Chase",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019065Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "Industrial and Commercial Bank of China",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019068Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "Foxconn",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019070Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "Bank of America",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019075Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "General Motors",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019077Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "Elevance Health",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019079Z",
+    "data_quality": 16
+  },
+  {
+    "company_name": "Baowu",
+    "website": "",
+    "country": "",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-09-28T00:07:46.019080Z",
+    "data_quality": 16
   }
 ]
