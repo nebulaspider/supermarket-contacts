@@ -3595,6 +3595,236 @@
     "data_quality": 24
   },
   {
+    "company_name": "Deutsche Telekom",
+    "website": "",
+    "country": "Germany",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260473Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Sony",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260475Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Hitachi",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260477Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Panasonic",
+    "website": "",
+    "country": "Japan",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260478Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "LG Electronics",
+    "website": "",
+    "country": "South Korea",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260480Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Accenture",
+    "website": "",
+    "country": "Ireland/US",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260482Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Lenovo",
+    "website": "",
+    "country": "Hong Kong/US",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260484Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "TSMC",
+    "website": "",
+    "country": "Taiwan",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260508Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Company",
+    "website": "",
+    "country": "Company",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260510Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Revenue",
+    "website": "",
+    "country": "Revenue",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260512Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Profit",
+    "website": "",
+    "country": "Profit",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260513Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Employees",
+    "website": "",
+    "country": "Employees",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260515Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Headquarters",
+    "website": "",
+    "country": "Headquarters",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260517Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Meta",
+    "website": "",
+    "country": "US",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260519Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Jingdong",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260521Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Alibaba",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260522Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Huawei",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260526Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Tencent",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260529Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Cisco",
+    "website": "",
+    "country": "US",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260535Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "HP Inc.",
+    "website": "",
+    "country": "US",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260538Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Meta(Facebook)",
+    "website": "",
+    "country": "Menlo Park, California, US",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260540Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Apple Inc.",
+    "website": "",
+    "country": "Cupertino, California, US",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260542Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Alphabet Inc.",
+    "website": "",
+    "country": "Mountain View, California, US",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-10-04T18:10:57.260544Z",
+    "data_quality": 24
+  },
+  {
     "company_name": "China National Petroleum Corporation",
     "website": "",
     "country": "",
