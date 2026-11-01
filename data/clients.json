@@ -3835,6 +3835,106 @@
     "data_quality": 24
   },
   {
+    "company_name": "SK Hynix",
+    "website": "",
+    "country": "South Korea",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072912Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Wistron",
+    "website": "",
+    "country": "Taiwan",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072920Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Quanta Computer",
+    "website": "",
+    "country": "Taiwan",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072922Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Hon Hai Precision Industry",
+    "website": "",
+    "country": "Taiwan",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072924Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Taiwan Semiconductor Manufacturing",
+    "website": "",
+    "country": "Taiwan",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072925Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Midea Group",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072941Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Xiaomi",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072942Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Uber",
+    "website": "",
+    "country": "US",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072954Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Huawei Investment & Holding",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072956Z",
+    "data_quality": 24
+  },
+  {
+    "company_name": "Lenovo Group",
+    "website": "",
+    "country": "China",
+    "city": "",
+    "industry": "科技",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_technology_companies_by_revenue",
+    "scraped_at": "2026-11-01T17:27:25.072960Z",
+    "data_quality": 24
+  },
+  {
     "company_name": "China National Petroleum Corporation",
     "website": "",
     "country": "",
