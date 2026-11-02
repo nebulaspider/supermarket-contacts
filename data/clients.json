@@ -3935,6 +3935,16 @@
     "data_quality": 24
   },
   {
+    "company_name": "Ford Motor Company",
+    "website": "",
+    "country": "No",
+    "city": "",
+    "industry": "综合",
+    "source_url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+    "scraped_at": "2026-11-02T03:40:23.370539Z",
+    "data_quality": 24
+  },
+  {
     "company_name": "China National Petroleum Corporation",
     "website": "",
     "country": "",
